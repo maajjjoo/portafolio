@@ -73,7 +73,9 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
       setValues(emptyValues);
       setStatus("success");
     } catch (error) {
-      setErrorMessage(error instanceof Error && error.message ? error.message : "No se pudo conectar con el servicio.");
+      // fetch lanza TypeError (con texto en inglés) cuando falla la red.
+      const isServiceError = error instanceof Error && !(error instanceof TypeError) && error.message;
+      setErrorMessage(isServiceError ? error.message : "No se pudo conectar con el servicio.");
       setStatus("error");
     }
   }
