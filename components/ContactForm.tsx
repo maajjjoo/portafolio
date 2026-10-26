@@ -81,7 +81,7 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
   }
 
   const inputClass = (invalid: boolean) =>
-    `w-full rounded-xl border bg-bg px-4 py-3 text-base text-ink placeholder:text-muted/70 transition-colors focus:border-accent focus:outline-none focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-60 ${
+    `w-full border-0 border-b-2 bg-transparent px-1 py-3 text-base text-ink placeholder:text-muted/70 transition-colors focus:border-accent focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 ${
       invalid ? "border-accent" : "border-line"
     }`;
 
@@ -91,9 +91,9 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
       noValidate
       onSubmit={handleSubmit}
       aria-labelledby="formulario-titulo"
-      className="rounded-[var(--radius-card)] border border-line bg-surface p-6 shadow-card sm:p-8"
+      className="border border-line bg-surface p-6 shadow-card sm:p-10"
     >
-      <h3 id="formulario-titulo" className="font-display text-2xl font-medium">
+      <h3 id="formulario-titulo" className="font-display text-4xl">
         Escríbeme
       </h3>
 
@@ -125,7 +125,7 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
 
           return (
             <div key={field.name}>
-              <label htmlFor={id} className="mb-2 block text-sm font-semibold">
+              <label htmlFor={id} className="label mb-2 block text-muted">
                 {field.label} <span aria-hidden="true" className="text-accent">*</span>
               </label>
               {field.type === "textarea" ? (
@@ -160,7 +160,7 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
 
         <button
           type="submit"
-          className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-accent px-6 font-semibold text-on-accent transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+          className="inline-flex min-h-12 w-full items-center justify-center gap-2 label rounded-full bg-wine px-8 text-on-wine transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
         >
           {status === "sending" ? (
             <>
@@ -175,7 +175,7 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
 
       <div aria-live="polite" className="mt-5">
         {status === "success" ? (
-          <p role="status" className="rounded-xl bg-academic-soft px-4 py-3 text-sm font-semibold text-academic">
+          <p role="status" className="rounded-xl bg-gold-soft px-4 py-3 text-sm font-semibold text-gold">
             ¡Gracias! Tu mensaje se envió correctamente. Te responderé lo antes posible.
           </p>
         ) : null}

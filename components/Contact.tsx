@@ -1,6 +1,8 @@
+import type { CSSProperties } from "react";
+
 import ContactForm from "@/components/ContactForm";
-import { ArrowUpRightIcon, GitHubIcon, LinkedInIcon, MailIcon } from "@/components/ui/Icons";
-import SectionHeading from "@/components/ui/SectionHeading";
+import { ArrowUpRightIcon, GitHubIcon, LinkedInIcon, MailIcon, SparkleIcon } from "@/components/ui/Icons";
+import SplitText from "@/components/ui/SplitText";
 import { sectionIds } from "@/config/navigation";
 import { portfolio } from "@/config/portfolio";
 import { parseFormspreeEndpoint } from "@/lib/contact";
@@ -9,13 +11,7 @@ import { parseFormspreeEndpoint } from "@/lib/contact";
 const formEndpoint = parseFormspreeEndpoint(process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT);
 
 const channels = [
-  {
-    label: "Correo",
-    value: portfolio.email,
-    href: `mailto:${portfolio.email}`,
-    Icon: MailIcon,
-    external: false,
-  },
+  { label: "Correo", value: portfolio.email, href: `mailto:${portfolio.email}`, Icon: MailIcon, external: false },
   {
     label: portfolio.social.github.label,
     value: "github.com/maajjjoo",
@@ -34,40 +30,59 @@ const channels = [
 
 export default function Contact() {
   return (
-    <section id={sectionIds.contact} aria-labelledby="contacto-titulo" className="border-t border-line">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <SectionHeading
-          index="05"
-          eyebrow="Contacto"
-          title="Hablemos"
-          titleId="contacto-titulo"
-          intro="Si quieres comentarme algo sobre mis proyectos, proponer una colaboración o simplemente saludar, escríbeme."
-        />
+    <section id={sectionIds.contact} aria-labelledby="contacto-titulo" className="relative isolate overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute -right-40 -bottom-40 -z-10 size-[36rem] rounded-full bg-[radial-gradient(circle,var(--glow)_0%,transparent_65%)]"
+      />
+      <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
+        <div className="mb-8 flex items-center gap-3 border-b border-line pb-4">
+          <p className="label flex items-center gap-3 text-muted">
+            <span className="text-accent">05</span>
+            Contacto
+            <SparkleIcon className="spin-slow text-accent" width={14} height={14} />
+          </p>
+        </div>
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-12">
-          <ul className="space-y-3">
-            {channels.map(({ label, value, href, Icon, external }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="group flex items-center gap-4 rounded-[var(--radius-card)] border border-line bg-surface p-5 transition-colors hover:border-accent"
-                >
-                  <span className="grid size-12 shrink-0 place-items-center rounded-full bg-surface-2 text-ink transition-colors group-hover:bg-accent group-hover:text-on-accent">
-                    <Icon />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block font-mono text-xs tracking-wide text-muted uppercase">{label}</span>
-                    <span className="block truncate font-semibold">{value}</span>
-                  </span>
-                  <ArrowUpRightIcon className="shrink-0 text-muted transition-colors group-hover:text-accent" />
-                  {external ? <span className="sr-only">(se abre en una pestaña nueva)</span> : null}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
+          <div>
+            <h2 id="contacto-titulo" data-reveal className="text-4xl leading-tight font-light tracking-wide uppercase sm:text-5xl">
+              Hablemos de algo
+              <span className="mt-1 block font-script text-7xl tracking-normal text-accent normal-case sm:text-8xl">
+                <SplitText text="increíble" step={60} delay={200} />
+              </span>
+            </h2>
+            <p data-reveal className="mt-8 max-w-md text-lg leading-relaxed text-muted">
+              Si quieres comentarme algo sobre mis proyectos, proponer una colaboración o simplemente saludar,
+              escríbeme.
+            </p>
 
-          <ContactForm endpoint={formEndpoint} fallbackEmail={portfolio.email} />
+            <ul data-reveal className="mt-10 border-t border-line">
+              {channels.map(({ label, value, href, Icon, external }) => (
+                <li key={label} className="border-b border-line">
+                  <a
+                    href={href}
+                    {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="group flex items-center gap-4 py-5 transition-colors hover:text-accent"
+                  >
+                    <span className="grid size-11 shrink-0 place-items-center rounded-full border border-line transition-colors group-hover:border-wine group-hover:bg-wine group-hover:text-on-wine">
+                      <Icon width={18} height={18} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="label block text-muted">{label}</span>
+                      <span className="mt-1 block truncate font-semibold">{value}</span>
+                    </span>
+                    <ArrowUpRightIcon className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    {external ? <span className="sr-only">(se abre en una pestaña nueva)</span> : null}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div data-reveal style={{ "--reveal-delay": "150ms" } as CSSProperties}>
+            <ContactForm endpoint={formEndpoint} fallbackEmail={portfolio.email} />
+          </div>
         </div>
       </div>
     </section>

@@ -6,52 +6,56 @@
 :root,
 [data-theme="light"] {
   color-scheme: light;
-  --bg: #f4f1ea;
-  --surface: #ffffff;
-  --surface-2: #ebe5d9;
-  --ink: #0f1b36;
-  --muted: #4b5672;
-  --line: #d8d0c1;
-  --accent: #b0331a;
-  --accent-soft: #f6dcd3;
-  --on-accent: #ffffff;
-  --academic: #1d4ed8;
-  --academic-soft: #dbe5fb;
-  --shadow: 0 1px 2px rgb(15 27 54 / 0.06), 0 8px 24px -12px rgb(15 27 54 / 0.18);
+  --bg: #f5ece3;
+  --surface: #fbf6f0;
+  --surface-2: #ebdfd3;
+  --ink: #24121a;
+  --muted: #6b5458;
+  --line: #d9c7b8;
+  --wine: #7b1e34;
+  --on-wine: #f3e6d8;
+  --accent: #7b1e34;
+  --accent-soft: #f2d9dc;
+  --gold: #7a5418;
+  --gold-soft: #f1e2c6;
+  --glow: rgb(123 30 52 / 0.16);
+  --shadow: 0 1px 2px rgb(36 18 26 / 0.06), 0 18px 40px -24px rgb(36 18 26 / 0.35);
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0a1124;
-  --surface: #121b35;
-  --surface-2: #1a2543;
-  --ink: #e8ecf5;
-  --muted: #9ea9c2;
-  --line: #27335a;
-  --accent: #ff8a66;
-  --accent-soft: #3a2230;
-  --on-accent: #0a1124;
-  --academic: #8fb0ff;
-  --academic-soft: #1c2b55;
-  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -16px rgb(0 0 0 / 0.6);
+  --bg: #0e0809;
+  --surface: #170f11;
+  --surface-2: #22171a;
+  --ink: #eedfd0;
+  --muted: #b5a49a;
+  --line: #36262a;
+  --wine: #7b1e34;
+  --on-wine: #f3e6d8;
+  --accent: #e8a3b0;
+  --accent-soft: #3a1720;
+  --gold: #d9b77e;
+  --gold-soft: #2e2416;
+  --glow: rgb(123 30 52 / 0.45);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 24px 48px -28px rgb(0 0 0 / 0.8);
 }
 
 /* Sin JavaScript, se respeta la preferencia del sistema. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --bg: #0a1124;
-    --surface: #121b35;
-    --surface-2: #1a2543;
-    --ink: #e8ecf5;
-    --muted: #9ea9c2;
-    --line: #27335a;
-    --accent: #ff8a66;
-    --accent-soft: #3a2230;
-    --on-accent: #0a1124;
-    --academic: #8fb0ff;
-    --academic-soft: #1c2b55;
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -16px rgb(0 0 0 / 0.6);
+    --bg: #0e0809;
+    --surface: #170f11;
+    --surface-2: #22171a;
+    --ink: #eedfd0;
+    --muted: #b5a49a;
+    --line: #36262a;
+    --accent: #e8a3b0;
+    --accent-soft: #3a1720;
+    --gold: #d9b77e;
+    --gold-soft: #2e2416;
+    --glow: rgb(123 30 52 / 0.45);
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 24px 48px -28px rgb(0 0 0 / 0.8);
   }
 }
 
@@ -62,16 +66,16 @@
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-wine: var(--wine);
+  --color-on-wine: var(--on-wine);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
-  --color-on-accent: var(--on-accent);
-  --color-academic: var(--academic);
-  --color-academic-soft: var(--academic-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
   --shadow-card: var(--shadow);
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
-  --radius-card: 1.25rem;
+  --font-display: var(--font-instrument), ui-serif, Georgia, serif;
+  --font-script: var(--font-pinyon), cursive;
 }
 
 @layer base {
@@ -83,7 +87,18 @@
     background-color: var(--bg);
     color: var(--ink);
     font-family: var(--font-sans);
-    transition: background-color 200ms ease, color 200ms ease;
+    transition: background-color 300ms ease, color 300ms ease;
+  }
+
+  /* Grano sutil, como papel impreso. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   /* Evita que la barra fija tape los títulos al navegar con anclas. */
@@ -92,8 +107,8 @@
   }
 
   ::selection {
-    background-color: var(--accent);
-    color: var(--on-accent);
+    background-color: var(--wine);
+    color: var(--on-wine);
   }
 
   :focus-visible {
@@ -103,29 +118,108 @@
   }
 }
 
+/* Etiquetas en mayúsculas espaciadas. */
+@utility label {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+/* ---------- Letras que entran una a una ---------- */
+.split-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.split-char {
+  display: inline-block;
+}
+
+/* ---------- Texto que rueda letra a letra al pasar el cursor ---------- */
+.roll {
+  display: inline-flex;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: 1.25;
+}
+
+.roll-char {
+  position: relative;
+  display: inline-block;
+  white-space: pre;
+  transition: transform 500ms cubic-bezier(0.7, 0, 0.2, 1);
+  transition-delay: calc(var(--i) * 18ms);
+}
+
+.roll-char::after {
+  content: attr(data-char);
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+:is(a, button, .roll-trigger):is(:hover, :focus-visible) .roll-char {
+  transform: translateY(-100%);
+}
+
+/* ---------- Animaciones (solo si la persona no pidió reducir movimiento) ---------- */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 
-  .reveal {
-    animation: reveal 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  .split-char {
+    animation: char-rise 1000ms cubic-bezier(0.2, 0.75, 0.15, 1) both;
+    animation-delay: calc(var(--i) * var(--step, 45ms) + var(--d, 0ms));
   }
 
-  .reveal-delay-1 {
-    animation-delay: 90ms;
+  /* En las secciones, las letras esperan a que el bloque entre en pantalla. */
+  .js [data-reveal] .split-char {
+    animation-play-state: paused;
   }
 
-  .reveal-delay-2 {
-    animation-delay: 180ms;
+  .js [data-reveal].is-visible .split-char {
+    animation-play-state: running;
   }
 
-  .reveal-delay-3 {
-    animation-delay: 270ms;
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(36px);
+    transition:
+      opacity 900ms ease,
+      transform 1000ms cubic-bezier(0.2, 0.75, 0.15, 1);
+    transition-delay: var(--reveal-delay, 0ms);
   }
 
-  .orbit {
-    animation: orbit 40s linear infinite;
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .fade-up {
+    animation: fade-up 1000ms cubic-bezier(0.2, 0.75, 0.15, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  .write-in {
+    animation: write-in 1800ms cubic-bezier(0.6, 0, 0.2, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  .marquee-track {
+    animation: marquee 38s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .spin-slow {
+    animation: spin 18s linear infinite;
+  }
+
+  .float {
+    animation: float 7s ease-in-out infinite;
   }
 }
 
@@ -137,12 +231,29 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+
+  .marquee-track {
+    animation: none !important;
+  }
 }
 
-@keyframes reveal {
+@keyframes char-rise {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(0.55em) rotate(8deg);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -150,13 +261,34 @@
   }
 }
 
-@keyframes orbit {
+@keyframes write-in {
+  from {
+    clip-path: inset(-30% 100% -30% -15%);
+  }
+  to {
+    clip-path: inset(-30% -15% -30% -15%);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-/* Patrón de puntos usado en los marcadores visuales de los proyectos. */
+@keyframes float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Patrón de puntos usado en las ilustraciones de los proyectos. */
 .dot-grid {
   background-image: radial-gradient(currentColor 1px, transparent 1px);
   background-size: 14px 14px;

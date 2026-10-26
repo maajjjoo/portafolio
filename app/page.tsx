@@ -3,6 +3,7 @@ import Contact from "@/components/Contact";
 import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
 import Navbar from "@/components/Navbar";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
@@ -14,6 +15,7 @@ export default function Home() {
       <Navbar />
       <main id="contenido" className="flex-1">
         <Hero />
+        <Marquee />
         <About />
         <Projects />
         <Testimonials />

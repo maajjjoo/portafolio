@@ -25,8 +25,8 @@ function sortKey(item: ExperienceItem) {
 }
 
 const typeStyles: Record<ExperienceType, { dot: string; badge: string }> = {
-  academica: { dot: "bg-academic", badge: "bg-academic-soft text-academic" },
-  profesional: { dot: "bg-accent", badge: "bg-accent-soft text-accent" },
+  academica: { dot: "bg-gold", badge: "bg-gold-soft text-gold" },
+  profesional: { dot: "bg-wine", badge: "bg-accent-soft text-accent" },
 };
 
 export default async function Experience() {
@@ -35,51 +35,54 @@ export default async function Experience() {
   const hasProfessional = items.some((item) => item.type === "profesional");
 
   return (
-    <section id={sectionIds.experience} aria-labelledby="experiencia-titulo" className="border-t border-line bg-surface-2/40">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+    <section id={sectionIds.experience} aria-labelledby="experiencia-titulo">
+      <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
         <SectionHeading
           index="04"
           eyebrow="Experiencia"
           title="Trayectoria académica y profesional"
           titleId="experiencia-titulo"
+          intro="Ordenada de lo más reciente a lo más antiguo."
         />
 
-        <ul className="mb-10 flex flex-wrap gap-3" aria-label="Leyenda">
-          {(Object.keys(experienceTypeLabels) as ExperienceType[]).map((type) => (
-            <li key={type} className={`rounded-full px-3 py-1 font-mono text-xs uppercase ${typeStyles[type].badge}`}>
-              {experienceTypeLabels[type]}
-            </li>
-          ))}
-        </ul>
+        <div className="grid gap-10 lg:grid-cols-[14rem_minmax(0,1fr)]">
+          <ul data-reveal className="flex flex-wrap gap-3 lg:flex-col lg:items-start" aria-label="Leyenda">
+            {(Object.keys(experienceTypeLabels) as ExperienceType[]).map((type) => (
+              <li key={type} className={`label rounded-full px-3 py-1.5 ${typeStyles[type].badge}`}>
+                {experienceTypeLabels[type]}
+              </li>
+            ))}
+          </ul>
 
-        <ol className="relative max-w-3xl border-l border-line pl-8 sm:pl-10">
-          {items.map((item) => (
-            <TimelineItem key={item.id} item={item} semester={semester} />
-          ))}
+          <ol className="relative max-w-3xl border-l border-line pl-8 sm:pl-12">
+            {items.map((item) => (
+              <TimelineItem key={item.id} item={item} semester={semester} />
+            ))}
 
-          {!hasProfessional ? (
-            <li className="relative">
-              <span
-                aria-hidden="true"
-                className="absolute top-2 -left-[calc(2rem+5px)] size-2.5 rounded-full border-2 border-accent bg-bg sm:-left-[calc(2.5rem+5px)]"
-              />
-              <div className="rounded-[var(--radius-card)] border border-dashed border-line p-6">
-                <span className={`rounded-full px-3 py-1 font-mono text-xs uppercase ${typeStyles.profesional.badge}`}>
-                  {experienceTypeLabels.profesional}
-                </span>
-                <h3 className="mt-4 font-display text-2xl font-medium">Experiencia profesional pendiente</h3>
-                <p className="mt-2 leading-relaxed text-muted">
-                  Todavía no tengo experiencia laboral en desarrollo de software para mostrar aquí. Mientras tanto,
-                  puedes ver mi trabajo en la sección de{" "}
-                  <a href={`#${sectionIds.projects}`} className="font-semibold text-ink underline decoration-accent underline-offset-4">
-                    proyectos
-                  </a>
-                  .
-                </p>
-              </div>
-            </li>
-          ) : null}
-        </ol>
+            {!hasProfessional ? (
+              <li data-reveal className="relative">
+                <span
+                  aria-hidden="true"
+                  className="absolute top-3 -left-[calc(2rem+6px)] size-3 rotate-45 border-2 border-wine bg-bg sm:-left-[calc(3rem+6px)]"
+                />
+                <div className="border border-dashed border-line p-6 sm:p-8">
+                  <span className={`label rounded-full px-3 py-1.5 ${typeStyles.profesional.badge}`}>
+                    {experienceTypeLabels.profesional}
+                  </span>
+                  <h3 className="mt-5 font-display text-3xl">Experiencia profesional pendiente</h3>
+                  <p className="mt-3 leading-relaxed text-muted">
+                    Todavía no tengo experiencia laboral en desarrollo de software para mostrar aquí. Mientras tanto,
+                    puedes ver mi trabajo en la sección de{" "}
+                    <a href={`#${sectionIds.projects}`} className="font-semibold text-ink underline decoration-accent underline-offset-4">
+                      proyectos
+                    </a>
+                    .
+                  </p>
+                </div>
+              </li>
+            ) : null}
+          </ol>
+        </div>
       </div>
     </section>
   );
@@ -89,23 +92,21 @@ function TimelineItem({ item, semester }: { item: ExperienceItem; semester: Seme
   const styles = typeStyles[item.type];
 
   return (
-    <li className="relative pb-10">
+    <li data-reveal className="relative pb-12">
       <span
         aria-hidden="true"
-        className={`absolute top-2 -left-[calc(2rem+5px)] size-2.5 rounded-full ring-4 ring-bg sm:-left-[calc(2.5rem+5px)] ${styles.dot}`}
+        className={`absolute top-3 -left-[calc(2rem+6px)] size-3 rotate-45 ring-4 ring-bg sm:-left-[calc(3rem+6px)] ${styles.dot}`}
       />
-      <article className="rounded-[var(--radius-card)] border border-line bg-surface p-6 shadow-card">
+      <article className="border border-line bg-surface p-6 shadow-card sm:p-8">
         <div className="flex flex-wrap items-center gap-3">
-          <span className={`rounded-full px-3 py-1 font-mono text-xs uppercase ${styles.badge}`}>
-            {experienceTypeLabels[item.type]}
-          </span>
-          <span className="font-mono text-xs text-muted">{formatPeriod(item)}</span>
+          <span className={`label rounded-full px-3 py-1.5 ${styles.badge}`}>{experienceTypeLabels[item.type]}</span>
+          <span className="label text-muted">{formatPeriod(item)}</span>
         </div>
-        <h3 className="mt-4 font-display text-2xl font-medium">{item.title}</h3>
-        <p className="text-muted">{item.organization}</p>
-        <p className="mt-3 leading-relaxed">{item.description}</p>
+        <h3 className="mt-5 font-display text-3xl">{item.title}</h3>
+        <p className="mt-1 text-muted">{item.organization}</p>
+        <p className="mt-4 leading-relaxed">{item.description}</p>
         {item.showCurrentSemester ? (
-          <p className="mt-4 rounded-xl bg-surface-2 px-4 py-3 text-sm font-semibold">
+          <p className="mt-5 border-l-2 border-gold bg-surface-2 px-4 py-3 text-sm font-semibold">
             Semestre actual: <SemesterStatus result={semester} />
           </p>
         ) : null}

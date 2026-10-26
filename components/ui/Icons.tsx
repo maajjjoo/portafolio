@@ -120,3 +120,28 @@ export function QuoteIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function SparkleIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} fill="currentColor" stroke="none">
+      <path d="M12 1.5c.5 5.6 4.9 10 10.5 10.5-5.6.5-10 4.9-10.5 10.5C11.5 16.9 7.1 12.5 1.5 12 7.1 11.5 11.5 7.1 12 1.5Z" />
+    </svg>
+  );
+}
+
+export function ArrowRightIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 12h16M14 6l6 6-6 6" />
+    </svg>
+  );
+}
+
+export function CapIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="m2 9 10-5 10 5-10 5L2 9Z" />
+      <path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6" />
+    </svg>
+  );
+}

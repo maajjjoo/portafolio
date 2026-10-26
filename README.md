@@ -121,7 +121,7 @@ Para añadir un enlace, edita `repositories` o `demo` en `data/projects.ts`. Par
 - **Fecha de inicio de la carrera:** `data/experience.ts → startDate` (formato `"AAAA-MM"`).
 - **Experiencia profesional:** añade entradas con `type: "profesional"` solo para trabajo real en software. Mientras no haya ninguna, se muestra un estado «pendiente».
 - **Habilidades:** revisa `data/skills.ts`. Las tecnologías salen de tus repositorios y de lo que indicaste; ajusta los niveles si algo no te representa.
-- **Foto:** el avatar es un monograma «MJ» (`components/Hero.tsx → Monogram`). Puedes reemplazarlo por una foto con `next/image`.
+- **Foto:** mientras no exista, el inicio muestra un arco vinotinto con el monograma «MJ» y la nota «Foto próximamente». Para poner tu foto, guárdala como **`public/images/perfil.png`** (también sirve `.jpg`, `.jpeg` o `.webp`) y vuelve a compilar o desplegar: se detecta sola (`next.config.ts`). Funciona mejor una foto vertical (proporción 3:4) con la cara en la parte superior, porque el marco recorta los lados y la parte de abajo.
 
 ## Publicar en GitHub
 

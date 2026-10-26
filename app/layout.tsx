@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, JetBrains_Mono, Manrope } from "next/font/google";
+import { Instrument_Serif, Manrope, Pinyon_Script } from "next/font/google";
 
+import ScrollReveal from "@/components/ScrollReveal";
 import { portfolio } from "@/config/portfolio";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const instrument = Instrument_Serif({
+  variable: "--font-instrument",
   subsets: ["latin"],
-  axes: ["opsz"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
 const manrope = Manrope({
@@ -15,9 +17,10 @@ const manrope = Manrope({
   subsets: ["latin"],
 });
 
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
+const pinyon = Pinyon_Script({
+  variable: "--font-pinyon",
   subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -34,32 +37,34 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f1ea" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a1124" },
+    { media: "(prefers-color-scheme: light)", color: "#f5ece3" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e0809" },
   ],
 };
 
-// Aplica el tema guardado (o el del sistema) antes de pintar, para evitar parpadeos.
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
+// Aplica el tema guardado (o el del sistema) antes de pintar, para evitar parpadeos,
+// y marca que hay JavaScript para activar las animaciones al hacer scroll.
+const themeScript = `(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}d.setAttribute("data-theme",t)}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${manrope.variable} ${jetbrains.variable} h-full antialiased`}
+      className={`${instrument.variable} ${manrope.variable} ${pinyon.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col overflow-x-clip">
         <a
           href="#contenido"
-          className="sr-only z-[60] rounded-full bg-accent px-4 py-2 font-semibold text-on-accent focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          className="sr-only z-[110] rounded-full bg-wine px-4 py-2 font-semibold text-on-wine focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
         >
           Saltar al contenido
         </a>
         {children}
+        <ScrollReveal />
       </body>
     </html>
   );

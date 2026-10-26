@@ -35,9 +35,11 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={theme === null ? "Cambiar tema" : `Activar modo ${next === "dark" ? "oscuro" : "claro"}`}
-      className="grid size-11 place-items-center rounded-full border border-line text-ink transition-colors hover:border-accent hover:text-accent"
+      className="group grid size-11 place-items-center rounded-full border border-line text-ink transition-colors hover:border-accent hover:text-accent"
     >
-      {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+      <span className="transition-transform duration-500 group-hover:rotate-45">
+        {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+      </span>
     </button>
   );
 }
