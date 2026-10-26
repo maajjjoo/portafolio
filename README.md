@@ -1,8 +1,30 @@
 # Portafolio — María José De La Cruz Madroñero
 
-Portafolio personal de una estudiante de Ingeniería de Software, construido con **Next.js (App Router)**, **React**, **TypeScript** y **Tailwind CSS**, listo para desplegarse en **Vercel**.
+**The Vinyl Archive**: portafolio personal de una estudiante de Ingeniería de Software, presentado como una colección de discos de vinilo. Construido con **Next.js (App Router)**, **React**, **TypeScript** y **Tailwind CSS**, listo para desplegarse en **Vercel**.
 
-Secciones, en este orden: barra de navegación, inicio, sobre mí, proyectos, testimonios, experiencia, contacto, habilidades y pie de página.
+## Cómo funciona la biblioteca
+
+- La página principal (`/`) es un **estante de discos**. Cada disco es una sección del portafolio.
+- Al pasar el cursor o enfocar una funda con el teclado, el vinilo asoma y gira. En pantallas táctiles el disco ya asoma un poco y el rótulo «Abrir álbum» siempre está visible.
+- Al elegir un disco, la funda **se transforma** en la portada del álbum (`<ViewTransition>` de React 19.3), el vinilo sale de la funda y empieza a girar, y debajo aparece el contenido de la sección.
+- Cada álbum tiene su propia ruta (`/album/proyectos`, `/album/contacto`…): se puede abrir directamente, compartir y usar con los botones Atrás/Adelante del navegador. Un slug que no existe muestra una página 404 propia.
+- Dentro de un álbum: «Volver a la biblioteca», disco anterior/siguiente y atajos de teclado (← →, Esc).
+- El botón **Álbumes** de la barra superior da acceso directo a las ocho secciones desde cualquier página.
+- La biblioteca permite **buscar** y **filtrar por categoría**, y marca como «Escuchado» los discos ya abiertos (solo en ese navegador).
+- Si el sistema pide reducir el movimiento, no hay giros ni deslizamientos.
+
+| Nº | Álbum | Sección de la entrega | Ruta |
+| --- | --- | --- | --- |
+| 01 | Hola, mundo | Hero y CV | `/album/bienvenida` |
+| 02 | Quién soy | Sobre mí | `/album/sobre-mi` |
+| 03 | Repositorio | Proyectos | `/album/proyectos` |
+| 04 | Otras voces | Testimonios | `/album/testimonios` |
+| 05 | Línea de tiempo | Experiencia | `/album/experiencia` |
+| 06 | Escríbeme | Contacto | `/album/contacto` |
+| 07 | Stack | Habilidades (sección adicional) | `/album/habilidades` |
+| 08 | Créditos finales | Contraportada | `/album/creditos` |
+
+La barra de navegación (logo «MJ», nombre, Biblioteca y Álbumes) y el pie de página (nombre, año, enlaces a los discos, redes, «Volver arriba» y «Hecho con Next.js + Tailwind CSS») aparecen en todas las páginas.
 
 ## Requisitos
 
@@ -16,7 +38,7 @@ npm install        # instalar dependencias
 npm run dev        # servidor de desarrollo en http://localhost:3000
 npm run lint       # ESLint
 npm run typecheck  # comprobación de tipos de TypeScript
-npm test           # pruebas unitarias (semestre y formulario)
+npm test           # pruebas unitarias (álbumes, semestre y formulario)
 npm run build      # compilación de producción
 npm run start      # servir la compilación de producción
 ```
@@ -24,15 +46,24 @@ npm run start      # servir la compilación de producción
 ## Estructura
 
 ```text
-app/            layout, página principal, estilos globales e ícono
-components/     una sección por archivo (Navbar, Hero, About, …) y componentes ui/
-config/         portfolio.ts (datos personales y semestre) y navigation.ts (secciones)
-data/           projects.ts, testimonials.ts, experience.ts, skills.ts
-lib/            semester.ts (cálculo del semestre), contact.ts (validación) y sus pruebas
-public/         archivos estáticos (aquí va cv.pdf cuando esté listo)
+app/
+  layout.tsx            cabecera, <main> y pie comunes; tema y fuentes
+  page.tsx              la biblioteca (estante de discos)
+  album/[slug]/page.tsx un álbum abierto (generado al compilar para cada disco)
+  not-found.tsx         «Este disco no está en la colección»
+components/
+  library/              cabecera, bienvenida, estante, funda, vinilo, portadas SVG, búsqueda
+  album/                vista del álbum, portada, lista de canciones, anterior/siguiente, teclado
+  sections/             el contenido de cada sección (Hero, About, Projects, …, Credits, Footer)
+  ui/                   piezas reutilizables (iconos, textos animados, tema, volver)
+  providers/            animaciones al hacer scroll
+config/                 portfolio.ts (datos personales y semestre), navigation.ts (IDs)
+data/                   albums.ts, projects.ts, testimonials.ts, experience.ts, skills.ts
+lib/                    albums.ts, semester.ts, contact.ts (+ pruebas) y useExplored.ts
+public/                 archivos estáticos (cv.pdf e images/perfil.* cuando estén listos)
 ```
 
-Todo el contenido sale de `config/` y `data/`: para actualizar el sitio normalmente basta con editar esos archivos.
+Todo el contenido sale de `config/` y `data/`. Cada sección se escribe una sola vez en `components/sections/` y el álbum correspondiente la muestra (`components/album/AlbumContent.tsx`). Para cambiar títulos, colores o canciones de un disco, edita `data/albums.ts`.
 
 ## Lo que falta por completar
 
@@ -121,7 +152,7 @@ Para añadir un enlace, edita `repositories` o `demo` en `data/projects.ts`. Par
 - **Fecha de inicio de la carrera:** `data/experience.ts → startDate` (formato `"AAAA-MM"`).
 - **Experiencia profesional:** añade entradas con `type: "profesional"` solo para trabajo real en software. Mientras no haya ninguna, se muestra un estado «pendiente».
 - **Habilidades:** revisa `data/skills.ts`. Las tecnologías salen de tus repositorios y de lo que indicaste; ajusta los niveles si algo no te representa.
-- **Foto:** mientras no exista, el inicio muestra un arco vinotinto con el monograma «MJ» y la nota «Foto próximamente». Para poner tu foto, guárdala como **`public/images/perfil.png`** (también sirve `.jpg`, `.jpeg` o `.webp`) y vuelve a compilar o desplegar: se detecta sola (`next.config.ts`). Funciona mejor una foto vertical (proporción 3:4) con la cara en la parte superior, porque el marco recorta los lados y la parte de abajo.
+- **Foto:** mientras no exista, el álbum «Hola, mundo» muestra un arco vinotinto con el monograma «MJ» y la nota «Foto próximamente». Para poner tu foto, guárdala como **`public/images/perfil.png`** (también sirve `.jpg`, `.jpeg` o `.webp`) y vuelve a compilar o desplegar: se detecta sola (`next.config.ts`). Funciona mejor una foto vertical (proporción 3:4) con la cara en la parte superior, porque el marco recorta los lados y la parte de abajo.
 
 ## Publicar en GitHub
 
@@ -141,31 +172,62 @@ El repositorio Git local ya existe, con un commit por etapa. Para subirlo:
 1. Entra en [vercel.com](https://vercel.com) con tu cuenta de GitHub → *Add New → Project* → importa el repositorio.
 2. Vercel detecta Next.js automáticamente; no hace falta cambiar comandos.
 3. Añade la variable `NEXT_PUBLIC_FORMSPREE_ENDPOINT` (opcional hasta que configures Formspree).
-4. Pulsa *Deploy* y abre la URL pública para verificarla: navegación, modo oscuro, menú móvil, formulario y botón del CV.
+4. Pulsa *Deploy* y abre la URL pública para verificarla: biblioteca, abrir varios discos, anterior/siguiente, una URL directa como `/album/proyectos`, modo oscuro, panel Álbumes en el móvil, formulario y botón del CV.
+
+## Limitaciones conocidas
+
+- **Slug inexistente (`/album/lo-que-sea`):** siempre muestra la página «Este disco no está en la colección» con `noindex`. La **primera** visita a un slug nuevo responde HTTP 200 y las siguientes 404. Es el comportamiento documentado de Next.js 16 con Cache Components: el estado queda en 200 si el streaming ya empezó. Se probó forzar el 404 desde `proxy.ts`, pero Next no aplica el estado de un `rewrite`.
+- **Transiciones:** la funda que se transforma en portada usa la API View Transitions (Chromium 125+, Safari y Firefox recientes). En navegadores sin soporte todo funciona igual, solo que sin animación.
+- **«Escuchado»:** se guarda en el navegador de cada visitante (`localStorage`); no se comparte entre dispositivos.
 
 ## Checklist de la entrega
 
-- [x] Proyecto Next.js con TypeScript
+### Tecnologías y estructura
+
+- [x] Next.js inicializado con `create-next-app` y TypeScript
 - [x] Tailwind CSS configurado
-- [x] Diseño responsive
-- [x] Navbar con nombre y navegación por secciones
-- [x] Sección de inicio
-- [ ] Descarga del CV con el PDF real
-- [x] Sección sobre mí
+- [x] Estructura de componentes reutilizables
+- [x] Clases responsive aplicadas
+- [x] El proyecto corre en local
+
+### Secciones principales
+
+- [x] Navegación con nombre, logo o iniciales
+- [x] Hero con perfil personal
+- [ ] Descarga del CV con el PDF real (pendiente: `public/cv.pdf`)
+- [x] Sobre mí con presentación personal
 - [x] Sección de proyectos
-- [ ] Cada proyecto con repositorio de GitHub verificado
-- [ ] Cada proyecto con demo en vivo verificada
+- [ ] Repositorio de GitHub verificado en cada proyecto (falta SmartControl)
+- [ ] Demo en vivo verificada en cada proyecto (solo AI Code Tutor tiene, y su backend respondió 503)
 - [ ] Al menos tres testimonios reales
-- [ ] Experiencia académica completa (falta la fecha de inicio)
-- [x] Experiencia profesional marcada honestamente como pendiente
-- [ ] Correo y redes verificados (GitHub verificado; abre tú el enlace de LinkedIn y envía un correo de prueba)
-- [ ] Formulario de contacto configurado y probado con el servicio real
-- [x] Pie de página
-- [x] Sección adicional (Habilidades)
-- [ ] Cálculo del semestre configurado (falta `referenceDate`) — implementado y probado
-- [x] Vista móvil verificada
-- [x] Lint y TypeScript sin errores
+- [ ] Experiencia académica completa (está la universidad y el programa; falta la fecha de inicio)
+- [ ] Experiencia profesional (no hay; se muestra honestamente como pendiente)
+- [x] Correo público
+- [ ] Formulario de contacto funcional (implementado y probado con respuestas simuladas; falta configurar Formspree)
+- [x] Pie de página con nombre y año actual
+- [x] Al menos una sección adicional (Habilidades)
+
+### Interacción creativa
+
+- [x] Biblioteca con fundas de discos
+- [x] Cada sección representada por un álbum
+- [x] Seleccionar un álbum funciona
+- [x] La transición de apertura funciona
+- [x] Cada álbum muestra el contenido correcto
+- [x] Volver a la biblioteca funciona
+- [x] Disco anterior/siguiente funciona
+- [x] Las URL directas de los álbumes funcionan
+- [x] Interacción táctil verificada (en emulación móvil)
+- [x] Accesibilidad con teclado verificada
+
+### Entrega
+
+- [x] Sitio revisado en móvil
+- [x] Sitio revisado en tablet y escritorio
+- [x] Lint completado
+- [x] TypeScript sin errores
 - [x] Compilación de producción correcta
-- [ ] Código subido a GitHub
-- [ ] Despliegue en Vercel
+- [ ] Repositorio de GitHub actualizado (requiere tu autorización)
+- [x] Commits creados
+- [ ] Despliegue en Vercel (requiere tu autorización)
 - [ ] URL pública verificada
