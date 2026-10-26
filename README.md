@@ -132,6 +132,7 @@ El repositorio Git local ya existe, con un commit por etapa. Para subirlo:
 
    ```bash
    git remote add origin https://github.com/maajjjoo/portafolio.git
+   git branch -M main
    git push -u origin main
    ```
 
