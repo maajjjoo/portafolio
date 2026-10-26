@@ -11,10 +11,8 @@ import { projects, projectStatusLabels, type Project, type ProjectMotif } from "
 export default function Projects() {
   return (
     <section id={sectionIds.projects} aria-labelledby="proyectos-titulo">
-      <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <SectionHeading
-          index="02"
-          eyebrow="Proyectos"
           title="Lo que he estado construyendo"
           titleId="proyectos-titulo"
           intro="Proyectos académicos y personales. Indico el estado real de cada uno y solo enlazo repositorios y demos que están publicados."
@@ -23,7 +21,7 @@ export default function Projects() {
               href={portfolio.social.github.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="label hidden items-center gap-3 text-muted transition-colors hover:text-ink sm:inline-flex"
+              className="label inline-flex items-center gap-3 text-muted transition-colors hover:text-ink"
             >
               <RollText>Mi perfil de GitHub</RollText>
               <ArrowRightIcon width={16} height={16} />

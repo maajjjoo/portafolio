@@ -1,125 +1,143 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-import ThemeToggle from "@/components/ThemeToggle";
-import RollText from "@/components/ui/RollText";
+import CoverArt from "@/components/library/CoverArt";
 import { CloseIcon, MenuIcon } from "@/components/ui/Icons";
-import { navItems, sectionIds, type SectionId } from "@/config/navigation";
+import RollText from "@/components/ui/RollText";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { portfolio } from "@/config/portfolio";
+import { albums } from "@/data/albums";
+import { albumHref, sortedAlbums } from "@/lib/albums";
 
-export default function Navbar() {
+const ordered = sortedAlbums(albums);
+
+/**
+ * Barra de navegación del sitio: identidad, regreso a la biblioteca y un
+ * panel "Álbumes" con acceso directo a todas las secciones.
+ */
+export default function LibraryHeader() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<SectionId | null>(null);
-  const [scrolled, setScrolled] = useState(false);
+  const [openedAt, setOpenedAt] = useState(pathname);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const onLibrary = pathname === "/";
 
-  // Resalta el enlace de la sección visible.
-  useEffect(() => {
-    const sections = navItems
-      .map((item) => document.getElementById(item.id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.find((entry) => entry.isIntersecting);
-        if (visible) setActive(visible.target.id as SectionId);
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
-  // La barra se vuelve sólida al bajar un poco.
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // Cierra el panel cuando cambia la ruta (por ejemplo, con el botón Atrás).
+  if (open && openedAt !== pathname) {
+    setOpen(false);
+  }
 
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
     };
-    const desktop = window.matchMedia("(min-width: 64rem)");
-    const onResize = () => desktop.matches && setOpen(false);
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (!panelRef.current?.contains(target) && !buttonRef.current?.contains(target)) setOpen(false);
+    };
     window.addEventListener("keydown", onKeyDown);
-    desktop.addEventListener("change", onResize);
+    window.addEventListener("pointerdown", onPointerDown);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
-      desktop.removeEventListener("change", onResize);
+      window.removeEventListener("pointerdown", onPointerDown);
     };
   }, [open]);
 
+  function toggle() {
+    setOpenedAt(pathname);
+    setOpen((value) => !value);
+  }
+
   return (
-    <header
-      className={`sticky top-0 z-50 border-b transition-colors duration-500 ${
-        scrolled || open ? "border-line bg-bg/85 backdrop-blur-md" : "border-transparent bg-transparent"
-      }`}
-    >
-      <nav aria-label="Principal" className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
-        <a href={`#${sectionIds.hero}`} className="group flex items-center gap-3" aria-label={`${portfolio.fullName}, ir al inicio`}>
-          <span className="grid size-10 place-items-center rounded-full bg-wine font-display text-lg text-on-wine transition-transform duration-500 group-hover:rotate-[360deg]">
+    <header style={{ viewTransitionName: "site-header" }} className="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
+      <nav aria-label="Principal" className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-3 px-5 sm:px-8">
+        <Link href="/" transitionTypes={["nav-back"]} className="group flex items-center gap-3" aria-label={`${portfolio.fullName}: ir a la biblioteca`}>
+          <span className="grid size-10 place-items-center rounded-full bg-wine font-display text-lg text-on-wine transition-transform duration-700 group-hover:rotate-[360deg]">
             {portfolio.initials}
           </span>
-          <span className="hidden font-script text-2xl leading-none text-accent sm:block">María José</span>
-        </a>
-
-        <ul className="hidden items-center gap-1 lg:flex">
-          {navItems.map((item) => (
-            <li key={item.id}>
-              <a
-                href={`#${item.id}`}
-                aria-current={active === item.id ? "true" : undefined}
-                className={`label relative inline-flex px-3 py-2 transition-colors hover:text-ink ${
-                  active === item.id ? "text-ink" : "text-muted"
-                }`}
-              >
-                <RollText>{item.label}</RollText>
-                <span
-                  aria-hidden="true"
-                  className={`absolute right-3 bottom-1 left-3 h-px origin-left bg-accent transition-transform duration-500 ${
-                    active === item.id ? "scale-x-100" : "scale-x-0"
-                  }`}
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
+          <span className="hidden leading-tight sm:block">
+            <span className="block font-script text-2xl text-accent">María José</span>
+            <span className="label block text-[0.6rem] text-muted">{portfolio.libraryTitle}</span>
+          </span>
+        </Link>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <button
-            type="button"
-            className="grid size-11 place-items-center rounded-full border border-line lg:hidden"
-            aria-expanded={open}
-            aria-controls="menu-movil"
-            aria-label={open ? "Cerrar menú" : "Abrir menú"}
-            onClick={() => setOpen((value) => !value)}
+          <Link
+            href="/"
+            transitionTypes={["nav-back"]}
+            aria-current={onLibrary ? "page" : undefined}
+            className={`label hidden min-h-11 items-center rounded-full px-4 transition-colors hover:text-ink sm:inline-flex ${
+              onLibrary ? "text-ink" : "text-muted"
+            }`}
           >
-            {open ? <CloseIcon /> : <MenuIcon />}
+            <RollText>Biblioteca</RollText>
+          </Link>
+          <button
+            ref={buttonRef}
+            type="button"
+            onClick={toggle}
+            aria-expanded={open}
+            aria-controls="panel-albumes"
+            className="label inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 transition-colors hover:border-ink"
+          >
+            {open ? <CloseIcon width={16} height={16} /> : <MenuIcon width={16} height={16} />}
+            Álbumes
           </button>
+          <ThemeToggle />
         </div>
       </nav>
 
-      <div id="menu-movil" hidden={!open} className="border-t border-line bg-bg lg:hidden">
-        <ul className="mx-auto grid max-w-7xl px-5 py-4 sm:px-8">
-          {navItems.map((item, index) => (
-            <li key={item.id} className="border-b border-line last:border-b-0">
-              <a
-                href={`#${item.id}`}
+      <div ref={panelRef} id="panel-albumes" hidden={!open} className="border-t border-line bg-bg">
+        <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8">
+          <p className="label mb-4 text-muted">Toda la colección · elige un disco</p>
+          <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            <li className="sm:hidden">
+              <Link
+                href="/"
+                transitionTypes={["nav-back"]}
                 onClick={() => setOpen(false)}
-                aria-current={active === item.id ? "true" : undefined}
-                className="flex items-baseline gap-4 px-1 py-4 font-display text-3xl transition-colors hover:text-accent"
+                aria-current={onLibrary ? "page" : undefined}
+                className="flex min-h-14 items-center gap-3 border border-line px-3 py-2 transition-colors hover:border-ink aria-[current=page]:border-wine"
               >
-                <span className="label text-accent">{String(index + 1).padStart(2, "0")}</span>
-                {item.label}
-              </a>
+                <span className="label text-accent">00</span>
+                <span className="font-display text-xl">Biblioteca</span>
+              </Link>
             </li>
-          ))}
-        </ul>
+            {ordered.map((album) => {
+              const href = albumHref(album.slug);
+              const current = pathname === href;
+              return (
+                <li key={album.slug}>
+                  <Link
+                    href={href}
+                    transitionTypes={["nav-forward"]}
+                    onClick={() => setOpen(false)}
+                    aria-current={current ? "page" : undefined}
+                    className="group flex min-h-14 items-center gap-3 border border-line px-3 py-2 transition-colors hover:border-ink aria-[current=page]:border-wine aria-[current=page]:bg-surface"
+                  >
+                    <span className="size-10 shrink-0 overflow-hidden rounded-[2px]">
+                      <CoverArt album={album} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="label block text-[0.6rem] text-muted">
+                        {String(album.order).padStart(2, "0")} · {album.section}
+                      </span>
+                      <span className="block truncate font-display text-xl">{album.title}</span>
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </header>
   );

@@ -19,10 +19,8 @@ export default function Testimonials() {
 
   return (
     <section id={sectionIds.testimonials} aria-labelledby="testimonios-titulo" className="bg-surface">
-      <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <SectionHeading
-          index="03"
-          eyebrow="Testimonios"
           title="Palabras de quienes han trabajado conmigo"
           titleId="testimonios-titulo"
           intro={

@@ -15,10 +15,8 @@ function LevelMark({ level }: { level: SkillLevel }) {
 export default function Skills() {
   return (
     <section id={sectionIds.skills} aria-labelledby="habilidades-titulo" className="bg-surface">
-      <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <SectionHeading
-          index="06"
-          eyebrow="Habilidades"
           title="Herramientas con las que trabajo"
           titleId="habilidades-titulo"
           intro="Sin porcentajes inventados: distingo entre lo que ya he usado en proyectos y lo que estoy aprendiendo ahora."

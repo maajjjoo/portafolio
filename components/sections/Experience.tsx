@@ -1,8 +1,11 @@
+import Link from "next/link";
+
 import SectionHeading from "@/components/ui/SectionHeading";
 import SemesterStatus from "@/components/ui/SemesterStatus";
 import { sectionIds } from "@/config/navigation";
 import { experience, experienceTypeLabels, type ExperienceItem, type ExperienceType } from "@/data/experience";
 import { getAcademicSnapshot } from "@/lib/academic";
+import { albumHref } from "@/lib/albums";
 import type { SemesterResult } from "@/lib/semester";
 
 const monthFormatter = new Intl.DateTimeFormat("es-CO", { month: "short", year: "numeric", timeZone: "UTC" });
@@ -36,10 +39,8 @@ export default async function Experience() {
 
   return (
     <section id={sectionIds.experience} aria-labelledby="experiencia-titulo">
-      <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <SectionHeading
-          index="04"
-          eyebrow="Experiencia"
           title="Trayectoria académica y profesional"
           titleId="experiencia-titulo"
           intro="Ordenada de lo más reciente a lo más antiguo."
@@ -72,10 +73,14 @@ export default async function Experience() {
                   <h3 className="mt-5 font-display text-3xl">Experiencia profesional pendiente</h3>
                   <p className="mt-3 leading-relaxed text-muted">
                     Todavía no tengo experiencia laboral en desarrollo de software para mostrar aquí. Mientras tanto,
-                    puedes ver mi trabajo en la sección de{" "}
-                    <a href={`#${sectionIds.projects}`} className="font-semibold text-ink underline decoration-accent underline-offset-4">
+                    puedes ver mi trabajo en el disco de{" "}
+                    <Link
+                      href={albumHref("proyectos")}
+                      transitionTypes={["nav-forward"]}
+                      className="font-semibold text-ink underline decoration-accent underline-offset-4"
+                    >
                       proyectos
-                    </a>
+                    </Link>
                     .
                   </p>
                 </div>

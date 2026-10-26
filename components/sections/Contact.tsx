@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 
-import ContactForm from "@/components/ContactForm";
-import { ArrowUpRightIcon, GitHubIcon, LinkedInIcon, MailIcon, SparkleIcon } from "@/components/ui/Icons";
+import ContactForm from "@/components/sections/ContactForm";
+import { ArrowUpRightIcon, GitHubIcon, LinkedInIcon, MailIcon } from "@/components/ui/Icons";
 import SplitText from "@/components/ui/SplitText";
 import { sectionIds } from "@/config/navigation";
 import { portfolio } from "@/config/portfolio";
@@ -35,15 +35,7 @@ export default function Contact() {
         aria-hidden="true"
         className="absolute -right-40 -bottom-40 -z-10 size-[36rem] rounded-full bg-[radial-gradient(circle,var(--glow)_0%,transparent_65%)]"
       />
-      <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
-        <div className="mb-8 flex items-center gap-3 border-b border-line pb-4">
-          <p className="label flex items-center gap-3 text-muted">
-            <span className="text-accent">05</span>
-            Contacto
-            <SparkleIcon className="spin-slow text-accent" width={14} height={14} />
-          </p>
-        </div>
-
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
           <div>
             <h2 id="contacto-titulo" data-reveal className="text-4xl leading-tight font-light tracking-wide uppercase sm:text-5xl">

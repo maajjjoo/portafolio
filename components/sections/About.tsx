@@ -28,8 +28,8 @@ export default async function About() {
 
   return (
     <section id={sectionIds.about} aria-labelledby="sobre-mi-titulo">
-      <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
-        <SectionHeading index="01" eyebrow="Sobre mí" title="Aprendo construyendo cosas útiles" titleId="sobre-mi-titulo" />
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
+        <SectionHeading title="Aprendo construyendo cosas útiles" titleId="sobre-mi-titulo" />
 
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-16">
           <div data-reveal className="space-y-6 text-lg leading-relaxed">

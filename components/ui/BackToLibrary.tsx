@@ -1,0 +1,18 @@
+import Link from "next/link";
+
+import { ArrowRightIcon } from "@/components/ui/Icons";
+import RollText from "@/components/ui/RollText";
+
+/** Enlace visible para volver al estante desde cualquier álbum. */
+export default function BackToLibrary() {
+  return (
+    <Link
+      href="/"
+      transitionTypes={["nav-back"]}
+      className="label inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 transition-colors hover:border-ink"
+    >
+      <ArrowRightIcon width={16} height={16} className="rotate-180" />
+      <RollText>Volver a la biblioteca</RollText>
+    </Link>
+  );
+}

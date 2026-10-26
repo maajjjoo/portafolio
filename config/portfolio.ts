@@ -15,6 +15,8 @@ export interface PortfolioConfig {
   shortName: string;
   initials: string;
   title: string;
+  /** Nombre de la colección que se muestra en la biblioteca. */
+  libraryTitle: string;
   email: string;
   /** Ciudad o país a mostrar. Déjalo en `null` si prefieres no publicarlo. */
   location: string | null;
@@ -31,6 +33,7 @@ export const portfolio: PortfolioConfig = {
   shortName: "María José De La Cruz",
   initials: "MJ",
   title: "Estudiante de Ingeniería de Software",
+  libraryTitle: "The Vinyl Archive",
   email: "majose2006@gmail.com",
   location: null,
   social: {

@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Manrope, Pinyon_Script } from "next/font/google";
 
-import ScrollReveal from "@/components/ScrollReveal";
+import LibraryHeader from "@/components/library/LibraryHeader";
+import ScrollReveal from "@/components/providers/ScrollReveal";
+import Footer from "@/components/sections/Footer";
 import { portfolio } from "@/config/portfolio";
 import "./globals.css";
 
@@ -63,7 +65,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Saltar al contenido
         </a>
-        {children}
+        <LibraryHeader />
+        <main id="contenido" tabIndex={-1} className="flex-1 focus:outline-none">
+          {children}
+        </main>
+        <Footer />
         <ScrollReveal />
       </body>
     </html>
