@@ -1,34 +1,21 @@
-import { ArrowRightIcon } from "@/components/ui/Icons";
 import type { Album } from "@/data/albums";
 
-/** Lista de canciones del álbum: cada pista lleva a su parte del contenido. */
+/** Índice del libreto: una línea breve con enlaces a cada parte del contenido. */
 export default function AlbumTracklist({ album }: { album: Album }) {
   return (
-    <div id={`pistas-${album.slug}`} className="mt-8">
-      <h2 className="label mb-3 text-muted">Lista de canciones</h2>
-      <ol className="border-t border-line">
-        {album.tracks.map((track, i) => (
-          <li key={track.anchor} className="border-b border-line">
+    <nav id={`pistas-${album.slug}`} aria-label="En este álbum" className="mt-7">
+      <ul className="flex flex-wrap gap-x-5 gap-y-1">
+        {album.tracks.map((track) => (
+          <li key={track.anchor}>
             <a
               href={`#${track.anchor}`}
-              className="group flex min-h-11 items-baseline gap-4 py-2.5 transition-colors hover:text-accent"
+              className="inline-flex min-h-11 items-center text-base font-medium underline decoration-line decoration-1 underline-offset-[6px] transition-colors hover:text-accent hover:decoration-accent"
             >
-              <span className="label w-8 shrink-0 text-accent">
-                {album.side}
-                {i + 1}
-              </span>
-              <span className="min-w-0 flex-1 transition-transform duration-300 group-hover:translate-x-1">{track.title}</span>
-              {track.note ? <span className="label shrink-0 text-muted max-sm:hidden">{track.note}</span> : null}
-              <ArrowRightIcon
-                width={14}
-                height={14}
-                aria-hidden="true"
-                className="shrink-0 translate-y-0.5 rotate-90 text-muted transition-transform duration-300 group-hover:translate-y-1.5 group-hover:text-accent"
-              />
+              {track.title}
             </a>
           </li>
         ))}
-      </ol>
-    </div>
+      </ul>
+    </nav>
   );
 }

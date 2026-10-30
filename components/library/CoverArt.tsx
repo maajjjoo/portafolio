@@ -21,13 +21,13 @@ export default function CoverArt({ album, className = "" }: { album: Album; clas
           <stop offset="1" stopColor="#000" stopOpacity="0.25" />
         </linearGradient>
       </defs>
-      <text x="18" y="30" fill={fg} fontSize="10" letterSpacing="2.5" style={{ fontFamily: "var(--font-manrope)" }} fontWeight="700">
+      <text x="18" y="30" fill={fg} fontSize="10" letterSpacing="0.5" style={{ fontFamily: "var(--font-hanken)" }} fontWeight="700">
         {album.catalog}
       </text>
-      <text x="282" y="30" fill={fg} fontSize="10" letterSpacing="2.5" textAnchor="end" style={{ fontFamily: "var(--font-manrope)" }} opacity="0.8">
-        LADO {album.side}
+      <text x="282" y="30" fill={fg} fontSize="10" letterSpacing="0.5" textAnchor="end" style={{ fontFamily: "var(--font-hanken)" }} opacity="0.8">
+        Lado {album.side}
       </text>
-      <text x="18" y="276" fill={fg} fontSize="34" style={{ fontFamily: "var(--font-instrument)" }}>
+      <text x="18" y="276" fill={fg} fontSize="34" style={{ fontFamily: "var(--font-gloock)" }}>
         {album.title}
       </text>
       <rect x="18" y="286" width="40" height="2" fill={accent} />
@@ -46,7 +46,7 @@ function Motif({ album }: { album: Album }) {
             <circle key={r} cx="150" cy="138" r={r} fill="none" stroke={fg} strokeOpacity="0.18" />
           ))}
           <circle cx="232" cy="62" r="9" fill={accent} />
-          <text x="150" y="172" textAnchor="middle" fill={fg} fontSize="104" style={{ fontFamily: "var(--font-instrument)" }}>
+          <text x="150" y="172" textAnchor="middle" fill={fg} fontSize="104" style={{ fontFamily: "var(--font-gloock)" }}>
             M<tspan fontStyle="italic" fill={accent}>J</tspan>
           </text>
         </g>
@@ -80,7 +80,7 @@ function Motif({ album }: { album: Album }) {
               );
             }),
           )}
-          <text x="150" y="168" textAnchor="middle" fill={fg} fontSize="40" style={{ fontFamily: "var(--font-manrope)" }} fontWeight="300" opacity="0.9">
+          <text x="150" y="168" textAnchor="middle" fill={fg} fontSize="40" style={{ fontFamily: "var(--font-hanken)" }} fontWeight="300" opacity="0.9">
             {"</>"}
           </text>
         </g>
@@ -88,10 +88,10 @@ function Motif({ album }: { album: Album }) {
     case "quotes":
       return (
         <g>
-          <text x="40" y="200" fill={fg} fontSize="230" style={{ fontFamily: "var(--font-instrument)" }}>
+          <text x="40" y="200" fill={fg} fontSize="230" style={{ fontFamily: "var(--font-gloock)" }}>
             “
           </text>
-          <text x="150" y="232" fill={fg} fontSize="230" style={{ fontFamily: "var(--font-instrument)" }} opacity="0.35">
+          <text x="150" y="232" fill={fg} fontSize="230" style={{ fontFamily: "var(--font-gloock)" }} opacity="0.35">
             ”
           </text>
           <circle cx="226" cy="86" r="22" fill={accent} />
@@ -134,7 +134,7 @@ function Motif({ album }: { album: Album }) {
         <g>
           {Array.from({ length: 8 }, (_, i) => (
             <g key={i}>
-              <text x="40" y={70 + i * 20} fill={fg} fontSize="9" style={{ fontFamily: "var(--font-manrope)" }} opacity="0.7">
+              <text x="40" y={70 + i * 20} fill={fg} fontSize="9" style={{ fontFamily: "var(--font-hanken)" }} opacity="0.7">
                 {String(i + 1).padStart(2, "0")}
               </text>
               <rect x="62" y={63 + i * 20} width={90 + ((i * 37) % 80)} height="5" rx="2.5" fill={fg} fillOpacity="0.2" />

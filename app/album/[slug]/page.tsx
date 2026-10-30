@@ -30,8 +30,8 @@ export default async function AlbumPage({ params }: PageProps<"/album/[slug]">) 
 
   return (
     <ViewTransition
-      enter={{ "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" }}
-      exit={{ "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" }}
+      enter={{ "room-open": "album-arrive", "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" }}
+      exit={{ "room-close": "album-leave", "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" }}
       default="none"
     >
       {/* scroll-mt: al navegar, Next desplaza hasta aquí; deja sitio para la cabecera fija. */}

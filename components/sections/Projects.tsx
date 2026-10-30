@@ -30,7 +30,7 @@ export default function Projects() {
           }
         />
 
-        <ul className="grid border-t border-l border-line md:grid-cols-2">
+        <ul className="grid overflow-hidden rounded-2xl border-t border-l border-line md:grid-cols-2">
           {projects.map((project, index) => (
             <li
               key={project.id}
@@ -38,7 +38,7 @@ export default function Projects() {
               style={{ "--reveal-delay": `${(index % 2) * 120}ms` } as CSSProperties}
               className="flex border-r border-b border-line"
             >
-              <ProjectCard project={project} index={index} />
+              <ProjectCard project={project} />
             </li>
           ))}
         </ul>
@@ -47,16 +47,15 @@ export default function Projects() {
   );
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project }: { project: Project }) {
   const titleId = `proyecto-${project.id}`;
 
   return (
-    <article aria-labelledby={titleId} className="group flex w-full flex-col p-5 transition-colors duration-500 hover:bg-surface sm:p-7">
+    <article aria-labelledby={titleId} className="group flex w-full flex-col p-5 sm:p-7">
       <header className="mb-5 flex items-start justify-between gap-4">
         <div className="flex items-baseline gap-4">
-          <span className="font-display text-3xl text-accent">{String(index + 1).padStart(2, "0")}</span>
           <div>
-            <h3 id={titleId} className="label text-base text-ink">
+            <h3 id={titleId} className="font-display text-2xl text-ink">
               {project.title}
             </h3>
             <p className="mt-1 text-sm text-muted">{projectStatusLabels[project.status]}</p>
@@ -64,7 +63,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       </header>
 
-      <div className="relative aspect-[16/10] overflow-hidden border border-line bg-surface-2">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line bg-surface-2">
         {project.image ? (
           <Image
             src={project.image.src}
@@ -91,7 +90,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
       <ul className="mt-6 flex flex-wrap gap-1.5" aria-label="Tecnologías">
         {project.tags.map((tag) => (
-          <li key={tag} className="label border border-line px-2.5 py-1.5 text-[0.65rem] text-muted">
+          <li key={tag} className="rounded-lg border border-line px-2.5 py-1 text-[0.8125rem] text-muted">
             {tag}
           </li>
         ))}
@@ -105,7 +104,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               href={repo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="label inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 text-[0.68rem] transition-colors hover:border-ink"
+              className="label inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 transition-colors hover:border-ink"
             >
               <GitHubIcon width={15} height={15} />
               <RollText>{project.repositories.length > 1 ? `Código ${repo.label}` : "Código"}</RollText>
@@ -117,7 +116,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               href={project.demo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="label inline-flex min-h-11 items-center gap-2 rounded-full bg-wine px-4 text-[0.68rem] text-on-wine transition-transform hover:-translate-y-0.5"
+              className="label inline-flex min-h-11 items-center gap-2 rounded-full bg-wine px-4 text-on-wine transition-transform hover:-translate-y-0.5"
             >
               <RollText>{project.demo.label}</RollText>
               <ArrowUpRightIcon width={15} height={15} />

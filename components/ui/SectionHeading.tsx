@@ -15,7 +15,7 @@ export default function SectionHeading({ title, titleId, intro, action }: Sectio
   return (
     <header data-reveal className="mb-12 md:mb-16">
       <div className="grid gap-6 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:items-end md:gap-12">
-        <h2 id={titleId} className="font-display text-5xl leading-[0.95] text-balance sm:text-6xl">
+        <h2 id={titleId} className="font-display text-4xl leading-[1.08] text-balance sm:text-5xl">
           <SplitText text={title} step={28} />
         </h2>
         <div className="space-y-4">

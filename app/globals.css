@@ -3,60 +3,53 @@
 /* El modo oscuro se controla con data-theme en <html> (ver app/layout.tsx). */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+/* Luz baja: es la sala de noche, también sin JavaScript. */
 :root,
-[data-theme="light"] {
-  color-scheme: light;
-  --bg: #f5ece3;
-  --surface: #fbf6f0;
-  --surface-2: #ebdfd3;
-  --ink: #24121a;
-  --muted: #6b5458;
-  --line: #d9c7b8;
-  --wine: #7b1e34;
-  --on-wine: #f3e6d8;
-  --accent: #7b1e34;
-  --accent-soft: #f2d9dc;
-  --gold: #7a5418;
-  --gold-soft: #f1e2c6;
-  --glow: rgb(123 30 52 / 0.16);
-  --shadow: 0 1px 2px rgb(36 18 26 / 0.06), 0 18px 40px -24px rgb(36 18 26 / 0.35);
-}
-
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0e0809;
-  --surface: #170f11;
-  --surface-2: #22171a;
-  --ink: #eedfd0;
-  --muted: #b5a49a;
-  --line: #36262a;
-  --wine: #7b1e34;
-  --on-wine: #f3e6d8;
-  --accent: #e8a3b0;
-  --accent-soft: #3a1720;
+  --bg: #14100c;
+  --surface: #1d1711;
+  --surface-2: #2a2118;
+  --ink: #efe3cf;
+  --muted: #b8a68d;
+  --line: #3d3024;
+  --wine: #e0a24a;
+  --on-wine: #1a100a;
+  --accent: #e8ad5a;
+  --accent-soft: #3a2a14;
   --gold: #d9b77e;
   --gold-soft: #2e2416;
-  --glow: rgb(123 30 52 / 0.45);
+  --glow: rgb(224 162 74 / 0.16);
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 24px 48px -28px rgb(0 0 0 / 0.8);
+  --foot-bg: #0e0b08;
+  --foot-ink: #efe3cf;
+  --foot-muted: #b8a68d;
+  --foot-line: #3d3024;
+  --foot-accent: #e8ad5a;
 }
 
-/* Sin JavaScript, se respeta la preferencia del sistema. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    color-scheme: dark;
-    --bg: #0e0809;
-    --surface: #170f11;
-    --surface-2: #22171a;
-    --ink: #eedfd0;
-    --muted: #b5a49a;
-    --line: #36262a;
-    --accent: #e8a3b0;
-    --accent-soft: #3a1720;
-    --gold: #d9b77e;
-    --gold-soft: #2e2416;
-    --glow: rgb(123 30 52 / 0.45);
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 24px 48px -28px rgb(0 0 0 / 0.8);
-  }
+/* Luz de día: el sol entra en la sala y los álbumes son papel. Ver "Sala de día" en room.css. */
+[data-theme="light"] {
+  --foot-bg: #d9ccb6;
+  --foot-ink: #21160e;
+  --foot-muted: #4d3e2f;
+  --foot-line: #b3a285;
+  --foot-accent: #7d4608;
+  color-scheme: light;
+  --bg: #e9dcc6;
+  --surface: #f3e9d8;
+  --surface-2: #dccdb3;
+  --ink: #21160e;
+  --muted: #5f4d3c;
+  --line: #c7b497;
+  --wine: #2a1a11;
+  --on-wine: #f0dfc2;
+  --accent: #8a4f10;
+  --accent-soft: #f0e3c6;
+  --gold: #6f5414;
+  --gold-soft: #e6d4a8;
+  --glow: rgb(224 162 74 / 0.18);
+  --shadow: 0 1px 2px rgb(33 22 14 / 0.08), 0 18px 40px -24px rgb(33 22 14 / 0.4);
 }
 
 @theme inline {
@@ -73,9 +66,8 @@
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --shadow-card: var(--shadow);
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-instrument), ui-serif, Georgia, serif;
-  --font-script: var(--font-pinyon), cursive;
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-gloock), ui-serif, Georgia, serif;
 }
 
 @layer base {
@@ -118,11 +110,11 @@
   }
 }
 
-/* Etiquetas en mayúsculas espaciadas. */
+/* Etiquetas breves: pequeñas y con algo de peso, sin mayúsculas ni letras separadas. */
 @utility label {
-  font-size: 0.72rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 /* ---------- Letras que entran una a una ---------- */
@@ -338,7 +330,7 @@
 }
 
 .vinyl-label-title {
-  font-family: var(--font-instrument);
+  font-family: var(--font-gloock);
   font-size: clamp(0.55rem, 2.6cqi, 1.1rem);
   line-height: 1;
   margin-top: 0.15em;
@@ -420,20 +412,6 @@
   pointer-events: none;
 }
 
-::view-transition-group(.morph) {
-  animation-duration: 550ms;
-  animation-timing-function: cubic-bezier(0.2, 0.75, 0.15, 1);
-}
-
-::view-transition-image-pair(.morph) {
-  animation-name: via-blur;
-}
-
-@keyframes via-blur {
-  35% {
-    filter: blur(2px);
-  }
-}
 
 /* La cabecera no se mueve durante las transiciones. */
 ::view-transition-group(site-header) {

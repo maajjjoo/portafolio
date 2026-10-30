@@ -80,7 +80,7 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
   }
 
   const inputClass = (invalid: boolean) =>
-    `w-full border-0 border-b-2 bg-transparent px-1 py-3 text-base text-ink placeholder:text-muted transition-colors focus:border-accent focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 ${
+    `w-full rounded-xl border-2 bg-transparent px-4 py-3 text-base text-ink placeholder:text-muted transition-colors focus:border-accent focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 ${
       invalid ? "border-accent" : "border-line"
     }`;
 
@@ -90,7 +90,7 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
       noValidate
       onSubmit={handleSubmit}
       aria-labelledby="formulario-titulo"
-      className="border border-line bg-surface p-6 shadow-card sm:p-10"
+      className="border-line sm:border-l sm:pl-10"
     >
       <h3 id="formulario-titulo" className="font-display text-4xl">
         Escríbeme

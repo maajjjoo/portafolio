@@ -110,8 +110,8 @@ export default function AlbumNowPlaying({ album }: { album: Album }) {
   return (
     <div className="sticky bottom-0 z-40 h-0">
       <nav
-        aria-label="Pistas de este álbum"
-        className={`absolute inset-x-0 bottom-4 mx-auto flex w-[min(calc(100%-2.5rem),26rem)] items-center gap-3 rounded-full bg-wine py-1.5 pr-1.5 pl-2.5 text-on-wine shadow-card transition-[opacity,transform,visibility] duration-500 ease-[cubic-bezier(0.2,0.75,0.15,1)] ${
+        aria-label="Partes de este álbum"
+        className={`album-glass absolute inset-x-0 bottom-4 mx-auto flex w-[min(calc(100%-1rem),24rem)] items-center gap-3 rounded-full border border-line py-1 pr-1 pl-2 shadow-card transition-[opacity,transform,visibility] duration-500 ease-[cubic-bezier(0.2,0.75,0.15,1)] ${
           visible ? "visible translate-y-0 opacity-100" : "invisible translate-y-6 opacity-0"
         }`}
       >
@@ -120,12 +120,11 @@ export default function AlbumNowPlaying({ album }: { album: Album }) {
         </span>
 
         <p className="flex min-w-0 flex-1 items-baseline gap-2.5">
-          <span className="label shrink-0">
-            <span className="sr-only">Pista actual: </span>
-            {album.side}
-            {active + 1}
+          <span className="shrink-0 text-sm text-muted">
+            <span className="sr-only">Parte actual: </span>
+            {active + 1}/{tracks.length}
           </span>
-          <span className="truncate font-display text-xl leading-tight">{current.title}</span>
+          <span className="truncate font-medium">{current.title}</span>
         </p>
 
         <TrackStep track={tracks[active - 1]} direction="previous" />
@@ -154,11 +153,11 @@ function TrackStep({ track, direction }: TrackStepProps) {
   return (
     <a
       href={`#${track.anchor}`}
-      className="grid size-11 shrink-0 place-items-center rounded-full transition-colors hover:bg-on-wine hover:text-wine"
+      className="grid size-11 shrink-0 place-items-center rounded-full transition-colors hover:bg-ink hover:text-bg"
     >
       {icon}
       <span className="sr-only">
-        {direction === "previous" ? "Pista anterior" : "Pista siguiente"}: {track.title}
+        {direction === "previous" ? "Parte anterior" : "Parte siguiente"}: {track.title}
       </span>
     </a>
   );

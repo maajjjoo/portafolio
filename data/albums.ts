@@ -59,12 +59,12 @@ export interface Album {
 }
 
 const palette = {
-  cream: "#efe3d3",
-  burgundy: "#7b1e34",
-  charcoal: "#1b1416",
-  green: "#3f5a48",
-  gold: "#c9a46a",
-  rose: "#e8a3b0",
+  cream: "#e9dcc4",
+  burgundy: "#6e2f1c",
+  charcoal: "#1a1512",
+  green: "#3f4f3a",
+  gold: "#d2a04f",
+  rose: "#d9976a",
 } as const;
 
 export const albums: Album[] = [

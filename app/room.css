@@ -1,0 +1,1130 @@
+/* =====================================================================
+   La sala de escucha. Toda la escena se mide en --u para escalar como un
+   solo objeto: 1440 × 828 unidades en escritorio.
+   ===================================================================== */
+
+.room {
+  --u: min(calc(100vw / 1440), calc((100svh - 4.5rem) / 828));
+  --cu: var(--u);
+  --amber: #e0a24a;
+  --cream: #efe3cf;
+  --walnut: #5a3a24;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.22' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.06 0 0 0 0 0.03 0 0 0 0 0.01 0 0 0 1.3 -0.42'/%3E%3C/filter%3E%3Crect width='600' height='200' filter='url(%23g)'/%3E%3C/svg%3E");
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  min-height: calc(100svh - 4.5rem);
+  overflow: hidden;
+  --door-extra: 0px;
+  --plaster: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55 0.7' numOctaves='4' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.42 -0.13'/%3E%3C/filter%3E%3Crect width='420' height='420' filter='url(%23p)'/%3E%3C/svg%3E");
+  color: var(--cream);
+  /* Pared de yeso pintado: textura, sombra del techo, luz de la lámpara y caída hacia los bordes. */
+  background:
+    var(--plaster),
+    linear-gradient(180deg, rgb(8 7 5 / 0.62), transparent 26%),
+    radial-gradient(26% 34% at 74% 63%, rgb(226 160 80 / 0.17), transparent 100%),
+    radial-gradient(74% 76% at 54% 44%, #4a4436 0%, #383428 48%, #24221b 100%);
+}
+
+/* Viñeta: la luz cae antes de llegar a los bordes. */
+.room::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  background: radial-gradient(90% 90% at 52% 42%, transparent 58%, rgb(8 6 4 / 0.5) 100%);
+}
+
+/* Oscurece la pared al volver con el botón Atrás (components/providers/HistoryCamera.tsx). */
+.room-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgb(10 8 6);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.room-scene {
+  position: relative;
+  z-index: 2;
+  width: calc(1440 * var(--u));
+  height: calc(828 * var(--u) + var(--door-extra));
+}
+
+/* --- Suelo, pared de listones, alfombra ------------------------------ */
+
+.room-floor {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: calc(138 * var(--u) + var(--door-extra));
+  background:
+    linear-gradient(180deg, rgb(6 4 2 / 0.86), transparent 42%),
+    radial-gradient(46% 70% at 54% 0%, rgb(226 160 80 / 0.16), transparent 100%),
+    repeating-linear-gradient(0deg, rgb(0 0 0 / 0.3) 0 1px, transparent 1px calc(34 * var(--u))),
+    var(--grain),
+    linear-gradient(100deg, #2e1c10, #4c2f1b 50%, #27180d);
+  background-size: auto, auto, auto, 900px 120px, auto;
+}
+
+/* Zócalo: donde la pared se encuentra con el suelo. */
+.room-floor::before {
+  content: "";
+  position: absolute;
+  inset: calc(-14 * var(--u)) 0 auto;
+  height: calc(14 * var(--u));
+  background: linear-gradient(180deg, #2a261e, #171511);
+  box-shadow: inset 0 1px 0 rgb(255 225 170 / 0.1);
+}
+
+/* Panel de listones, algo adelantado: su lado derecho recibe la luz de las repisas. */
+.room-slats {
+  position: absolute;
+  inset: 0 auto calc(138 * var(--u) + var(--door-extra)) 0;
+  z-index: 1;
+  width: calc(50vw - 500 * var(--u));
+  background:
+    linear-gradient(180deg, rgb(5 3 2 / 0.6), transparent 34%),
+    linear-gradient(90deg, rgb(5 3 2 / 0.72), rgb(5 3 2 / 0.25) 62%, transparent),
+    repeating-linear-gradient(90deg, #080503 0 calc(4 * var(--u)), #2a1a0e calc(4 * var(--u)) calc(5 * var(--u)), #55361f calc(5 * var(--u)) calc(14 * var(--u)), #6e4728 calc(14 * var(--u)) calc(16 * var(--u)), #3a2413 calc(16 * var(--u)) calc(20 * var(--u)));
+  box-shadow: calc(16 * var(--u)) calc(4 * var(--u)) calc(36 * var(--u)) rgb(6 4 2 / 0.72);
+}
+
+.room-frame {
+  position: absolute;
+  left: calc(14 * var(--u));
+  top: calc(118 * var(--u));
+  width: calc(132 * var(--u));
+  height: calc(176 * var(--u));
+  padding: calc(10 * var(--u));
+  background: #e4d8c2;
+  border: calc(4 * var(--u)) solid #120d09;
+  box-shadow: calc(5 * var(--u)) calc(12 * var(--u)) calc(22 * var(--u)) rgb(0 0 0 / 0.65);
+  filter: brightness(0.72);
+}
+
+/* El cristal del marco recoge algo de luz. */
+.room-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(118deg, transparent 58%, rgb(255 235 200 / 0.12) 60%, transparent 76%);
+}
+
+/* Alfombra de lana: trama, irregularidad y canto con grosor. */
+.room-rug {
+  position: absolute;
+  left: calc(-30 * var(--u));
+  bottom: calc(-32 * var(--u));
+  width: calc(640 * var(--u));
+  height: calc(118 * var(--u));
+  clip-path: polygon(14% 0, 100% 0, 88% 100%, 0 100%);
+  background:
+    linear-gradient(90deg, rgb(10 7 4 / 0.55), transparent 42%, rgb(226 160 80 / 0.08)),
+    var(--plaster),
+    repeating-linear-gradient(90deg, rgb(255 240 210 / 0.07) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg, rgb(0 0 0 / 0.22) 0 1px, transparent 1px 3px),
+    #5d5243;
+}
+
+.room-vine {
+  position: absolute;
+  left: calc(146 * var(--u));
+  top: 0;
+  width: calc(150 * var(--u));
+  filter: drop-shadow(calc(4 * var(--u)) calc(8 * var(--u)) calc(8 * var(--u)) rgb(0 0 0 / 0.5));
+}
+
+/* --- Altavoces --------------------------------------------------------- */
+
+.room-speaker {
+  position: absolute;
+  bottom: calc(92 * var(--u) + var(--door-extra));
+  width: calc(112 * var(--u));
+  height: calc(320 * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-block: calc(16 * var(--u));
+  border-radius: calc(3 * var(--u));
+  background: linear-gradient(90deg, #0b0a08, #1a1815 62%, #100e0c);
+  box-shadow:
+    0 calc(10 * var(--u)) calc(16 * var(--u)) rgb(0 0 0 / 0.8),
+    calc(-10 * var(--u)) 0 calc(30 * var(--u)) rgb(0 0 0 / 0.45),
+    inset 0 1px 0 rgb(255 215 150 / 0.28),
+    inset 1px 0 0 rgb(255 225 170 / 0.05);
+}
+
+/* Lateral de nogal, la cara que recibe la luz. */
+.room-speaker::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(-14 * var(--u)) 0 auto;
+  width: calc(14 * var(--u));
+  background: var(--grain), linear-gradient(90deg, #7b4c2a, #472b18);
+  background-size: 300px 900px, auto;
+  border-radius: 0 calc(3 * var(--u)) calc(3 * var(--u)) 0;
+}
+
+.room-speaker-l { left: calc(186 * var(--u)); }
+.room-speaker-r { left: calc(1246 * var(--u)); }
+
+.room-driver {
+  border-radius: 9999px;
+  /* Tapa central, cono de papel, suspensión de goma y aro metálico. */
+  background:
+    radial-gradient(circle at 42% 36%, rgb(255 235 200 / 0.14), transparent 26%),
+    radial-gradient(circle, #4a443c 0 11%, #15130f 13%, #060504 24%, #1b1815 44%, #0e0c0a 58%, #312c26 62%, #1a1714 68%, #0a0908 71%);
+  box-shadow:
+    0 0 0 calc(1.5 * var(--u)) #6a6358,
+    0 0 0 calc(3 * var(--u)) #171512,
+    inset 0 calc(2 * var(--u)) calc(4 * var(--u)) rgb(0 0 0 / 0.8);
+}
+
+.room-driver-sm { width: calc(46 * var(--u)); height: calc(46 * var(--u)); }
+.room-driver-lg { width: calc(78 * var(--u)); height: calc(78 * var(--u)); }
+
+/* --- Mueble y lo que hay encima (usa --cu para poder reducirlo en móvil) --- */
+
+.room-console {
+  position: absolute;
+  left: calc(300 * var(--u));
+  top: calc(440 * var(--u));
+  width: calc(940 * var(--cu));
+  height: calc(272 * var(--cu) + var(--door-extra));
+}
+
+/* Tablero de nogal: cara superior iluminada por las repisas y canto frontal en sombra. */
+.room-slab {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(104 * var(--cu));
+  height: calc(22 * var(--cu));
+  background:
+    linear-gradient(180deg, transparent 54%, rgb(0 0 0 / 0.5) 55%, rgb(0 0 0 / 0.68)),
+    radial-gradient(20% 100% at 72% 20%, rgb(255 190 110 / 0.3), transparent 100%),
+    linear-gradient(90deg, rgb(255 190 110 / 0.14), rgb(255 190 110 / 0.05) 50%, rgb(255 190 110 / 0.1)),
+    var(--grain),
+    linear-gradient(180deg, #a56e3f, #70472a);
+  background-size: auto, auto, auto, 800px 70px, auto;
+  box-shadow: 0 calc(7 * var(--cu)) calc(12 * var(--cu)) rgb(0 0 0 / 0.7);
+}
+
+/* Cuerpo mate color carbón, con las juntas de sus puertas. */
+.room-body {
+  position: absolute;
+  left: calc(8 * var(--cu));
+  right: calc(8 * var(--cu));
+  top: calc(126 * var(--cu));
+  bottom: calc(12 * var(--cu));
+  background:
+    linear-gradient(90deg, transparent calc(50% + 136 * var(--cu)), #060504 calc(50% + 136 * var(--cu)), #060504 calc(50% + 137.5 * var(--cu)), transparent calc(50% + 137.5 * var(--cu))),
+    linear-gradient(180deg, rgb(0 0 0 / 0.55), transparent 16%),
+    var(--plaster),
+    linear-gradient(180deg, #1d1b17, #171511);
+  box-shadow:
+    0 calc(14 * var(--cu)) calc(16 * var(--cu)) rgb(0 0 0 / 0.82),
+    0 calc(30 * var(--cu)) calc(44 * var(--cu)) rgb(0 0 0 / 0.5);
+}
+
+.room-spines {
+  position: absolute;
+  left: calc(12 * var(--cu));
+  top: calc(14 * var(--cu));
+  bottom: calc(10 * var(--cu));
+  width: calc(390 * var(--cu));
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  padding-inline: calc(4 * var(--cu));
+  overflow: hidden;
+  background: #070605;
+  box-shadow: inset 0 calc(12 * var(--cu)) calc(16 * var(--cu)) rgb(0 0 0 / 0.9);
+}
+
+.room-spines span { flex: 1 1 0; min-width: 0; }
+
+/* Tocadiscos: pieza principal del mueble, dibujada en SVG. */
+.room-turntable {
+  position: absolute;
+  left: calc(26 * var(--cu));
+  top: calc(-4 * var(--cu));
+  width: calc(390 * var(--cu));
+  filter: drop-shadow(0 calc(5 * var(--cu)) calc(6 * var(--cu)) rgb(0 0 0 / 0.75));
+}
+
+.room-turntable svg { display: block; width: 100%; overflow: visible; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .tt-spin {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spin 1.8s linear infinite;
+  }
+}
+
+/* Amplificador: frontal de aluminio cepillado, dial y mandos con indicador. */
+.room-amp {
+  position: absolute;
+  left: calc(440 * var(--cu));
+  top: calc(58 * var(--cu));
+  width: calc(176 * var(--cu));
+  height: calc(46 * var(--cu));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: calc(11 * var(--cu));
+  border-radius: 1px;
+  background:
+    linear-gradient(180deg, rgb(255 235 200 / 0.14), transparent 26%, rgb(0 0 0 / 0.42)),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.04) 0 1px, transparent 1px 3px),
+    #3e3a33;
+  box-shadow:
+    0 calc(5 * var(--cu)) calc(8 * var(--cu)) rgb(0 0 0 / 0.8),
+    inset 0 1px 0 rgb(255 228 180 / 0.34);
+}
+
+.room-amp-dial {
+  flex: 1;
+  height: calc(17 * var(--cu));
+  margin-inline: calc(9 * var(--cu));
+  background:
+    linear-gradient(90deg, transparent 56%, #f6d7a0 56%, #f6d7a0 58%, transparent 58%),
+    repeating-linear-gradient(90deg, rgb(26 16 8 / 0.65) 0 1px, transparent 1px calc(6 * var(--cu))),
+    linear-gradient(180deg, #d19544, #8a5a22);
+  box-shadow: inset 0 calc(2 * var(--cu)) calc(3 * var(--cu)) rgb(0 0 0 / 0.65);
+}
+
+.room-knob {
+  position: relative;
+  width: calc(25 * var(--cu));
+  height: calc(25 * var(--cu));
+  flex: none;
+  border-radius: 9999px;
+  background: conic-gradient(from 20deg, #c9c4ba, #5a564e, #bdb8ae, #4e4a43, #c9c4ba);
+  box-shadow: 0 calc(2 * var(--cu)) calc(4 * var(--cu)) rgb(0 0 0 / 0.85), 0 0 0 1px #15130f;
+}
+
+.room-knob::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  width: calc(2 * var(--cu));
+  height: 30%;
+  background: #15130f;
+  transform: translateX(-50%);
+}
+
+.room-plant {
+  position: absolute;
+  left: calc(650 * var(--cu));
+  top: calc(8 * var(--cu));
+  width: calc(112 * var(--cu));
+  filter: drop-shadow(calc(-3 * var(--cu)) calc(3 * var(--cu)) calc(4 * var(--cu)) rgb(0 0 0 / 0.5));
+}
+
+.room-lamp {
+  position: absolute;
+  left: calc(786 * var(--cu));
+  top: calc(26 * var(--cu));
+  width: calc(76 * var(--cu));
+  filter: drop-shadow(calc(-2 * var(--cu)) calc(2 * var(--cu)) calc(3 * var(--cu)) rgb(0 0 0 / 0.45));
+}
+
+.room-lamp svg { display: block; width: 100%; overflow: visible; }
+
+/* --- Puertas del mueble: placa con el nombre y fichero ------------------ */
+
+.room-door {
+  position: absolute;
+  z-index: 3;
+  left: calc(716 * var(--u));
+  top: calc(574 * var(--u));
+  width: calc(512 * var(--u));
+  height: calc(124 * var(--u) + var(--door-extra));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: calc(16 * var(--u));
+  align-items: center;
+}
+
+/* Placa de latón oscuro atornillada a la puerta. */
+.room-plate {
+  border-radius: 0.75rem;
+  padding: calc(10 * var(--u)) calc(12 * var(--u));
+  background:
+    linear-gradient(180deg, rgb(255 228 180 / 0.1), rgb(0 0 0 / 0.2)),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.018) 0 1px, transparent 1px 3px),
+    #2f2a22;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.75), inset 0 1px 0 rgb(255 228 180 / 0.18);
+}
+
+.room-plate h1 {
+  font-family: var(--font-gloock);
+  font-size: max(16px, calc(21 * var(--u)));
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.room-engraved {
+  font-family: var(--font-hanken);
+  font-weight: 600;
+  font-size: max(12px, calc(13 * var(--u)));
+  color: #c9b79b;
+}
+
+.room-plate .room-engraved { margin-top: calc(5 * var(--u)); line-height: 1.3; }
+
+.room-file { display: grid; gap: calc(7 * var(--u)); }
+
+.room-field {
+  width: 100%;
+  min-height: max(36px, calc(38 * var(--u)));
+  padding-inline: 0.75rem;
+  border: 1px solid #6b5a43;
+  border-radius: 0.75rem;
+  background: #0c0a08;
+  color: var(--cream);
+  font-size: 16px;
+  caret-color: var(--amber);
+}
+
+.room-field::placeholder { color: #b5a386; opacity: 1; }
+.room-field:hover { border-color: #9a8360; }
+
+.room-status {
+  min-height: 1.1em;
+  font-family: var(--font-hanken);
+  font-weight: 500;
+  font-size: max(12px, calc(13 * var(--u)));
+  color: #c9b79b;
+}
+
+.room-status button {
+  color: var(--amber);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.room :focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+/* --- Repisas y discos --------------------------------------------------- */
+
+.room-shelves {
+  position: absolute;
+  z-index: 3;
+  left: calc(330 * var(--u));
+  top: calc(46 * var(--u));
+  width: calc(880 * var(--u));
+  display: grid;
+  gap: calc(44 * var(--u));
+}
+
+.room-ledge {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.room-slot {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/*
+ * Tira LED bajo la repisa: la luz baja por la pared y se apaga pronto. Ocupa el ancho exacto
+ * de la repisa y se desvanece antes de sus extremos, así que nunca asoma por los lados.
+ */
+.room-slot::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: calc(100% + 9 * var(--u));
+  height: calc(112 * var(--u));
+  background: linear-gradient(180deg, rgb(248 186 104 / 0.28), rgb(240 172 84 / 0.16) 22%, rgb(240 172 84 / 0.05) 58%, transparent);
+  pointer-events: none;
+}
+
+.room-slot:first-child::before { mask-image: linear-gradient(90deg, transparent, #000 34%); }
+.room-slot:last-child::before { mask-image: linear-gradient(90deg, #000 66%, transparent); }
+
+/* Canto de la repisa, continuo de un disco al siguiente. */
+.room-slot::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: calc(160 * var(--u));
+  height: calc(9 * var(--u));
+  background: var(--grain), linear-gradient(180deg, #b47c48 0 14%, #6e4527 15%, #4a2d19 82%, #ffcf8a 88%, #ffcf8a);
+  background-size: 700px 40px, auto;
+}
+
+.record {
+  position: relative;
+  display: block;
+  width: calc(160 * var(--u));
+  text-align: center;
+  border-radius: 2px;
+  perspective: calc(700 * var(--u));
+}
+
+.record-stage { position: relative; display: block; aspect-ratio: 1; }
+
+.record-disc {
+  position: absolute;
+  inset: 4%;
+  transform: translateX(5%);
+  transition: transform 700ms cubic-bezier(0.2, 0.75, 0.15, 1);
+}
+
+.record-sleeve {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 1px;
+  transform-origin: 50% 100%;
+  box-shadow:
+    calc(2 * var(--u)) calc(-1 * var(--u)) calc(6 * var(--u)) rgb(0 0 0 / 0.55),
+    calc(5 * var(--u)) calc(-3 * var(--u)) calc(16 * var(--u)) rgb(0 0 0 / 0.3);
+  transition:
+    transform 550ms cubic-bezier(0.2, 0.75, 0.15, 1),
+    box-shadow 550ms ease,
+    filter 400ms ease;
+}
+
+/* Portadas a la luz de la sala, no a pantalla completa. */
+.record-sleeve { filter: brightness(0.88) saturate(0.92); }
+
+/* Papel: la luz de la repisa superior cae desde arriba y el borde del cartón se nota. */
+.record-sleeve::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(255 200 125 / 0.2), transparent 30%, transparent 82%, rgb(10 6 3 / 0.12));
+  box-shadow: inset 0 0 0 1px rgb(255 240 215 / 0.1);
+  pointer-events: none;
+}
+
+.record-name {
+  position: absolute;
+  z-index: 2;
+  left: -12%;
+  right: -12%;
+  top: calc(100% + 18 * var(--u));
+  font-family: var(--font-hanken);
+  font-weight: 600;
+  font-size: max(12px, calc(14 * var(--u)));
+  line-height: 1;
+  color: #fff6e8;
+}
+
+.record-heard {
+  font-weight: 500;
+  color: #ffe2b5;
+}
+
+.room-slot:has(.record:is(:hover, :focus-visible)) { z-index: 4; }
+
+.record:is(:hover, :focus-visible) .record-sleeve {
+  filter: brightness(1) saturate(1);
+  transform: translateZ(calc(46 * var(--u))) rotateX(5deg) translateY(calc(-5 * var(--u)));
+  box-shadow:
+    0 calc(22 * var(--u)) calc(30 * var(--u)) rgb(0 0 0 / 0.72);
+}
+
+.record:is(:hover, :focus-visible) .record-disc {
+  transform: translateX(44%) rotate(150deg);
+}
+
+.record:is(:hover, :focus-visible) .record-name { color: var(--amber); }
+
+.record:active .record-sleeve {
+  transform: translateZ(calc(20 * var(--u))) rotateX(2deg) scale(0.985);
+}
+
+/* Filtrado: el disco se hunde en la pared, sin mover a los demás. */
+.room-slot[data-dim] .record {
+  opacity: 0.2;
+  transform: scale(0.94);
+  pointer-events: none;
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+@media (hover: none) {
+  .record-disc { transform: translateX(14%); }
+}
+
+/* --- Introducción -------------------------------------------------------- */
+
+.room-intro {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  place-items: center;
+  padding: 1.5rem;
+  text-align: center;
+  color: #efe3cf;
+  background: radial-gradient(60% 50% at 50% 50%, rgb(8 6 4 / 0.72), rgb(8 6 4 / 0.4));
+}
+
+.intro-pending .room-intro { display: grid; }
+
+.intro-pending { overflow: hidden; }
+
+.intro-pending .room-lit {
+  animation: lights-rise 8s cubic-bezier(0.3, 0.1, 0.2, 1) both;
+}
+
+.intro-pending body > header { visibility: hidden; }
+
+.room-intro-phrase {
+  max-width: 22ch;
+  font-family: var(--font-gloock);
+  font-size: clamp(2rem, 5.2vw, 4.25rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.room-intro-phrase span {
+  display: block;
+  animation: intro-line 1600ms ease-out both;
+}
+
+.room-intro-phrase span:nth-child(1) { animation-delay: 1400ms; }
+.room-intro-phrase span:nth-child(2) { animation-delay: 3400ms; color: #f0bb6e; }
+
+.room-intro-enter {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.25rem;
+  margin-top: 2.5rem;
+  padding-inline: 2rem;
+  border: 1px solid #f0bb6e;
+  border-radius: 9999px;
+  color: #efe3cf;
+  font-family: var(--font-hanken);
+  font-weight: 600;
+  font-size: 1.125rem;
+  transition: background-color 250ms ease, color 250ms ease;
+  animation: intro-enter 1200ms ease-out 5400ms both;
+}
+
+.room-intro-enter:hover { background: #f0bb6e; color: #1a100a; }
+
+.room-intro-enter:focus-visible {
+  outline: 2px solid #f0bb6e;
+  outline-offset: 4px;
+}
+
+/* Al entrar: se encienden las luces y se aparta el velo. */
+.intro-leaving .room-intro {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 900ms ease;
+}
+
+.intro-leaving .room-lit {
+  animation: lights-full 1100ms ease-out both;
+}
+
+.intro-leaving body > header {
+  visibility: visible;
+  animation: intro-line 900ms ease-out both;
+}
+
+@keyframes lights-rise {
+  from { filter: brightness(0); }
+  to { filter: brightness(0.38); }
+}
+
+@keyframes lights-full {
+  from { filter: brightness(0.38); }
+  to { filter: brightness(1); }
+}
+
+@keyframes intro-line {
+  from { opacity: 0; transform: translateY(0.3em); }
+  to { opacity: 1; transform: none; }
+}
+
+/* El botón se ve desde el principio: se puede entrar sin esperar. */
+@keyframes intro-enter {
+  from { background: transparent; }
+  to { background: rgb(240 187 110 / 0.16); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .room-intro-phrase span,
+  .room-intro-enter,
+  .intro-pending .room-lit,
+  .intro-leaving .room-lit {
+    animation-delay: 0ms !important;
+  }
+
+  .record:is(:hover, :focus-visible) .record-sleeve { transform: none; }
+  .record:is(:hover, :focus-visible) .record-disc { transform: translateX(30%); }
+  .room-slot[data-dim] .record { transform: none; }
+}
+
+/* --- Cámara: de la sala al disco y de vuelta ---------------------------------
+   Solo la funda y el vinilo elegidos viajan (lib/roomCamera.ts les da nombre). La sala
+   no se mueve: la cámara enfoca el disco y lo demás se oscurece y queda desenfocado. */
+
+.album-sleeve { view-transition-name: camera-sleeve; }
+.album-disc { view-transition-name: camera-disc; }
+
+::view-transition-group(camera-sleeve),
+::view-transition-group(camera-disc) {
+  animation-duration: 1000ms;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.15, 1);
+}
+
+::view-transition-group(camera-sleeve) { z-index: 51; }
+::view-transition-group(camera-disc) { z-index: 50; }
+
+/* Entre un álbum y el siguiente, la portada cambia en su sitio, sin viaje largo. */
+:root:active-view-transition-type(nav-forward, nav-back)::view-transition-group(camera-sleeve),
+:root:active-view-transition-type(nav-forward, nav-back)::view-transition-group(camera-disc) {
+  animation-duration: 400ms;
+}
+
+::view-transition-old(.room-dolly) {
+  animation: room-focus-out 1000ms cubic-bezier(0.55, 0, 0.15, 1) both;
+}
+
+::view-transition-new(.album-arrive) {
+  animation: album-arrive 560ms ease-out 480ms both;
+}
+
+::view-transition-old(.album-leave) {
+  animation: album-leave 300ms ease-in both;
+}
+
+::view-transition-new(.room-return) {
+  animation: room-focus-in 950ms cubic-bezier(0.3, 0, 0.1, 1) both;
+}
+
+/* El disco sale de la funda cuando ya ha llegado. */
+:root[data-dolly] .disc-out { animation-delay: 750ms; }
+
+@keyframes room-focus-out {
+  to { filter: brightness(0.3) blur(7px); }
+}
+
+@keyframes room-focus-in {
+  from { filter: brightness(0.3) blur(7px); }
+}
+
+@keyframes album-arrive {
+  from { opacity: 0; transform: scale(1.02); }
+}
+
+@keyframes album-leave {
+  to { opacity: 0; transform: scale(0.985); }
+}
+
+/* Con movimiento reducido no hay cámara: un fundido breve entre la sala y el álbum. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(.room-dolly),
+  ::view-transition-old(.album-leave) {
+    animation: album-leave 1ms both;
+  }
+
+  ::view-transition-new(.room-return),
+  ::view-transition-new(.album-arrive) {
+    animation: album-arrive 1ms both;
+  }
+}
+
+/* --- Libreto del álbum: la pared de la sala detrás y una hoja translúcida delante --- */
+
+.album-wall {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, #4a2f1b 0 0.5rem, #0d0906 0.5rem 0.75rem) 0 0 / 3.5rem 100% no-repeat,
+    radial-gradient(60% 38% at 62% 26%, rgb(240 172 84 / 0.17), transparent 100%),
+    linear-gradient(180deg, #2c2922, #3a3529 42%, #25221b);
+}
+
+/* De noche, el texto secundario sobre la pared iluminada necesita más luz que sobre un fondo liso. */
+:root:not([data-theme="light"]) .album-booklet { --muted: #d3c4ac; }
+
+/* De día, el color de acento debe aguantar también sobre los paños de sol de la pared. */
+[data-theme="light"] .album-booklet { --accent: #754206; }
+
+.album-sheet {
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius: 1.5rem;
+  /* De noche, una hoja cálida y clara frente a la pared; el texto gana contraste dentro de ella. */
+  --surface: #40392d;
+  --surface-2: #2f291f;
+  --line: #66584a;
+  --muted: #d3c4ac;
+  background: rgb(84 75 60 / 0.58);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  backdrop-filter: blur(16px) saturate(1.1);
+  box-shadow: 0 30px 60px -40px rgb(0 0 0 / 0.75);
+}
+
+.album-glass {
+  background: color-mix(in srgb, var(--surface) 62%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* Por debajo de este ancho el texto llegaría a pisar la tira de listones: se quita. */
+@media (max-width: 1279px) {
+  .album-wall {
+    background:
+      radial-gradient(90% 34% at 60% 20%, rgb(240 172 84 / 0.16), transparent 100%),
+      linear-gradient(180deg, #2c2922, #3a3529 42%, #25221b);
+  }
+}
+
+/* --- Sala de día: la misma sala con otra luz --------------------------------------
+   Sol de ventana en lugar de LED: pared clara, mueble pintado, roble al sol y sombras
+   donde de noche hay resplandor. Los altavoces y los discos siguen siendo negros. */
+
+[data-theme="light"] .room {
+  --amber: #8a4f10;
+  --cream: #21160e;
+  /* Con luz de día el grano se nota mucho más: el yeso es apenas perceptible. */
+  --plaster: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5 0.65' numOctaves='3' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0 0.14 0 0 0 0.1 -0.03'/%3E%3C/filter%3E%3Crect width='420' height='420' filter='url(%23p)'/%3E%3C/svg%3E");
+  background:
+    var(--plaster),
+    linear-gradient(180deg, rgb(120 96 66 / 0.2), transparent 22%),
+    radial-gradient(80% 90% at 40% 34%, #efe7d8 0%, #e2d8c6 52%, #c9bda7 100%);
+}
+
+/* Luz de ventana sobre la pared: paños suaves en diagonal. */
+[data-theme="light"] .room::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(112deg, transparent 22%, rgb(255 246 222 / 0.62) 22.6% 33%, transparent 33.6% 35%, rgb(255 246 222 / 0.62) 35.6% 46%, transparent 46.6% 48%, rgb(255 246 222 / 0.5) 48.6% 59%, transparent 59.6%);
+  filter: blur(14px);
+  mask-image: linear-gradient(180deg, #000 58%, transparent 92%);
+}
+
+[data-theme="light"] .room::after {
+  background: radial-gradient(90% 90% at 44% 40%, transparent 62%, rgb(96 74 46 / 0.2) 100%);
+}
+
+[data-theme="light"] .room-floor {
+  background:
+    linear-gradient(180deg, rgb(70 48 26 / 0.42), transparent 34%),
+    radial-gradient(50% 80% at 36% 20%, rgb(255 240 205 / 0.4), transparent 100%),
+    repeating-linear-gradient(0deg, rgb(60 38 18 / 0.28) 0 1px, transparent 1px calc(34 * var(--u))),
+    var(--grain),
+    linear-gradient(100deg, #b98f5f, #c9a06e 50%, #a97f50);
+  background-size: auto, auto, auto, 100% 120px, auto;
+}
+
+[data-theme="light"] .room-floor::before {
+  background: linear-gradient(180deg, #f1e9da, #d4c8b3);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.7);
+}
+
+[data-theme="light"] .room-slats {
+  background:
+    linear-gradient(180deg, rgb(70 46 22 / 0.2), transparent 30%),
+    repeating-linear-gradient(90deg, #5a3d22 0 calc(4 * var(--u)), #84603b calc(4 * var(--u)) calc(5 * var(--u)), #b48a5b calc(5 * var(--u)) calc(14 * var(--u)), #c9a06e calc(14 * var(--u)) calc(16 * var(--u)), #9a7349 calc(16 * var(--u)) calc(20 * var(--u)));
+  box-shadow: calc(12 * var(--u)) calc(4 * var(--u)) calc(30 * var(--u)) rgb(70 48 26 / 0.34);
+}
+
+[data-theme="light"] .room-frame {
+  filter: none;
+  border-color: #3a2815;
+  box-shadow: calc(6 * var(--u)) calc(10 * var(--u)) calc(18 * var(--u)) rgb(60 40 20 / 0.42);
+}
+
+[data-theme="light"] .room-rug {
+  background:
+    linear-gradient(90deg, rgb(120 96 66 / 0.18), transparent 50%),
+    var(--plaster),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.2) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg, rgb(90 70 46 / 0.2) 0 1px, transparent 1px 3px),
+    #d8ccb6;
+}
+
+[data-theme="light"] .room-vine { filter: drop-shadow(calc(5 * var(--u)) calc(8 * var(--u)) calc(6 * var(--u)) rgb(60 40 20 / 0.32)); }
+
+[data-theme="light"] .room-speaker {
+  background: linear-gradient(90deg, #1d1b18, #2d2a25 62%, #211f1b);
+  box-shadow:
+    0 calc(10 * var(--u)) calc(14 * var(--u)) rgb(50 34 18 / 0.5),
+    calc(10 * var(--u)) calc(4 * var(--u)) calc(26 * var(--u)) rgb(50 34 18 / 0.3),
+    inset 0 1px 0 rgb(255 255 255 / 0.24);
+}
+
+[data-theme="light"] .room-speaker::before {
+  background: var(--grain), linear-gradient(90deg, #a06a3c, #79502c);
+  background-size: 300px 900px, auto;
+}
+
+/* Tablero al sol y cuerpo pintado de blanco roto. */
+[data-theme="light"] .room-slab {
+  background:
+    linear-gradient(180deg, transparent 54%, rgb(60 38 18 / 0.34) 55%, rgb(60 38 18 / 0.5)),
+    linear-gradient(90deg, rgb(255 240 205 / 0.3), transparent 60%),
+    var(--grain),
+    linear-gradient(180deg, #c08c58, #99693d);
+  background-size: auto, auto, 800px 70px, auto;
+  box-shadow: 0 calc(6 * var(--cu)) calc(10 * var(--cu)) rgb(60 40 20 / 0.36);
+}
+
+[data-theme="light"] .room-body {
+  background:
+    linear-gradient(90deg, transparent calc(50% + 136 * var(--cu)), #bcae97 calc(50% + 136 * var(--cu)), #bcae97 calc(50% + 137.5 * var(--cu)), transparent calc(50% + 137.5 * var(--cu))),
+    linear-gradient(180deg, rgb(70 48 26 / 0.22), transparent 14%),
+    var(--plaster),
+    linear-gradient(180deg, #efe8da, #e2d9c8);
+  box-shadow:
+    0 calc(14 * var(--cu)) calc(16 * var(--cu)) rgb(60 40 20 / 0.42),
+    0 calc(30 * var(--cu)) calc(44 * var(--cu)) rgb(60 40 20 / 0.2);
+}
+
+[data-theme="light"] .room-spines { background: #2b2118; box-shadow: inset 0 calc(10 * var(--cu)) calc(14 * var(--cu)) rgb(0 0 0 / 0.5); }
+[data-theme="light"] .room-spines span { filter: brightness(1.05) saturate(0.95) !important; }
+
+[data-theme="light"] .room-turntable { filter: drop-shadow(0 calc(5 * var(--cu)) calc(5 * var(--cu)) rgb(60 40 20 / 0.42)); }
+[data-theme="light"] .tt-lid { stroke: #5a4630; stroke-opacity: 0.55; }
+
+/* El tocadiscos, de roble al sol como el resto de la madera; el disco sigue negro. */
+[data-theme="light"] .room-turntable {
+  --tt-wood-a: #b9844f;
+  --tt-wood-b: #d6a56c;
+  --tt-wood-c: #c0905a;
+  --tt-front-a: #a37446;
+  --tt-front-b: #7f5730;
+}
+[data-theme="light"] .room-amp { box-shadow: 0 calc(5 * var(--cu)) calc(8 * var(--cu)) rgb(60 40 20 / 0.42), inset 0 1px 0 rgb(255 255 255 / 0.4); }
+[data-theme="light"] .room-plant,
+[data-theme="light"] .room-lamp { filter: drop-shadow(calc(4 * var(--cu)) calc(3 * var(--cu)) calc(4 * var(--cu)) rgb(60 40 20 / 0.36)); }
+
+/* De día la lámpara está apagada. */
+[data-theme="light"] .lamp-glow { display: none; }
+[data-theme="light"] .lamp-rim { fill: #3a3228; }
+[data-theme="light"] .lamp-bulb { fill: #cfc4b0; }
+
+[data-theme="light"] .room-plate {
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.3), rgb(90 70 40 / 0.1)),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.1) 0 1px, transparent 1px 3px),
+    #cdb88f;
+  box-shadow: 0 1px 2px rgb(60 40 20 / 0.45), inset 0 1px 0 rgb(255 255 255 / 0.5);
+}
+
+/* En la sala compacta el nombre va directamente sobre la pared, también de día. */
+@media (max-width: 899px) {
+  [data-theme="light"] .room-plate { background: none; box-shadow: none; }
+}
+
+[data-theme="light"] .room-engraved,
+[data-theme="light"] .room-status { color: #3f3020; }
+
+[data-theme="light"] .room-field {
+  border-color: #8a7557;
+  background: rgb(255 252 245 / 0.72);
+  color: #21160e;
+}
+
+[data-theme="light"] .room-field:hover { border-color: #5a4630; }
+
+/* La tira LED, apagada: bajo cada repisa solo queda su sombra. */
+[data-theme="light"] .room-slot::before {
+  background: linear-gradient(180deg, rgb(70 48 26 / 0.3), rgb(70 48 26 / 0.1) 26%, transparent 66%);
+}
+
+[data-theme="light"] .room-slot::after {
+  background: var(--grain), linear-gradient(180deg, #d2a06c 0 16%, #a9774a 17%, #7d5531 100%);
+  background-size: 700px 40px, auto;
+}
+
+[data-theme="light"] .record-sleeve {
+  filter: none;
+  box-shadow:
+    calc(3 * var(--u)) calc(-1 * var(--u)) calc(6 * var(--u)) rgb(60 40 20 / 0.34),
+    calc(7 * var(--u)) calc(-3 * var(--u)) calc(16 * var(--u)) rgb(60 40 20 / 0.2);
+}
+
+[data-theme="light"] .record-sleeve::after {
+  background: linear-gradient(120deg, rgb(255 250 235 / 0.18), transparent 44%);
+}
+
+[data-theme="light"] .record:is(:hover, :focus-visible) .record-sleeve {
+  box-shadow: 0 calc(20 * var(--u)) calc(26 * var(--u)) rgb(60 40 20 / 0.45);
+}
+
+[data-theme="light"] .record-name { color: #2c2016; }
+[data-theme="light"] .record:is(:hover, :focus-visible) .record-name { color: #8a4f10; }
+[data-theme="light"] .record-heard { color: #452502; }
+
+/* El libreto, de día: papel sobre la misma pared soleada. */
+[data-theme="light"] .album-wall {
+  background:
+    linear-gradient(112deg, transparent 30%, rgb(255 246 222 / 0.6) 31% 44%, transparent 45% 47%, rgb(255 246 222 / 0.6) 48% 61%, transparent 62%),
+    repeating-linear-gradient(90deg, #b48a5b 0 0.5rem, #5a3d22 0.5rem 0.75rem) 0 0 / 3.5rem 100% no-repeat,
+    linear-gradient(180deg, #e2d8c6, #ece4d4 42%, #d9cdb9);
+}
+
+[data-theme="light"] .album-sheet {
+  --surface: #f3e9d8;
+  --surface-2: #dccdb3;
+  --line: #c7b497;
+  --muted: #5f4d3c;
+  background: color-mix(in srgb, #fbf6ec 62%, transparent);
+  box-shadow: 0 30px 60px -40px rgb(60 40 20 / 0.5);
+}
+
+@media (max-width: 1279px) {
+  [data-theme="light"] .album-wall {
+    background:
+      linear-gradient(112deg, transparent 20%, rgb(255 246 222 / 0.6) 22% 50%, transparent 52%),
+      linear-gradient(180deg, #e2d8c6, #ece4d4 42%, #d9cdb9);
+  }
+}
+
+/* --- Sala compacta: una pared alta, no la de escritorio encogida ------------ */
+
+@media (max-width: 899px) {
+  .room {
+    --u: min(calc(100vw / 390), 1.7px);
+    --cu: calc(min(100vw, 663px) / 960);
+    min-height: 0;
+    justify-items: center;
+    align-items: start;
+  }
+
+  .room-scene {
+    width: calc(390 * var(--u));
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: calc(54 * var(--u));
+  }
+
+  .room-speaker,
+  .room-rug,
+  .room-frame { display: none; }
+
+  .room-slats { width: calc(14 * var(--u) + (100vw - 390 * var(--u)) / 2); bottom: 0; }
+  .room-plate { background: none; box-shadow: none; padding: 0; }
+  .room-floor { height: calc(54 * var(--u)); }
+
+  .room-vine { left: auto; right: calc(-16 * var(--u)); width: calc(92 * var(--u)); z-index: 1; }
+
+  .room-door {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+    order: 1;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    margin: calc(20 * var(--u)) calc(16 * var(--u)) calc(30 * var(--u)) calc(30 * var(--u));
+  }
+
+  .room-plate { padding-right: calc(52 * var(--u)); }
+  .room-plate h1 { font-size: calc(30 * var(--u)); }
+  .room-slot::before { height: calc(70 * var(--u)); }
+  .room-engraved { font-size: 14px; }
+  .room-field { min-height: 44px; }
+
+  .room-shelves {
+    position: relative;
+    inset: auto;
+    width: auto;
+    order: 2;
+    gap: calc(52 * var(--u));
+    margin-inline: calc(14 * var(--u)) 0;
+    padding-right: 0;
+  }
+
+  .room-ledge { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: calc(52 * var(--u)); }
+
+  .record { width: calc(150 * var(--u)); }
+  .room-slot::after { top: calc(150 * var(--u)); }
+  .record-name { font-size: 14px; top: calc(100% + 17 * var(--u)); }
+
+  .room-console {
+    position: relative;
+    inset: auto;
+    order: 3;
+    margin: calc(66 * var(--u)) auto 0;
+  }
+}
+
+/* Tableta vertical: conserva cuatro discos por repisa, sin agigantarlos. */
+@media (min-width: 600px) and (max-width: 899px) {
+  .room {
+    --u: calc(100vw / 720);
+    --cu: calc(100vw / 1000);
+  }
+
+  .room-scene { width: calc(720 * var(--u)); }
+  .room-slats { width: calc(14 * var(--u)); }
+  .room-door { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin-right: calc(30 * var(--u)); }
+  .room-plate { padding-right: 0; }
+  .room-shelves { margin-inline: calc(14 * var(--u)); }
+  .room-ledge { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .record { width: calc(150 * var(--u)); }
+  .room-vine { display: none; }
+}
+
+@media (max-width: 899px) {
+  .room-spines { width: auto; right: calc(12 * var(--cu)); }
+  .room-body { background: linear-gradient(180deg, #1d1b17, #171511); }
+}
+
+/* Teléfono: el tocadiscos manda; el amplificador y la planta no caben a una escala legible. */
+@media (max-width: 599px) {
+  .room { --cu: calc(100vw / 640); }
+  .room-console { width: calc(640 * var(--cu)); }
+  .room-amp, .room-plant { display: none; }
+  .room-lamp { left: calc(500 * var(--cu)); }
+
+  /* Dos discos por fila: cada fila se apaga hacia sus propios extremos. */
+  .room-slot:nth-child(odd)::before { mask-image: linear-gradient(90deg, transparent, #000 34%); }
+  .room-slot:nth-child(even)::before { mask-image: linear-gradient(90deg, #000 66%, transparent); }
+}
+
+/* Pantallas de 900 a 1100 px: el fichero gana sitio y el mueble crece hacia abajo para contenerlo. */
+@media (min-width: 900px) and (max-width: 1100px) {
+  .room { --door-extra: 46px; }
+
+  .room-door {
+    left: calc(560 * var(--u));
+    width: calc(668 * var(--u));
+  }
+
+  /* Nombres más pegados a su repisa y tocadiscos algo menor: quedan holgados sobre la tapa. */
+  .record-name { top: calc(100% + 13 * var(--u)); font-size: 12px; }
+  .room-turntable { width: calc(360 * var(--cu)); top: calc(5 * var(--cu)); }
+
+  .room-spines { width: calc(236 * var(--cu)); }
+  .room-spines span:nth-child(2n) { display: none; }
+  .room-body { background: linear-gradient(180deg, #1d1b17, #171511); }
+}

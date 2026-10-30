@@ -23,7 +23,7 @@ export default function Testimonials() {
   else if (hasPending) intro += " Sigo reuniendo más.";
 
   return (
-    <section id={sectionIds.testimonials} aria-labelledby="testimonios-titulo" className="bg-surface">
+    <section id={sectionIds.testimonials} aria-labelledby="testimonios-titulo">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <SectionHeading
           title="Palabras de quienes han trabajado conmigo"
@@ -31,14 +31,14 @@ export default function Testimonials() {
           intro={intro}
         />
 
-        <ul className="grid border-t border-line md:grid-cols-3 md:border-t-0 md:border-l">
+        <ul className="grid overflow-hidden rounded-2xl border border-line md:grid-cols-3">
           {testimonials.map((item, index) => (
             <li
               key={item.id}
               id={`testimonio-${index + 1}`}
               data-reveal
               style={{ "--reveal-delay": `${index * 120}ms` } as CSSProperties}
-              className="flex border-b border-line md:border-r md:border-b-0"
+              className="flex border-b border-line last:border-b-0 md:border-r md:border-b-0 md:last:border-r-0"
             >
               {item.status === "publicado" ? <TestimonialCard item={item} /> : <PendingCard item={item} />}
             </li>
@@ -51,7 +51,7 @@ export default function Testimonials() {
 
 function TestimonialCard({ item }: { item: PublishedTestimonial }) {
   return (
-    <figure className="flex w-full flex-col px-2 py-8 md:px-8">
+    <figure className="flex w-full flex-col px-5 py-8 md:px-8">
       <span aria-hidden="true" className="font-display text-7xl leading-none text-accent">
         “
       </span>
@@ -75,7 +75,7 @@ function TestimonialCard({ item }: { item: PublishedTestimonial }) {
 
 function PendingCard({ item }: { item: PendingTestimonial }) {
   return (
-    <div className="flex w-full flex-col px-2 py-8 md:px-8">
+    <div className="flex w-full flex-col px-5 py-8 md:px-8">
       <span aria-hidden="true" className="font-display text-7xl leading-none text-line">
         “
       </span>

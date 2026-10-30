@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import { albumHref } from "@/lib/albums";
+import { rememberAlbum } from "@/lib/roomCamera";
 import { markExplored } from "@/lib/useExplored";
 
 interface AlbumKeyboardProps {
@@ -31,6 +32,7 @@ export default function AlbumKeyboard({ slug, previousHref, nextHref }: AlbumKey
 
   useEffect(() => {
     markExplored(slug);
+    rememberAlbum(slug);
     // Puede haber títulos de álbumes ocultos (páginas conservadas por Next); se enfoca el visible.
     const titles = document.querySelectorAll<HTMLElement>('[id="album-titulo"]');
     [...titles].find((title) => title.getClientRects().length > 0)?.focus({ preventScroll: true });
@@ -46,7 +48,7 @@ export default function AlbumKeyboard({ slug, previousHref, nextHref }: AlbumKey
       if (document.getElementById("panel-albumes")?.hidden === false) return;
 
       if (event.key === "Escape") {
-        router.push("/", { transitionTypes: ["nav-back"] });
+        router.push("/", { transitionTypes: ["room-close"] });
       } else if (event.key === "ArrowLeft" && previousHref) {
         router.push(previousHref, { transitionTypes: ["nav-back"] });
       } else if (event.key === "ArrowRight" && nextHref) {

@@ -14,7 +14,7 @@ function LevelMark({ level }: { level: SkillLevel }) {
 
 export default function Skills() {
   return (
-    <section id={sectionIds.skills} aria-labelledby="habilidades-titulo" className="bg-surface">
+    <section id={sectionIds.skills} aria-labelledby="habilidades-titulo">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <SectionHeading
           title="Herramientas con las que trabajo"
@@ -31,28 +31,27 @@ export default function Skills() {
           ))}
         </ul>
 
-        <div className="grid border-t border-l border-line sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid overflow-hidden rounded-2xl border-t border-l border-line sm:grid-cols-2 lg:grid-cols-3">
           {skillCategories.map((category, index) => (
             <article
               key={category.id}
               data-reveal
               style={{ "--reveal-delay": `${(index % 3) * 100}ms` } as CSSProperties}
               aria-labelledby={`skills-${category.id}`}
-              className="group border-r border-b border-line p-6 transition-colors duration-500 hover:bg-bg sm:p-8"
+              className="group border-r border-b border-line p-6 sm:p-8"
             >
               <div className="flex items-baseline justify-between gap-4">
-                <h3 id={`skills-${category.id}`} className="font-display text-3xl">
+                <h3 id={`skills-${category.id}`} className="font-display text-2xl">
                   {category.title}
                 </h3>
-                <span className="label text-accent">{String(index + 1).padStart(2, "0")}</span>
               </div>
               <p className="mt-2 mb-6 text-sm text-muted">{category.description}</p>
               <ul className="grid grid-cols-2 gap-2">
                 {category.skills.map((skill) => (
                   <li
                     key={skill.name}
-                    className={`flex items-center gap-2.5 border px-3 py-2.5 text-sm transition-transform duration-300 hover:-translate-y-0.5 ${
-                      skill.level === "proyectos" ? "border-line bg-bg" : "border-dashed border-line text-muted"
+                    className={`flex items-center gap-2.5 rounded-lg border px-3 py-2.5 text-sm transition-transform duration-300 hover:-translate-y-0.5 ${
+                      skill.level === "proyectos" ? "border-line" : "border-dashed border-line text-muted"
                     }`}
                   >
                     <LevelMark level={skill.level} />

@@ -15,7 +15,7 @@ const ordered = sortedAlbums(albums);
 const colophon = [
   { label: "Idea, diseño y desarrollo", value: portfolio.fullName },
   { label: "Tecnologías", value: "Next.js, React, TypeScript y Tailwind CSS" },
-  { label: "Tipografías", value: "Instrument Serif, Manrope y Pinyon Script" },
+  { label: "Tipografías", value: "Gloock y Hanken Grotesk" },
   { label: "Portadas", value: "Ilustraciones originales hechas con SVG y CSS" },
   { label: "Transiciones", value: "View Transitions de React y animaciones CSS" },
 ];
@@ -65,7 +65,7 @@ export default async function Credits() {
               <dl className="border-t border-line">
                 {colophon.map((item) => (
                   <div key={item.label} className="grid gap-1 border-b border-line py-3 sm:grid-cols-[11rem_1fr] sm:gap-4">
-                    <dt className="label pt-1 text-[0.65rem] text-muted">{item.label}</dt>
+                    <dt className="label pt-0.5 text-muted">{item.label}</dt>
                     <dd>{item.value}</dd>
                   </div>
                 ))}

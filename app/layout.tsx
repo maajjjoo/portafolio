@@ -1,28 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Manrope, Pinyon_Script } from "next/font/google";
+import { Gloock, Hanken_Grotesk } from "next/font/google";
 
 import LibraryHeader from "@/components/library/LibraryHeader";
+import HistoryCamera from "@/components/providers/HistoryCamera";
 import ScrollReveal from "@/components/providers/ScrollReveal";
 import Footer from "@/components/sections/Footer";
 import { portfolio } from "@/config/portfolio";
 import "./globals.css";
+import "./room.css";
 
-const instrument = Instrument_Serif({
-  variable: "--font-instrument",
+const gloock = Gloock({
+  variable: "--font-gloock",
   subsets: ["latin"],
   weight: "400",
-  style: ["normal", "italic"],
 });
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
-});
-
-const pinyon = Pinyon_Script({
-  variable: "--font-pinyon",
-  subsets: ["latin"],
-  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -39,21 +34,21 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5ece3" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e0809" },
+    { media: "(prefers-color-scheme: light)", color: "#14100c" },
+    { media: "(prefers-color-scheme: dark)", color: "#14100c" },
   ],
 };
 
-// Aplica el tema guardado (o el del sistema) antes de pintar, para evitar parpadeos,
-// y marca que hay JavaScript para activar las animaciones al hacer scroll.
-const themeScript = `(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}d.setAttribute("data-theme",t)}catch(e){}})()`;
+// Aplica la luz guardada antes de pintar, para evitar parpadeos, y marca que hay JavaScript
+// para activar las animaciones. La introducción solo se prepara al llegar a la sala por primera vez en la sesión.
+const themeScript = `(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");d.setAttribute("data-theme",t==="light"?"light":"dark");if(location.pathname==="/"&&!sessionStorage.getItem("intro-vista"))d.classList.add("intro-pending")}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${instrument.variable} ${manrope.variable} ${pinyon.variable} h-full antialiased`}
+      className={`${gloock.variable} ${hanken.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
@@ -71,6 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <ScrollReveal />
+        <HistoryCamera />
       </body>
     </html>
   );

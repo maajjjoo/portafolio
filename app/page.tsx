@@ -1,28 +1,26 @@
 import { ViewTransition } from "react";
 
-import LibraryWelcome from "@/components/library/LibraryWelcome";
-import VinylLibrary from "@/components/library/VinylLibrary";
-import Marquee from "@/components/sections/Marquee";
+import RoomCollection from "@/components/room/RoomCollection";
+import { RoomBackdrop, RoomFurniture } from "@/components/room/RoomDecor";
+import RoomIntro from "@/components/room/RoomIntro";
 import { albums } from "@/data/albums";
 import { sortedAlbums } from "@/lib/albums";
 
-export default function LibraryPage() {
+export default function ListeningRoomPage() {
   return (
     <ViewTransition
-      enter={{ "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" }}
-      exit={{ "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" }}
+      enter={{ "room-close": "room-return", "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" }}
+      exit={{ "room-open": "room-dolly", "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" }}
       default="none"
     >
-      <div className="scroll-mt-[4.5rem]">
-        <LibraryWelcome />
-        <section aria-labelledby="estante-titulo" className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
-          <h2 id="estante-titulo" className="sr-only">
-            Estante de discos
-          </h2>
-          <VinylLibrary albums={sortedAlbums(albums)} />
-        </section>
-        <Marquee />
-      </div>
+      <section aria-label="Sala de escucha" className="room room-lit">
+        <RoomBackdrop />
+        <div className="room-scene">
+          <RoomFurniture />
+          <RoomCollection albums={sortedAlbums(albums)} />
+        </div>
+      </section>
+      <RoomIntro />
     </ViewTransition>
   );
 }

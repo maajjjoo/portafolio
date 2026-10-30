@@ -59,26 +59,26 @@ export default function LibraryHeader() {
   return (
     <header style={{ viewTransitionName: "site-header" }} className="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
       <nav aria-label="Principal" className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-3 px-5 sm:px-8">
-        <Link href="/" transitionTypes={["nav-back"]} className="group flex items-center gap-3" aria-label={`${portfolio.fullName}: ir a la biblioteca`}>
+        <Link href="/" transitionTypes={["room-close"]} className="group flex items-center gap-3" aria-label={`${portfolio.fullName}: ir a la sala`}>
           <span className="grid size-10 place-items-center rounded-full bg-wine font-display text-lg text-on-wine transition-transform duration-700 group-hover:rotate-[360deg]">
             {portfolio.initials}
           </span>
           <span className="hidden leading-tight sm:block">
-            <span className="block font-script text-2xl text-accent">María José</span>
-            <span className="label block text-[0.6rem] text-muted">{portfolio.libraryTitle}</span>
+            <span className="block font-display text-lg">María José</span>
+            <span className="block text-[0.8125rem] text-muted">{portfolio.libraryTitle}</span>
           </span>
         </Link>
 
         <div className="flex items-center gap-2">
           <Link
             href="/"
-            transitionTypes={["nav-back"]}
+            transitionTypes={["room-close"]}
             aria-current={onLibrary ? "page" : undefined}
             className={`label hidden min-h-11 items-center rounded-full px-4 transition-colors hover:text-ink sm:inline-flex ${
               onLibrary ? "text-ink" : "text-muted"
             }`}
           >
-            <RollText>Biblioteca</RollText>
+            <RollText>Sala</RollText>
           </Link>
           <button
             ref={buttonRef}
@@ -102,13 +102,12 @@ export default function LibraryHeader() {
             <li className="sm:hidden">
               <Link
                 href="/"
-                transitionTypes={["nav-back"]}
+                transitionTypes={["room-close"]}
                 onClick={() => setOpen(false)}
                 aria-current={onLibrary ? "page" : undefined}
-                className="flex min-h-14 items-center gap-3 border border-line px-3 py-2 transition-colors hover:border-ink aria-[current=page]:border-wine"
+                className="flex min-h-14 items-center gap-3 rounded-xl border border-line px-3 py-2 transition-colors hover:border-ink aria-[current=page]:border-wine"
               >
-                <span className="label text-accent">00</span>
-                <span className="font-display text-xl">Biblioteca</span>
+                <span className="font-display text-xl">Sala de escucha</span>
               </Link>
             </li>
             {ordered.map((album) => {
@@ -121,15 +120,13 @@ export default function LibraryHeader() {
                     transitionTypes={["nav-forward"]}
                     onClick={() => setOpen(false)}
                     aria-current={current ? "page" : undefined}
-                    className="group flex min-h-14 items-center gap-3 border border-line px-3 py-2 transition-colors hover:border-ink aria-[current=page]:border-wine aria-[current=page]:bg-surface"
+                    className="group flex min-h-14 items-center gap-3 rounded-xl border border-line px-3 py-2 transition-colors hover:border-ink aria-[current=page]:border-wine aria-[current=page]:bg-surface"
                   >
                     <span className="size-10 shrink-0 overflow-hidden rounded-[2px]">
                       <CoverArt album={album} />
                     </span>
                     <span className="min-w-0">
-                      <span className="label block text-[0.6rem] text-muted">
-                        {String(album.order).padStart(2, "0")} · {album.section}
-                      </span>
+                      <span className="block text-[0.8125rem] text-muted">{album.section}</span>
                       <span className="block truncate font-display text-xl">{album.title}</span>
                     </span>
                   </Link>

@@ -2,7 +2,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 
 import { albums, albumSlugs } from "../data/albums.ts";
-import { albumHref, filterAlbums, getAdjacentAlbums, getAlbum, sortedAlbums } from "./albums.ts";
+import { albumHref, filterByCategory, getAdjacentAlbums, getAlbum, sortedAlbums } from "./albums.ts";
 
 describe("colección de álbumes", () => {
   it("tiene un álbum por cada slug, sin duplicados", () => {
@@ -62,29 +62,18 @@ describe("getAdjacentAlbums", () => {
   });
 });
 
-describe("filterAlbums", () => {
-  it("sin filtros devuelve todo en orden", () => {
-    assert.equal(filterAlbums(albums, "", null).length, albums.length);
-  });
-
-  it("busca sin distinguir tildes ni mayúsculas", () => {
-    assert.deepEqual(
-      filterAlbums(albums, "SOBRE MI", null).map((album) => album.slug),
-      ["sobre-mi"],
-    );
-  });
-
-  it("busca también en las canciones", () => {
-    assert.ok(filterAlbums(albums, "pollystock", null).some((album) => album.slug === "proyectos"));
+describe("filterByCategory", () => {
+  it("sin categoría devuelve todo en orden", () => {
+    assert.deepEqual(filterByCategory(albums, null), sortedAlbums());
   });
 
   it("filtra por categoría", () => {
-    const extras = filterAlbums(albums, "", "Extras").map((album) => album.slug);
+    const extras = filterByCategory(albums, "Extras").map((album) => album.slug);
     assert.deepEqual(extras, ["habilidades", "creditos"]);
   });
 
-  it("combina texto y categoría", () => {
-    assert.deepEqual(filterAlbums(albums, "stack", "Presentación"), []);
+  it("devuelve una lista vacía si la categoría no existe", () => {
+    assert.deepEqual(filterByCategory(albums, "Otra"), []);
   });
 });
 

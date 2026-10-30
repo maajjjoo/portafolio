@@ -20,20 +20,15 @@ export default async function Hero() {
 
   return (
     <section id={sectionIds.hero} aria-labelledby="hero-titulo" className="relative isolate overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="float absolute top-0 left-1/3 -z-10 size-[38rem] rounded-full bg-[radial-gradient(circle,var(--glow)_0%,transparent_65%)]"
-      />
-
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 sm:px-8 md:py-24 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,22rem)]">
         <div>
-          <p className="fade-up label text-accent" style={delay(200)}>
-            {portfolio.title}
-          </p>
-          <h2 id="hero-titulo" className="fade-up mt-4 font-display text-5xl leading-[0.95] sm:text-6xl lg:text-7xl" style={delay(300)}>
+          <h2 id="hero-titulo" className="fade-up font-display text-4xl leading-[1.05] text-balance sm:text-5xl lg:text-6xl" style={delay(300)}>
             {portfolio.fullName}
           </h2>
-          <p className="fade-up mt-8 text-2xl leading-tight font-light tracking-wide uppercase" style={delay(450)}>
+          <p className="fade-up mt-3 text-lg font-medium text-accent" style={delay(350)}>
+            {portfolio.title}
+          </p>
+          <p className="fade-up mt-7 max-w-xl text-2xl leading-snug" style={delay(450)}>
             Construyo software que intenta resolver problemas reales
           </p>
           <p className="fade-up mt-6 max-w-xl text-lg leading-relaxed text-muted" style={delay(550)}>
@@ -118,9 +113,6 @@ export default async function Hero() {
 
         <div className="fade-up mx-auto w-[min(72vw,20rem)] lg:w-full" style={delay(500)}>
           <Portrait />
-          <p aria-hidden="true" className="write-in mt-10 -rotate-3 text-center font-script text-5xl text-accent" style={delay(1200)}>
-            María José
-          </p>
         </div>
       </div>
     </section>

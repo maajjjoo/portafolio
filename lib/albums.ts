@@ -30,25 +30,9 @@ export function getAdjacentAlbums(slug: string, albums: readonly Album[] = allAl
   };
 }
 
-function normalize(text: string) {
-  return text
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .trim();
-}
-
-/** Filtra por categoría y por texto (título, sección, descripción y canciones), sin distinguir tildes. */
-export function filterAlbums(albums: readonly Album[], query: string, category: string | null): Album[] {
-  const terms = normalize(query).split(/\s+/).filter(Boolean);
-  return sortedAlbums(albums).filter((album) => {
-    if (category && album.category !== category) return false;
-    if (terms.length === 0) return true;
-    const haystack = normalize(
-      [album.title, album.section, album.category, album.description, album.catalog, ...album.tracks.map((track) => track.title)].join(" "),
-    );
-    return terms.every((term) => haystack.includes(term));
-  });
+/** Discos de una categoría, en orden; sin categoría, todos. */
+export function filterByCategory(albums: readonly Album[], category: string | null): Album[] {
+  return sortedAlbums(albums).filter((album) => !category || album.category === category);
 }
 
 export function albumHref(slug: string) {

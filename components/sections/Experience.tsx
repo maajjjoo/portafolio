@@ -78,7 +78,7 @@ export default async function Experience() {
                   aria-hidden="true"
                   className="absolute top-3 -left-[calc(2rem+6px)] size-3 rotate-45 border-2 border-wine bg-bg sm:-left-[calc(3rem+6px)]"
                 />
-                <div className="border border-dashed border-line p-6 sm:p-8">
+                <div className="rounded-2xl border border-dashed border-line p-6 sm:p-8">
                   <span className={`label rounded-full px-3 py-1.5 ${typeStyles.profesional.badge}`}>
                     {experienceTypeLabels.profesional}
                   </span>
@@ -114,7 +114,7 @@ function TimelineItem({ item, semester, anchor }: { item: ExperienceItem; semest
         aria-hidden="true"
         className={`absolute top-3 -left-[calc(2rem+6px)] size-3 rotate-45 ring-4 ring-bg sm:-left-[calc(3rem+6px)] ${styles.dot}`}
       />
-      <article className="border border-line bg-surface p-6 shadow-card sm:p-8">
+      <article className="border-b border-line pb-8">
         <div className="flex flex-wrap items-center gap-3">
           <span className={`label rounded-full px-3 py-1.5 ${styles.badge}`}>{experienceTypeLabels[item.type]}</span>
           <span className="label text-muted">{formatPeriod(item)}</span>
@@ -123,7 +123,7 @@ function TimelineItem({ item, semester, anchor }: { item: ExperienceItem; semest
         <p className="mt-1 text-muted">{item.organization}</p>
         <p className="mt-4 leading-relaxed">{item.description}</p>
         {item.showCurrentSemester ? (
-          <p className="mt-5 border-l-2 border-gold bg-surface-2 px-4 py-3 text-sm font-semibold">
+          <p className="mt-5 rounded-xl bg-surface-2 px-4 py-3 text-sm font-semibold">
             Semestre actual: <SemesterStatus result={semester} />
           </p>
         ) : null}

@@ -2,7 +2,6 @@ import type { CSSProperties } from "react";
 
 import ContactForm from "@/components/sections/ContactForm";
 import { ArrowUpRightIcon, GitHubIcon, LinkedInIcon, MailIcon } from "@/components/ui/Icons";
-import SplitText from "@/components/ui/SplitText";
 import { sectionIds } from "@/config/navigation";
 import { portfolio } from "@/config/portfolio";
 import { parseFormspreeEndpoint } from "@/lib/contact";
@@ -33,18 +32,11 @@ const channels = [
 export default function Contact() {
   return (
     <section id={sectionIds.contact} aria-labelledby="contacto-titulo" className="relative isolate overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="absolute -right-40 -bottom-40 -z-10 size-[36rem] rounded-full bg-[radial-gradient(circle,var(--glow)_0%,transparent_65%)]"
-      />
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
           <div>
-            <h2 id="contacto-titulo" data-reveal className="text-4xl leading-tight font-light tracking-wide uppercase sm:text-5xl">
-              Hablemos de algo
-              <span className="mt-1 block font-script text-7xl tracking-normal text-accent normal-case sm:text-8xl">
-                <SplitText text="increíble" step={60} delay={200} />
-              </span>
+            <h2 id="contacto-titulo" data-reveal className="font-display text-4xl leading-[1.08] text-balance sm:text-5xl">
+              Hablemos de algo <span className="text-accent">increíble</span>
             </h2>
             <p data-reveal className="mt-8 max-w-md text-lg leading-relaxed text-muted">
               Si quieres comentarme algo sobre mis proyectos, proponer una colaboración o simplemente saludar,

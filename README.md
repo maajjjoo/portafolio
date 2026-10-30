@@ -8,10 +8,10 @@
 - Al pasar el cursor o enfocar una funda con el teclado, el vinilo asoma y gira. En pantallas táctiles el disco ya asoma un poco y el rótulo «Abrir álbum» siempre está visible.
 - Al elegir un disco, la funda **se transforma** en la portada del álbum (`<ViewTransition>` de React 19.3), el vinilo sale de la funda y empieza a girar, y debajo aparece el contenido de la sección.
 - Cada álbum tiene su propia ruta (`/album/proyectos`, `/album/contacto`…): se puede abrir directamente, compartir y usar con los botones Atrás/Adelante del navegador. Un slug que no existe muestra una página 404 propia.
-- Dentro de un álbum: «Volver a la biblioteca», disco anterior/siguiente y atajos de teclado (← →, Esc).
-- La **lista de canciones** enlaza con cada parte del contenido. Cuando deja de verse, aparece una barra «sonando» con la pista actual y enlaces a la anterior y la siguiente. Para añadir una pista, indica en `data/albums.ts` el `id` del elemento al que lleva.
+- Dentro de un álbum: «Volver a la sala», disco anterior/siguiente y atajos de teclado (← →, Esc).
+- El contenido se presenta como un **libreto**: un índice breve enlaza con cada parte y, cuando deja de verse, un paginador muestra la parte actual con enlaces a la anterior y la siguiente. Para añadir una parte, indica en `data/albums.ts` el `id` del elemento al que lleva.
 - El botón **Álbumes** de la barra superior da acceso directo a las ocho secciones desde cualquier página.
-- La biblioteca permite **buscar** y **filtrar por categoría**, y marca como «Escuchado» los discos ya abiertos (solo en ese navegador).
+- La sala permite **filtrar por categoría** y tiene dos luces, de noche y de día. Además, marca como «Escuchado» los discos ya abiertos (solo en ese navegador).
 - Si el sistema pide reducir el movimiento, no hay giros ni deslizamientos.
 
 | Nº | Álbum | Sección de la entrega | Ruta |
