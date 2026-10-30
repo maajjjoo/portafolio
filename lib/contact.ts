@@ -35,6 +35,13 @@ export function validateContact(values: ContactValues): ContactErrors {
   return errors;
 }
 
+/** Explica en español una respuesta de error del servicio, sin mostrar códigos ni su texto en inglés. */
+export function contactErrorMessage(status: number): string {
+  if (status === 429) return "Se han enviado demasiados mensajes en poco tiempo.";
+  if (status >= 500) return "El servicio de envío no está disponible en este momento.";
+  return "El servicio de envío rechazó el mensaje.";
+}
+
 /** Devuelve el endpoint de Formspree solo si tiene un formato válido. */
 export function parseFormspreeEndpoint(value: string | undefined): string | null {
   const endpoint = value?.trim();

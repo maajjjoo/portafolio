@@ -37,8 +37,8 @@ export default function LibraryControls({
           type="search"
           value={query}
           onChange={(event) => onQueryChange(event.target.value)}
-          placeholder="Ej.: proyectos, contacto, React…"
-          className="w-full border-0 border-b-2 border-line bg-transparent px-1 py-2 text-base text-ink placeholder:text-muted/70 focus:border-accent focus:outline-none"
+          placeholder="Ej.: proyectos, contacto, habilidades…"
+          className="w-full border-0 border-b-2 border-line bg-transparent px-1 py-2 text-base text-ink placeholder:text-muted focus:border-accent focus:outline-none"
         />
       </div>
 

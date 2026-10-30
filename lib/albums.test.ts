@@ -18,6 +18,12 @@ describe("colección de álbumes", () => {
     );
   });
 
+  it("cada pista lleva a un ancla única en toda la colección", () => {
+    const anchors = albums.flatMap((album) => album.tracks.map((track) => track.anchor));
+    assert.ok(anchors.every(Boolean));
+    assert.equal(new Set(anchors).size, anchors.length);
+  });
+
   it("usa órdenes consecutivos desde 1", () => {
     assert.deepEqual(
       sortedAlbums().map((album) => album.order),

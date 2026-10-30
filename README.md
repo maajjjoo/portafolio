@@ -9,6 +9,7 @@
 - Al elegir un disco, la funda **se transforma** en la portada del álbum (`<ViewTransition>` de React 19.3), el vinilo sale de la funda y empieza a girar, y debajo aparece el contenido de la sección.
 - Cada álbum tiene su propia ruta (`/album/proyectos`, `/album/contacto`…): se puede abrir directamente, compartir y usar con los botones Atrás/Adelante del navegador. Un slug que no existe muestra una página 404 propia.
 - Dentro de un álbum: «Volver a la biblioteca», disco anterior/siguiente y atajos de teclado (← →, Esc).
+- La **lista de canciones** enlaza con cada parte del contenido. Cuando deja de verse, aparece una barra «sonando» con la pista actual y enlaces a la anterior y la siguiente. Para añadir una pista, indica en `data/albums.ts` el `id` del elemento al que lleva.
 - El botón **Álbumes** de la barra superior da acceso directo a las ocho secciones desde cualquier página.
 - La biblioteca permite **buscar** y **filtrar por categoría**, y marca como «Escuchado» los discos ya abiertos (solo en ese navegador).
 - Si el sistema pide reducir el movimiento, no hay giros ni deslizamientos.
@@ -89,8 +90,8 @@ El semestre se calcula en `lib/semester.ts` a partir de `config/portfolio.ts →
 
 Cálculo: `semestreActual = referenceSemester + floor(mesesCompletos / monthsPerSemester)`. Un mes cuenta como completo solo cuando se llega al mismo día del mes de la fecha de referencia. Por ejemplo, con `referenceDate: "2026-02-15"`, el 14 de agosto de 2026 sigue mostrando 5.º semestre y el 15 de agosto pasa a 6.º.
 
-- Mientras `referenceDate` sea `null`, el sitio muestra **5.º semestre** con la nota «Último semestre confirmado. Falta configurar la fecha académica de referencia.».
-- Si la fecha es inválida (por ejemplo `2026-02-30`) o está en el futuro, también se muestra el último semestre confirmado con una nota.
+- Mientras `referenceDate` sea `null`, el sitio muestra **5.º semestre** con la nota «Último semestre confirmado.». El motivo aparece solo como aviso en la consola del servidor.
+- Si la fecha es inválida (por ejemplo `2026-02-30`) o está en el futuro, también se muestra el último semestre confirmado con la misma nota y el motivo en la consola.
 - No se asume un número total de semestres en la carrera.
 - La página se regenera automáticamente una vez al día en Vercel (`cacheLife("days")` en `lib/academic.ts`), así que el semestre y el año del pie se actualizan sin redesplegar.
 

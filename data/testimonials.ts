@@ -32,7 +32,7 @@ export interface PendingTestimonial {
 export type Testimonial = PublishedTestimonial | PendingTestimonial;
 
 export const testimonials: Testimonial[] = [
-  { id: "pendiente-1", status: "pendiente", label: "Testimonio pendiente 1" },
-  { id: "pendiente-2", status: "pendiente", label: "Testimonio pendiente 2" },
-  { id: "pendiente-3", status: "pendiente", label: "Testimonio pendiente 3" },
+  { id: "pendiente-1", status: "pendiente", label: "Testimonio 1, por grabar" },
+  { id: "pendiente-2", status: "pendiente", label: "Testimonio 2, por grabar" },
+  { id: "pendiente-3", status: "pendiente", label: "Testimonio 3, por grabar" },
 ];

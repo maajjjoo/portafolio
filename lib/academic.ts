@@ -18,8 +18,10 @@ export async function getAcademicSnapshot(): Promise<AcademicSnapshot> {
   cacheLife("days");
 
   const today = calendarDateInTimeZone(new Date(), portfolio.academic.timeZone);
-  return {
-    semester: calculateSemester(portfolio.academic, today),
-    currentYear: today.year,
-  };
+  const semester = calculateSemester(portfolio.academic, today);
+  if (semester.status !== "calculated") {
+    console.warn(`Semestre sin calcular: ${semester.reason} Ver README → "Semestre automático".`);
+  }
+
+  return { semester, currentYear: today.year };
 }

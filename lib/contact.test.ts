@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 
-import { parseFormspreeEndpoint, validateContact } from "./contact.ts";
+import { contactErrorMessage, parseFormspreeEndpoint, validateContact } from "./contact.ts";
 
 const valid = { name: "Ana", email: "ana@example.com", message: "Hola, me gustaría hablar contigo." };
 
@@ -26,6 +26,20 @@ describe("validateContact", () => {
 
   it("rechaza mensajes demasiado cortos", () => {
     assert.ok(validateContact({ ...valid, message: "Hola" }).message);
+  });
+});
+
+describe("contactErrorMessage", () => {
+  it("distingue límite de envíos, caída del servicio y rechazo", () => {
+    assert.match(contactErrorMessage(429), /demasiados/);
+    assert.match(contactErrorMessage(503), /no está disponible/);
+    assert.match(contactErrorMessage(422), /rechazó/);
+  });
+
+  it("no muestra el código de estado", () => {
+    for (const status of [400, 422, 429, 500, 503]) {
+      assert.doesNotMatch(contactErrorMessage(status), /\d/);
+    }
   });
 });
 

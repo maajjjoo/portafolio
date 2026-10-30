@@ -37,7 +37,7 @@ export default async function About() {
               Soy María José, estudiante de {portfolio.academic.degree} en la {portfolio.university}. Actualmente curso
               el <span className="text-accent italic">{formatSemester(semester.semester)}</span>.
             </p>
-            <p className="text-muted">
+            <p id="sobre-mi-intereses" className="text-muted">
               Me interesa el desarrollo de interfaces, la construcción de APIs y la integración de herramientas de
               inteligencia artificial en aplicaciones que de verdad ayuden a alguien. Son temas que he explorado en mis
               proyectos académicos y personales, tanto en web como en móvil y escritorio.
@@ -49,7 +49,7 @@ export default async function About() {
           </div>
 
           <div data-reveal style={revealDelay(150)} className="space-y-8">
-            <dl className="border-t border-line">
+            <dl id="sobre-mi-formacion" className="border-t border-line">
               {facts.map((fact) => (
                 <div key={fact.label} className="grid gap-1 border-b border-line py-5 sm:grid-cols-[9rem_1fr] sm:gap-4">
                   <dt className="label pt-1 text-muted">{fact.label}</dt>
@@ -58,7 +58,7 @@ export default async function About() {
               ))}
             </dl>
 
-            <div>
+            <div id="sobre-mi-tecnologias">
               <h3 className="label mb-4 text-muted">Tecnologías que he usado</h3>
               <ul className="flex flex-wrap gap-2">
                 {mainTechnologies.map((name) => (

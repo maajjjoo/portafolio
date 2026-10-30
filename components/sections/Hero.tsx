@@ -41,7 +41,7 @@ export default async function Hero() {
             herramienta para organizar el estudio o una app para llevar el inventario de un negocio.
           </p>
 
-          <p className="fade-up mt-8 flex items-center gap-4" style={delay(650)}>
+          <p id="bienvenida-perfil" className="fade-up mt-8 flex items-center gap-4" style={delay(650)}>
             <span className="grid size-12 shrink-0 place-items-center rounded-full border border-line text-accent">
               <CapIcon />
             </span>
@@ -52,7 +52,7 @@ export default async function Hero() {
             </span>
           </p>
 
-          <div className="fade-up mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start" style={delay(750)}>
+          <div id="bienvenida-cv" className="fade-up mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start" style={delay(750)}>
             {cvAvailable ? (
               <a
                 href="/cv.pdf"
@@ -96,7 +96,7 @@ export default async function Hero() {
             </Link>
           </div>
 
-          <ul className="fade-up mt-8 flex gap-2" aria-label="Perfiles" style={delay(850)}>
+          <ul id="bienvenida-redes" className="fade-up mt-8 flex gap-2" aria-label="Perfiles" style={delay(850)}>
             {[
               { ...portfolio.social.github, Icon: GitHubIcon },
               { ...portfolio.social.linkedin, Icon: LinkedInIcon },

@@ -45,7 +45,7 @@ export function filterAlbums(albums: readonly Album[], query: string, category: 
     if (category && album.category !== category) return false;
     if (terms.length === 0) return true;
     const haystack = normalize(
-      [album.title, album.section, album.category, album.description, album.catalog, ...album.tracks].join(" "),
+      [album.title, album.section, album.category, album.description, album.catalog, ...album.tracks.map((track) => track.title)].join(" "),
     );
     return terms.every((term) => haystack.includes(term));
   });

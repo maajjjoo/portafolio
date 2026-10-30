@@ -4,6 +4,7 @@ import AlbumContent from "@/components/album/AlbumContent";
 import AlbumCover from "@/components/album/AlbumCover";
 import AlbumKeyboard from "@/components/album/AlbumKeyboard";
 import AlbumNavigation from "@/components/album/AlbumNavigation";
+import AlbumNowPlaying from "@/components/album/AlbumNowPlaying";
 import AlbumTracklist from "@/components/album/AlbumTracklist";
 import BackToLibrary from "@/components/ui/BackToLibrary";
 import SplitText from "@/components/ui/SplitText";
@@ -58,6 +59,7 @@ export default function AlbumExperience({ album, adjacent }: AlbumExperienceProp
 
       <div className="border-t border-line bg-surface/40">
         <AlbumContent slug={album.slug} />
+        <AlbumNowPlaying album={album} />
       </div>
 
       <div className="pt-10">

@@ -16,6 +16,7 @@ function formatMonth(value: string) {
 }
 
 function formatPeriod(item: ExperienceItem) {
+  if (item.isCurrent && !item.startDate) return "En curso";
   const start = item.startDate ? formatMonth(item.startDate) : "Inicio por confirmar";
   const end = item.isCurrent ? "Actualidad" : item.endDate ? formatMonth(item.endDate) : "Fin por confirmar";
   return `${start} — ${end}`;
@@ -30,6 +31,12 @@ function sortKey(item: ExperienceItem) {
 const typeStyles: Record<ExperienceType, { dot: string; badge: string }> = {
   academica: { dot: "bg-gold", badge: "bg-gold-soft text-gold" },
   profesional: { dot: "bg-wine", badge: "bg-accent-soft text-accent" },
+};
+
+/** Destino de las pistas del álbum: la primera entrada de cada tipo. */
+const typeAnchors: Record<ExperienceType, string> = {
+  academica: "experiencia-academica",
+  profesional: "experiencia-profesional",
 };
 
 export default async function Experience() {
@@ -57,11 +64,16 @@ export default async function Experience() {
 
           <ol className="relative max-w-3xl border-l border-line pl-8 sm:pl-12">
             {items.map((item) => (
-              <TimelineItem key={item.id} item={item} semester={semester} />
+              <TimelineItem
+                key={item.id}
+                item={item}
+                semester={semester}
+                anchor={items.find((other) => other.type === item.type) === item ? typeAnchors[item.type] : undefined}
+              />
             ))}
 
             {!hasProfessional ? (
-              <li data-reveal className="relative">
+              <li id={typeAnchors.profesional} data-reveal className="relative">
                 <span
                   aria-hidden="true"
                   className="absolute top-3 -left-[calc(2rem+6px)] size-3 rotate-45 border-2 border-wine bg-bg sm:-left-[calc(3rem+6px)]"
@@ -93,11 +105,11 @@ export default async function Experience() {
   );
 }
 
-function TimelineItem({ item, semester }: { item: ExperienceItem; semester: SemesterResult }) {
+function TimelineItem({ item, semester, anchor }: { item: ExperienceItem; semester: SemesterResult; anchor?: string }) {
   const styles = typeStyles[item.type];
 
   return (
-    <li data-reveal className="relative pb-12">
+    <li id={anchor} data-reveal className="relative pb-12">
       <span
         aria-hidden="true"
         className={`absolute top-3 -left-[calc(2rem+6px)] size-3 rotate-45 ring-4 ring-bg sm:-left-[calc(3rem+6px)] ${styles.dot}`}

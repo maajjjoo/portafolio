@@ -35,7 +35,7 @@ export default async function Credits() {
 
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
           <div data-reveal>
-            <h3 className="label mb-4 text-muted">Catálogo</h3>
+            <h3 id="creditos-catalogo" className="label mb-4 text-muted">Catálogo</h3>
             <ol className="border-t border-line">
               {ordered.map((album) => (
                 <li key={album.slug} className="border-b border-line">
@@ -61,7 +61,7 @@ export default async function Credits() {
 
           <div data-reveal style={{ "--reveal-delay": "150ms" } as CSSProperties} className="space-y-10">
             <div>
-              <h3 className="label mb-4 text-muted">Ficha técnica</h3>
+              <h3 id="creditos-ficha" className="label mb-4 text-muted">Ficha técnica</h3>
               <dl className="border-t border-line">
                 {colophon.map((item) => (
                   <div key={item.label} className="grid gap-1 border-b border-line py-3 sm:grid-cols-[11rem_1fr] sm:gap-4">
@@ -73,7 +73,7 @@ export default async function Credits() {
             </div>
 
             <div>
-              <h3 className="label mb-4 text-muted">Redes</h3>
+              <h3 id="creditos-redes" className="label mb-4 text-muted">Redes</h3>
               <ul className="flex flex-wrap gap-2">
                 <li>
                   <a href={`mailto:${portfolio.email}`} className="label inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 transition-colors hover:border-ink">
@@ -101,7 +101,7 @@ export default async function Credits() {
               </ul>
             </div>
 
-            <p className="border-l-2 border-wine pl-4 text-sm leading-relaxed text-muted">
+            <p id="creditos-derechos" className="border-l-2 border-wine pl-4 text-sm leading-relaxed text-muted">
               © {currentYear} {portfolio.fullName}. Este sitio es un portafolio personal inspirado en una colección de
               vinilos; no es un servicio de música ni está asociado a ningún sello discográfico.
             </p>

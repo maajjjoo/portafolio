@@ -2,7 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 
-import { validateContact, type ContactErrors, type ContactValues } from "@/lib/contact";
+import { contactErrorMessage, validateContact, type ContactErrors, type ContactValues } from "@/lib/contact";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -13,6 +13,8 @@ interface ContactFormProps {
 }
 
 const emptyValues: ContactValues = { name: "", email: "", message: "" };
+
+const SEND_TIMEOUT_MS = 15_000;
 
 const fields: { name: keyof ContactValues; label: string; type: "text" | "email" | "textarea"; autoComplete?: string }[] = [
   { name: "name", label: "Nombre", type: "text", autoComplete: "name" },
@@ -52,6 +54,7 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { Accept: "application/json", "Content-Type": "application/json" },
+        signal: AbortSignal.timeout(SEND_TIMEOUT_MS),
         body: JSON.stringify({
           name: values.name.trim(),
           email: values.email.trim(),
@@ -62,26 +65,22 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
       });
 
       if (!response.ok) {
-        const data: unknown = await response.json().catch(() => null);
-        const detail =
-          data && typeof data === "object" && "errors" in data && Array.isArray(data.errors)
-            ? data.errors.map((item: { message?: string }) => item.message).filter(Boolean).join(" ")
-            : "";
-        throw new Error(detail || `El servicio respondió con el código ${response.status}.`);
+        setErrorMessage(contactErrorMessage(response.status));
+        setStatus("error");
+        return;
       }
 
       setValues(emptyValues);
       setStatus("success");
-    } catch (error) {
-      // fetch lanza TypeError (con texto en inglés) cuando falla la red.
-      const isServiceError = error instanceof Error && !(error instanceof TypeError) && error.message;
-      setErrorMessage(isServiceError ? error.message : "No se pudo conectar con el servicio.");
+    } catch {
+      // Falló la red o se agotó el tiempo de espera.
+      setErrorMessage("No se pudo conectar con el servicio.");
       setStatus("error");
     }
   }
 
   const inputClass = (invalid: boolean) =>
-    `w-full border-0 border-b-2 bg-transparent px-1 py-3 text-base text-ink placeholder:text-muted/70 transition-colors focus:border-accent focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 ${
+    `w-full border-0 border-b-2 bg-transparent px-1 py-3 text-base text-ink placeholder:text-muted transition-colors focus:border-accent focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 ${
       invalid ? "border-accent" : "border-line"
     }`;
 
@@ -99,8 +98,7 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
 
       {!configured ? (
         <p role="note" className="mt-4 rounded-xl border border-dashed border-line bg-surface-2 px-4 py-3 text-sm leading-relaxed">
-          El formulario todavía no está conectado a un servicio de envío, así que por ahora no puede mandar mensajes.
-          Mientras tanto, escríbeme directamente a{" "}
+          El formulario estará disponible pronto. Mientras tanto, escríbeme directamente a{" "}
           <a href={`mailto:${fallbackEmail}`} className="font-semibold underline decoration-accent underline-offset-4">
             {fallbackEmail}
           </a>

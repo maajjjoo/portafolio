@@ -12,10 +12,11 @@ interface AlbumKeyboardProps {
   nextHref: string | null;
 }
 
+/** Incluye todo el formulario: salir desde «Enviar» perdería el mensaje escrito. */
 function isTyping(target: EventTarget | null) {
   return (
     target instanceof HTMLElement &&
-    (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName))
+    (target.isContentEditable || target.closest("input, textarea, select, form") !== null)
   );
 }
 

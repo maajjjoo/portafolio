@@ -5,6 +5,9 @@
  * components/sections y se asocia por `slug` en components/album/AlbumContent.tsx.
  */
 
+import { projects, projectStatusLabels } from "./projects.ts";
+import { skillCategories } from "./skills.ts";
+
 export const albumSlugs = [
   "bienvenida",
   "sobre-mi",
@@ -30,6 +33,14 @@ export interface AlbumCover {
   accent: string;
 }
 
+export interface AlbumTrack {
+  title: string;
+  /** `id` del elemento al que lleva la pista. Debe ser único en toda la colección. */
+  anchor: string;
+  /** Dato breve junto al título (por ejemplo, el estado de un proyecto). */
+  note?: string;
+}
+
 export interface Album {
   slug: AlbumSlug;
   order: number;
@@ -42,8 +53,8 @@ export interface Album {
   section: string;
   category: AlbumCategory;
   description: string;
-  /** Lista de canciones decorativa: lo que encontrarás dentro. */
-  tracks: string[];
+  /** Lista de canciones: lo que encontrarás dentro, enlazado a cada parte. */
+  tracks: AlbumTrack[];
   cover: AlbumCover;
 }
 
@@ -66,7 +77,12 @@ export const albums: Album[] = [
     section: "Bienvenida",
     category: "Presentación",
     description: "Quién soy en pocas palabras, mi perfil y mi CV.",
-    tracks: ["Presentación", "Perfil académico", "Descargar CV", "Redes"],
+    tracks: [
+      { title: "Presentación", anchor: "hero-titulo" },
+      { title: "Perfil académico", anchor: "bienvenida-perfil" },
+      { title: "Descargar CV", anchor: "bienvenida-cv" },
+      { title: "Redes", anchor: "bienvenida-redes" },
+    ],
     cover: { motif: "monogram", background: palette.burgundy, foreground: palette.cream, accent: palette.gold },
   },
   {
@@ -78,7 +94,12 @@ export const albums: Album[] = [
     section: "Sobre mí",
     category: "Presentación",
     description: "Mi formación, lo que me interesa del desarrollo y las tecnologías que he usado.",
-    tracks: ["Introducción", "Formación", "Intereses", "Tecnologías"],
+    tracks: [
+      { title: "Introducción", anchor: "sobre-mi-titulo" },
+      { title: "Formación", anchor: "sobre-mi-formacion" },
+      { title: "Intereses", anchor: "sobre-mi-intereses" },
+      { title: "Tecnologías", anchor: "sobre-mi-tecnologias" },
+    ],
     cover: { motif: "portrait", background: palette.cream, foreground: palette.charcoal, accent: palette.burgundy },
   },
   {
@@ -90,7 +111,11 @@ export const albums: Album[] = [
     section: "Proyectos",
     category: "Trabajo",
     description: "Las aplicaciones que he construido, con su estado real y sus enlaces.",
-    tracks: ["AI Code Tutor", "PollyStock", "Studia", "SmartControl"],
+    tracks: projects.map((project) => ({
+      title: project.title,
+      anchor: `proyecto-${project.id}`,
+      note: projectStatusLabels[project.status],
+    })),
     cover: { motif: "grid", background: palette.charcoal, foreground: palette.cream, accent: palette.rose },
   },
   {
@@ -101,8 +126,12 @@ export const albums: Album[] = [
     title: "Otras voces",
     section: "Testimonios",
     category: "Personas",
-    description: "Lo que dicen profesores y compañeros que han trabajado conmigo.",
-    tracks: ["Testimonio 1", "Testimonio 2", "Testimonio 3"],
+    description: "Testimonios de profesores y compañeros, a medida que los voy reuniendo.",
+    tracks: [
+      { title: "Testimonio 1", anchor: "testimonio-1" },
+      { title: "Testimonio 2", anchor: "testimonio-2" },
+      { title: "Testimonio 3", anchor: "testimonio-3" },
+    ],
     cover: { motif: "quotes", background: palette.cream, foreground: palette.burgundy, accent: palette.green },
   },
   {
@@ -114,7 +143,10 @@ export const albums: Album[] = [
     section: "Experiencia",
     category: "Trayectoria",
     description: "Mi trayectoria académica y profesional, de lo más reciente a lo más antiguo.",
-    tracks: ["Experiencia académica", "Experiencia profesional"],
+    tracks: [
+      { title: "Experiencia académica", anchor: "experiencia-academica" },
+      { title: "Experiencia profesional", anchor: "experiencia-profesional" },
+    ],
     cover: { motif: "timeline", background: palette.green, foreground: palette.cream, accent: palette.gold },
   },
   {
@@ -126,7 +158,12 @@ export const albums: Album[] = [
     section: "Contacto",
     category: "Contacto",
     description: "Correo, redes y un formulario para enviarme un mensaje.",
-    tracks: ["Correo", "GitHub", "LinkedIn", "Formulario"],
+    tracks: [
+      { title: "Correo", anchor: "contacto-correo" },
+      { title: "GitHub", anchor: "contacto-github" },
+      { title: "LinkedIn", anchor: "contacto-linkedin" },
+      { title: "Formulario", anchor: "contacto-formulario" },
+    ],
     cover: { motif: "waves", background: palette.burgundy, foreground: palette.rose, accent: palette.cream },
   },
   {
@@ -138,7 +175,7 @@ export const albums: Album[] = [
     section: "Habilidades",
     category: "Extras",
     description: "Las tecnologías que he usado en proyectos y las que estoy aprendiendo.",
-    tracks: ["Lenguajes", "Frontend", "Backend", "Móvil y escritorio", "Bases de datos", "Herramientas"],
+    tracks: skillCategories.map((category) => ({ title: category.title, anchor: `skills-${category.id}` })),
     cover: { motif: "rings", background: palette.charcoal, foreground: palette.gold, accent: palette.burgundy },
   },
   {
@@ -150,7 +187,12 @@ export const albums: Album[] = [
     section: "Créditos",
     category: "Extras",
     description: "La contraportada: cómo está hecho este sitio, redes y derechos.",
-    tracks: ["Catálogo", "Ficha técnica", "Redes", "Derechos"],
+    tracks: [
+      { title: "Catálogo", anchor: "creditos-catalogo" },
+      { title: "Ficha técnica", anchor: "creditos-ficha" },
+      { title: "Redes", anchor: "creditos-redes" },
+      { title: "Derechos", anchor: "creditos-derechos" },
+    ],
     cover: { motif: "back-cover", background: palette.cream, foreground: palette.charcoal, accent: palette.burgundy },
   },
 ];

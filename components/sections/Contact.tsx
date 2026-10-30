@@ -11,8 +11,9 @@ import { parseFormspreeEndpoint } from "@/lib/contact";
 const formEndpoint = parseFormspreeEndpoint(process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT);
 
 const channels = [
-  { label: "Correo", value: portfolio.email, href: `mailto:${portfolio.email}`, Icon: MailIcon, external: false },
+  { id: "contacto-correo", label: "Correo", value: portfolio.email, href: `mailto:${portfolio.email}`, Icon: MailIcon, external: false },
   {
+    id: "contacto-github",
     label: portfolio.social.github.label,
     value: "github.com/maajjjoo",
     href: portfolio.social.github.href,
@@ -20,6 +21,7 @@ const channels = [
     external: true,
   },
   {
+    id: "contacto-linkedin",
     label: portfolio.social.linkedin.label,
     value: "María José De La Cruz",
     href: portfolio.social.linkedin.href,
@@ -50,8 +52,8 @@ export default function Contact() {
             </p>
 
             <ul data-reveal className="mt-10 border-t border-line">
-              {channels.map(({ label, value, href, Icon, external }) => (
-                <li key={label} className="border-b border-line">
+              {channels.map(({ id, label, value, href, Icon, external }) => (
+                <li key={label} id={id} className="border-b border-line">
                   <a
                     href={href}
                     {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
@@ -72,7 +74,7 @@ export default function Contact() {
             </ul>
           </div>
 
-          <div data-reveal style={{ "--reveal-delay": "150ms" } as CSSProperties}>
+          <div id="contacto-formulario" data-reveal style={{ "--reveal-delay": "150ms" } as CSSProperties}>
             <ContactForm endpoint={formEndpoint} fallbackEmail={portfolio.email} />
           </div>
         </div>

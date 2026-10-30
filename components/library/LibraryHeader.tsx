@@ -95,7 +95,7 @@ export default function LibraryHeader() {
         </div>
       </nav>
 
-      <div ref={panelRef} id="panel-albumes" hidden={!open} className="border-t border-line bg-bg">
+      <div ref={panelRef} id="panel-albumes" hidden={!open} className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-bg">
         <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8">
           <p className="label mb-4 text-muted">Toda la colección · elige un disco</p>
           <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">

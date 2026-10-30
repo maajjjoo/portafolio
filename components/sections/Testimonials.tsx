@@ -16,6 +16,11 @@ function initialsOf(name: string) {
 
 export default function Testimonials() {
   const hasPublished = testimonials.some((item) => item.status === "publicado");
+  const hasPending = testimonials.some((item) => item.status === "pendiente");
+
+  let intro = "Comentarios de profesores y compañeros con quienes he trabajado.";
+  if (!hasPublished) intro = "Todavía estoy reuniendo testimonios de profesores y compañeros. Cuando los tenga, aparecerán aquí.";
+  else if (hasPending) intro += " Sigo reuniendo más.";
 
   return (
     <section id={sectionIds.testimonials} aria-labelledby="testimonios-titulo" className="bg-surface">
@@ -23,17 +28,14 @@ export default function Testimonials() {
         <SectionHeading
           title="Palabras de quienes han trabajado conmigo"
           titleId="testimonios-titulo"
-          intro={
-            hasPublished
-              ? "Comentarios de profesores y compañeros con quienes he trabajado."
-              : "Todavía estoy reuniendo testimonios de profesores y compañeros. Cuando los tenga, aparecerán aquí."
-          }
+          intro={intro}
         />
 
         <ul className="grid border-t border-line md:grid-cols-3 md:border-t-0 md:border-l">
           {testimonials.map((item, index) => (
             <li
               key={item.id}
+              id={`testimonio-${index + 1}`}
               data-reveal
               style={{ "--reveal-delay": `${index * 120}ms` } as CSSProperties}
               className="flex border-b border-line md:border-r md:border-b-0"
@@ -78,16 +80,9 @@ function PendingCard({ item }: { item: PendingTestimonial }) {
         “
       </span>
       <p className="mt-2 font-display text-2xl text-muted italic">{item.label}</p>
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
-        Espacio reservado para un testimonio real. Aún no se ha publicado ninguno.
+      <p className="mt-3 text-sm leading-relaxed text-muted">
+        Aquí irá la opinión de un profesor o compañero, con su nombre y su permiso.
       </p>
-      <div aria-hidden="true" className="mt-8 flex items-center gap-3">
-        <span className="size-11 rounded-full border border-dashed border-line" />
-        <span className="space-y-2">
-          <span className="block h-2 w-24 rounded-full bg-surface-2" />
-          <span className="block h-2 w-16 rounded-full bg-surface-2" />
-        </span>
-      </div>
     </div>
   );
 }
