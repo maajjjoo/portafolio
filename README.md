@@ -1,8 +1,8 @@
 # Portafolio — María José De La Cruz Madroñero
 
-**The Vinyl Archive**: portafolio personal de una estudiante de Ingeniería de Software, presentado como una colección de discos de vinilo. Construido con **Next.js (App Router)**, **React**, **TypeScript** y **Tailwind CSS**, listo para desplegarse en **Vercel**.
+**The Listening Experience**: portafolio personal de una estudiante de Ingeniería de Software, presentado como una colección de discos de vinilo. Construido con **Next.js (App Router)**, **React**, **TypeScript** y **Tailwind CSS**, listo para desplegarse en **Vercel**.
 
-## Cómo funciona la biblioteca
+## Cómo funciona la sala
 
 - La página principal (`/`) es un **estante de discos**. Cada disco es una sección del portafolio.
 - Al pasar el cursor o enfocar una funda con el teclado, el vinilo asoma y gira. En pantallas táctiles el disco ya asoma un poco y el rótulo «Abrir álbum» siempre está visible.
@@ -11,7 +11,7 @@
 - Dentro de un álbum: «Volver a la sala», disco anterior/siguiente y atajos de teclado (← →, Esc).
 - El contenido se presenta como un **libreto**: un índice breve enlaza con cada parte y, cuando deja de verse, un paginador muestra la parte actual con enlaces a la anterior y la siguiente. Para añadir una parte, indica en `data/albums.ts` el `id` del elemento al que lleva.
 - El botón **Álbumes** de la barra superior da acceso directo a las ocho secciones desde cualquier página.
-- La sala permite **filtrar por categoría** y tiene dos luces, de noche y de día. Además, marca como «Escuchado» los discos ya abiertos (solo en ese navegador).
+- La sala tiene dos luces, de noche y de día, y marca como «Escuchado» los discos ya abiertos (solo en ese navegador).
 - Si el sistema pide reducir el movimiento, no hay giros ni deslizamientos.
 
 | Nº | Álbum | Sección de la entrega | Ruta |
@@ -25,7 +25,7 @@
 | 07 | Stack | Habilidades (sección adicional) | `/album/habilidades` |
 | 08 | Créditos finales | Contraportada | `/album/creditos` |
 
-La barra de navegación (logo «MJ», nombre, Biblioteca y Álbumes) y el pie de página (nombre, año, enlaces a los discos, redes, «Volver arriba» y «Hecho con Next.js + Tailwind CSS») aparecen en todas las páginas.
+La barra de navegación (logo «MJ», nombre, Sala y Álbumes) y el pie de página (nombre, año, enlaces a los discos, redes, «Volver arriba» y «Hecho con Next.js + Tailwind CSS») aparecen en todas las páginas.
 
 ## Requisitos
 
@@ -49,7 +49,7 @@ npm run start      # servir la compilación de producción
 ```text
 app/
   layout.tsx            cabecera, <main> y pie comunes; tema y fuentes
-  page.tsx              la biblioteca (estante de discos)
+  page.tsx              la sala de escucha (repisas de discos)
   album/[slug]/page.tsx un álbum abierto (generado al compilar para cada disco)
   not-found.tsx         «Este disco no está en la colección»
 components/
@@ -173,7 +173,7 @@ El repositorio Git local ya existe, con un commit por etapa. Para subirlo:
 1. Entra en [vercel.com](https://vercel.com) con tu cuenta de GitHub → *Add New → Project* → importa el repositorio.
 2. Vercel detecta Next.js automáticamente; no hace falta cambiar comandos.
 3. Añade la variable `NEXT_PUBLIC_FORMSPREE_ENDPOINT` (opcional hasta que configures Formspree).
-4. Pulsa *Deploy* y abre la URL pública para verificarla: biblioteca, abrir varios discos, anterior/siguiente, una URL directa como `/album/proyectos`, modo oscuro, panel Álbumes en el móvil, formulario y botón del CV.
+4. Pulsa *Deploy* y abre la URL pública para verificarla: sala, abrir varios discos, anterior/siguiente, una URL directa como `/album/proyectos`, modo oscuro, panel Álbumes en el móvil, formulario y botón del CV.
 
 ## Limitaciones conocidas
 
@@ -210,12 +210,12 @@ El repositorio Git local ya existe, con un commit por etapa. Para subirlo:
 
 ### Interacción creativa
 
-- [x] Biblioteca con fundas de discos
+- [x] Sala con fundas de discos
 - [x] Cada sección representada por un álbum
 - [x] Seleccionar un álbum funciona
 - [x] La transición de apertura funciona
 - [x] Cada álbum muestra el contenido correcto
-- [x] Volver a la biblioteca funciona
+- [x] Volver a la sala funciona
 - [x] Disco anterior/siguiente funciona
 - [x] Las URL directas de los álbumes funcionan
 - [x] Interacción táctil verificada (en emulación móvil)

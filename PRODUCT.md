@@ -21,7 +21,7 @@ It first has to pass the course submission. Beyond that, success means a visitor
 
 ## Positioning
 
-"The Vinyl Archive": the portfolio is a collection of eight records, and each record is one section. Picking a record from the shelf opens it as an album with its own URL. The work itself is reported with unusual honesty: real project status, verified links only, and no invented percentages.
+"The Listening Experience" (the design concept): the portfolio is a private listening room with a collection of eight records, and each record is one section. Picking a record opens it as an album with its own URL. The work itself is reported with unusual honesty: real project status, verified links only, and no invented percentages.
 
 ## Operating Context
 
@@ -34,14 +34,14 @@ It first has to pass the course submission. Beyond that, success means a visitor
 - **Required by the course, so future work must keep them:** navigation with name or initials, hero with personal profile, CV download, About, Projects with repository and demo links, at least three real testimonials, academic and professional experience, public email, working contact form, footer with name and current year, and at least one additional section (Habilidades).
 - **Required by the course for the interaction:** a shelf of record sleeves, one album per section, an opening transition, the correct content in each album, return to the library, previous/next, working direct URLs, touch support and keyboard accessibility.
 - **Spaces for missing content stay in place until it's filled.** The CV, testimonials, contact form and photo keep their place on the site. They aren't removed or hidden, and the owner will supply the content.
-- **Terminology:** a section is an "álbum" or "disco", and the collection is "The Vinyl Archive". Album titles are artistic (Repositorio) and each maps to a plain section name (Proyectos).
+- **Terminology:** a section is an "álbum" or "disco", and the main page is "la sala". Album titles are artistic (Repositorio) and each maps to a plain section name (Proyectos).
 - **Stack:** Next.js App Router, React, TypeScript and Tailwind CSS, intended for deployment on Vercel. Not yet deployed.
 - **Undecided:** the portfolio's direction after the course is submitted, including whether the structure changes for recruiters.
 
 ## Brand Commitments
 
-- Name: María José De La Cruz Madroñero, with the initials "MJ".
-- Collection name: "The Vinyl Archive".
+- Name: María José De La Cruz Madroñero, with the initials "MJ". This is the site's identity, because it is a career portfolio.
+- Collection name: "The Vinyl Archive", a small detail in the footer and credits only.
 - Site language: Spanish.
 - Voice: modest and precise, stating the real state of things.
 
