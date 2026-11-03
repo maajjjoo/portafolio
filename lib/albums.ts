@@ -30,11 +30,6 @@ export function getAdjacentAlbums(slug: string, albums: readonly Album[] = allAl
   };
 }
 
-/** Discos de una categoría, en orden; sin categoría, todos. */
-export function filterByCategory(albums: readonly Album[], category: string | null): Album[] {
-  return sortedAlbums(albums).filter((album) => !category || album.category === category);
-}
-
 export function albumHref(slug: string) {
   return `/album/${slug}`;
 }

@@ -2,7 +2,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 
 import { albums, albumSlugs } from "../data/albums.ts";
-import { albumHref, filterByCategory, getAdjacentAlbums, getAlbum, sortedAlbums } from "./albums.ts";
+import { albumHref, getAdjacentAlbums, getAlbum, sortedAlbums } from "./albums.ts";
 
 describe("colección de álbumes", () => {
   it("tiene un álbum por cada slug, sin duplicados", () => {
@@ -59,21 +59,6 @@ describe("getAdjacentAlbums", () => {
 
   it("devuelve null para un slug desconocido", () => {
     assert.equal(getAdjacentAlbums("no-existe"), null);
-  });
-});
-
-describe("filterByCategory", () => {
-  it("sin categoría devuelve todo en orden", () => {
-    assert.deepEqual(filterByCategory(albums, null), sortedAlbums());
-  });
-
-  it("filtra por categoría", () => {
-    const extras = filterByCategory(albums, "Extras").map((album) => album.slug);
-    assert.deepEqual(extras, ["habilidades", "creditos"]);
-  });
-
-  it("devuelve una lista vacía si la categoría no existe", () => {
-    assert.deepEqual(filterByCategory(albums, "Otra"), []);
   });
 });
 
