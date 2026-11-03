@@ -1,0 +1,67 @@
+/* --- Libreto del álbum: la pared de la sala detrás y una hoja translúcida delante --- */
+
+.album-wall {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, #4a2f1b 0 0.5rem, #0d0906 0.5rem 0.75rem) 0 0 / 3.5rem 100% no-repeat,
+    radial-gradient(60% 38% at 62% 26%, rgb(240 172 84 / 0.17), transparent 100%),
+    linear-gradient(180deg, #2c2922, #3a3529 42%, #25221b);
+}
+
+/* De noche, el texto secundario sobre la pared iluminada necesita más luz que sobre un fondo liso. */
+:root:not([data-theme="light"]) .album-booklet { --muted: #d3c4ac; }
+
+/* De día, el color de acento debe aguantar también sobre los paños de sol de la pared. */
+[data-theme="light"] .album-booklet { --accent: #754206; }
+
+.album-sheet {
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius: 1.5rem;
+  /* De noche, una hoja cálida y clara frente a la pared; el texto gana contraste dentro de ella. */
+  --surface: #40392d;
+  --surface-2: #2f291f;
+  --line: #66584a;
+  --muted: #d3c4ac;
+  background: rgb(84 75 60 / 0.58);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  backdrop-filter: blur(16px) saturate(1.1);
+  box-shadow: 0 30px 60px -40px rgb(0 0 0 / 0.75);
+}
+
+/* Por debajo de este ancho el texto llegaría a pisar la tira de listones: se quita. */
+@media (max-width: 1279px) {
+  .album-wall {
+    background:
+      radial-gradient(90% 34% at 60% 20%, rgb(240 172 84 / 0.16), transparent 100%),
+      linear-gradient(180deg, #2c2922, #3a3529 42%, #25221b);
+  }
+}
+
+/* El libreto, de día: papel sobre la misma pared soleada. */
+[data-theme="light"] .album-wall {
+  background:
+    linear-gradient(112deg, transparent 30%, rgb(255 246 222 / 0.6) 31% 44%, transparent 45% 47%, rgb(255 246 222 / 0.6) 48% 61%, transparent 62%),
+    repeating-linear-gradient(90deg, #b48a5b 0 0.5rem, #5a3d22 0.5rem 0.75rem) 0 0 / 3.5rem 100% no-repeat,
+    linear-gradient(180deg, #e2d8c6, #ece4d4 42%, #d9cdb9);
+}
+
+[data-theme="light"] .album-sheet {
+  --surface: #f3e9d8;
+  --surface-2: #dccdb3;
+  --line: #c7b497;
+  --muted: #5f4d3c;
+  background: color-mix(in srgb, #fbf6ec 62%, transparent);
+  box-shadow: 0 30px 60px -40px rgb(60 40 20 / 0.5);
+}
+
+@media (max-width: 1279px) {
+  [data-theme="light"] .album-wall {
+    background:
+      linear-gradient(112deg, transparent 20%, rgb(255 246 222 / 0.6) 22% 50%, transparent 52%),
+      linear-gradient(180deg, #e2d8c6, #ece4d4 42%, #d9cdb9);
+  }
+}

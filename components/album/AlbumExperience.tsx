@@ -36,7 +36,7 @@ export default function AlbumExperience({ album, adjacent }: AlbumExperienceProp
           <AlbumCover album={album} />
 
           <div data-album-fade className="max-w-[38rem]">
-            <h1 id="album-titulo" tabIndex={-1} className="font-display text-5xl leading-[1.02] focus:outline-none sm:text-6xl lg:text-7xl">
+            <h1 id="album-titulo" tabIndex={-1} className="title-album focus:outline-none">
               <SplitText text={album.title} delay={350} step={40} />
             </h1>
             <p className="fade-up mt-3 text-lg font-medium text-accent" style={delay(600)}>

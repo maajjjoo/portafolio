@@ -26,6 +26,15 @@
   --foot-muted: #b8a68d;
   --foot-line: #3d3024;
   --foot-accent: #e8ad5a;
+  --paper: #2f291f;
+  --paper-ink: #efe3cf;
+  --glass: rgb(29 23 17 / 0.62);
+  --glass-edge: rgb(239 227 207 / 0.16);
+  --radius-sheet: 1.5rem;
+  --radius-group: 1rem;
+  --radius-field: 0.75rem;
+  --space-section: clamp(4rem, 9vw, 7rem);
+  --ease-object: cubic-bezier(0.2, 0.75, 0.15, 1);
 }
 
 /* Luz de día: el sol entra en la sala y los álbumes son papel. Ver "Sala de día" en room.css. */
@@ -35,6 +44,10 @@
   --foot-muted: #4d3e2f;
   --foot-line: #b3a285;
   --foot-accent: #7d4608;
+  --paper: #fbf6ec;
+  --paper-ink: #21160e;
+  --glass: rgb(251 246 236 / 0.62);
+  --glass-edge: rgb(90 70 46 / 0.2);
   color-scheme: light;
   --bg: #e9dcc6;
   --surface: #f3e9d8;
@@ -115,6 +128,42 @@
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.35;
+}
+
+/* Escala tipográfica: títulos en Gloock, lectura en Hanken Grotesk. */
+@utility title-album {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+@utility title-section {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+@utility read {
+  max-width: 65ch;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+/* Las tres superficies: la pared no lleva clase; el papel es para leer; el vidrio, para piezas pequeñas. */
+@utility paper {
+  border-radius: var(--radius-group);
+  background: var(--paper);
+  color: var(--paper-ink);
+  box-shadow: var(--shadow);
+}
+
+@utility glass {
+  border: 1px solid var(--glass-edge);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 /* ---------- Letras que entran una a una ---------- */
@@ -199,25 +248,8 @@
     animation-delay: var(--d, 0ms);
   }
 
-  .write-in {
-    animation: write-in 1800ms cubic-bezier(0.6, 0, 0.2, 1) both;
-    animation-delay: var(--d, 0ms);
-  }
-
-  .marquee-track {
-    animation: marquee 38s linear infinite;
-  }
-
-  .marquee:hover .marquee-track {
-    animation-play-state: paused;
-  }
-
   .spin-slow {
     animation: spin 18s linear infinite;
-  }
-
-  .float {
-    animation: float 7s ease-in-out infinite;
   }
 }
 
@@ -228,10 +260,6 @@
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-  }
-
-  .marquee-track {
-    animation: none !important;
   }
 }
 
@@ -259,30 +287,9 @@
   }
 }
 
-@keyframes write-in {
-  from {
-    clip-path: inset(-30% 100% -30% -15%);
-  }
-  to {
-    clip-path: inset(-30% -15% -30% -15%);
-  }
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes float {
-  50% {
-    transform: translateY(-10px);
   }
 }
 
@@ -293,7 +300,7 @@
 }
 
 /* =====================================================================
-   Biblioteca de vinilos
+   Discos de vinilo
    ===================================================================== */
 
 /* Disco: surcos concéntricos, brillo cónico y etiqueta central. */
@@ -342,39 +349,6 @@
   inset: 46%;
   border-radius: 9999px;
   background: var(--bg);
-}
-
-/* Funda en el estante: el disco asoma un poco y sale al pasar el cursor o enfocar. */
-.record-card .record-disc {
-  transform: translateX(10%) rotate(0deg);
-  transition: transform 700ms cubic-bezier(0.2, 0.75, 0.15, 1);
-}
-
-.record-card .record-sleeve {
-  transition:
-    transform 500ms cubic-bezier(0.2, 0.75, 0.15, 1),
-    box-shadow 500ms ease;
-}
-
-.record-card:is(:hover, :focus-visible) .record-disc {
-  transform: translateX(36%) rotate(160deg);
-}
-
-.record-card:is(:hover, :focus-visible) .record-sleeve {
-  transform: translateY(-10px) rotate(-1.5deg);
-  box-shadow: 0 30px 50px -24px rgb(0 0 0 / 0.65);
-}
-
-.record-card:active .record-sleeve {
-  transform: translateY(-4px) scale(0.98);
-}
-
-/* Repisa de madera oscura bajo cada fila. */
-.shelf-plank {
-  height: 14px;
-  border-radius: 2px;
-  background: linear-gradient(180deg, #5a3a2c 0%, #3b2419 60%, #24150f 100%);
-  box-shadow: 0 14px 22px -10px rgb(0 0 0 / 0.55);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -481,10 +455,5 @@
   ::view-transition-group(*) {
     animation-duration: 0s !important;
     animation-delay: 0s !important;
-  }
-
-  .record-card .record-disc,
-  .record-card .record-sleeve {
-    transition: none;
   }
 }

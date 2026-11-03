@@ -35,7 +35,7 @@ export default function Contact() {
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
           <div>
-            <h2 id="contacto-titulo" data-reveal className="font-display text-4xl leading-[1.08] text-balance sm:text-5xl">
+            <h2 id="contacto-titulo" data-reveal className="title-section">
               Hablemos de algo <span className="text-accent">increíble</span>
             </h2>
             <p data-reveal className="mt-8 max-w-md text-lg leading-relaxed text-muted">

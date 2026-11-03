@@ -9,7 +9,7 @@ export default function BackToLibrary() {
     <Link
       href="/"
       transitionTypes={["room-close"]}
-      className="label album-glass inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 transition-colors hover:border-ink"
+      className="label glass inline-flex min-h-11 items-center gap-2 rounded-full px-4 transition-colors hover:border-ink"
     >
       <ArrowRightIcon width={16} height={16} className="rotate-180" />
       <RollText>Volver a la sala</RollText>

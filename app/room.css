@@ -9,6 +9,10 @@
   --amber: #e0a24a;
   --cream: #efe3cf;
   --walnut: #5a3a24;
+  /* Color de las sombras, que cambia con la luz del tema. */
+  --shade: 6 4 2;
+  /* Aguas anchas de la madera, bajo la veta fina de --grain. */
+  --figure: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='160'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0018 0.03' numOctaves='2' seed='12'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.02 0 0 0 0 0 0 0 0 1.5 -0.55'/%3E%3C/filter%3E%3Crect width='1200' height='160' filter='url(%23f)'/%3E%3C/svg%3E");
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.22' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.06 0 0 0 0 0.03 0 0 0 0 0.01 0 0 0 1.3 -0.42'/%3E%3C/filter%3E%3Crect width='600' height='200' filter='url(%23g)'/%3E%3C/svg%3E");
   position: relative;
   isolation: isolate;
@@ -17,7 +21,6 @@
   justify-items: center;
   min-height: calc(100svh - 4.5rem);
   overflow: hidden;
-  --door-extra: 0px;
   --plaster: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55 0.7' numOctaves='4' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.42 -0.13'/%3E%3C/filter%3E%3Crect width='420' height='420' filter='url(%23p)'/%3E%3C/svg%3E");
   color: var(--cream);
   /* Pared de yeso pintado: textura, sombra del techo, luz de la lámpara y caída hacia los bordes. */
@@ -25,7 +28,7 @@
     var(--plaster),
     linear-gradient(180deg, rgb(8 7 5 / 0.62), transparent 26%),
     radial-gradient(26% 34% at 74% 63%, rgb(226 160 80 / 0.17), transparent 100%),
-    radial-gradient(74% 76% at 54% 44%, #4a4436 0%, #383428 48%, #24221b 100%);
+    radial-gradient(70% 72% at 54% 42%, #4a4436 0%, #353126 50%, #1e1c16 100%);
 }
 
 /* Viñeta: la luz cae antes de llegar a los bordes. */
@@ -52,7 +55,7 @@
   position: relative;
   z-index: 2;
   width: calc(1440 * var(--u));
-  height: calc(828 * var(--u) + var(--door-extra));
+  height: calc(828 * var(--u));
 }
 
 /* --- Suelo, pared de listones, alfombra ------------------------------ */
@@ -61,7 +64,7 @@
   position: absolute;
   inset: auto 0 0;
   z-index: 1;
-  height: calc(138 * var(--u) + var(--door-extra));
+  height: calc(138 * var(--u));
   background:
     linear-gradient(180deg, rgb(6 4 2 / 0.86), transparent 42%),
     radial-gradient(46% 70% at 54% 0%, rgb(226 160 80 / 0.16), transparent 100%),
@@ -84,7 +87,7 @@
 /* Panel de listones, algo adelantado: su lado derecho recibe la luz de las repisas. */
 .room-slats {
   position: absolute;
-  inset: 0 auto calc(138 * var(--u) + var(--door-extra)) 0;
+  inset: 0 auto calc(138 * var(--u)) 0;
   z-index: 1;
   width: calc(50vw - 500 * var(--u));
   background:
@@ -143,7 +146,7 @@
 
 .room-speaker {
   position: absolute;
-  bottom: calc(92 * var(--u) + var(--door-extra));
+  bottom: calc(92 * var(--u));
   width: calc(112 * var(--u));
   height: calc(320 * var(--u));
   display: flex;
@@ -171,6 +174,20 @@
   border-radius: 0 calc(3 * var(--u)) calc(3 * var(--u)) 0;
 }
 
+/* Sombra de contacto: el altavoz pesa sobre el suelo. */
+.room-speaker::after {
+  content: "";
+  position: absolute;
+  left: -8%;
+  right: -20%;
+  bottom: calc(-9 * var(--u));
+  height: calc(18 * var(--u));
+  z-index: -1;
+  border-radius: 50%;
+  background: rgb(var(--shade) / 0.75);
+  filter: blur(calc(6 * var(--u)));
+}
+
 .room-speaker-l { left: calc(186 * var(--u)); }
 .room-speaker-r { left: calc(1246 * var(--u)); }
 
@@ -196,7 +213,7 @@
   left: calc(300 * var(--u));
   top: calc(440 * var(--u));
   width: calc(940 * var(--cu));
-  height: calc(272 * var(--cu) + var(--door-extra));
+  height: calc(272 * var(--cu));
 }
 
 /* Tablero de nogal: cara superior iluminada por las repisas y canto frontal en sombra. */
@@ -210,9 +227,10 @@
     linear-gradient(180deg, transparent 54%, rgb(0 0 0 / 0.5) 55%, rgb(0 0 0 / 0.68)),
     radial-gradient(20% 100% at 72% 20%, rgb(255 190 110 / 0.3), transparent 100%),
     linear-gradient(90deg, rgb(255 190 110 / 0.14), rgb(255 190 110 / 0.05) 50%, rgb(255 190 110 / 0.1)),
+    var(--figure),
     var(--grain),
     linear-gradient(180deg, #a56e3f, #70472a);
-  background-size: auto, auto, auto, 800px 70px, auto;
+  background-size: auto, auto, auto, 100% 100%, 100% 70px, auto;
   box-shadow: 0 calc(7 * var(--cu)) calc(12 * var(--cu)) rgb(0 0 0 / 0.7);
 }
 
@@ -340,7 +358,7 @@
 
 .room-lamp svg { display: block; width: 100%; overflow: visible; }
 
-/* --- Puertas del mueble: placa con el nombre y fichero ------------------ */
+/* --- Puertas del mueble: placa con el nombre e indicación ------------------ */
 
 .room-door {
   position: absolute;
@@ -348,7 +366,7 @@
   left: calc(716 * var(--u));
   top: calc(574 * var(--u));
   width: calc(512 * var(--u));
-  height: calc(124 * var(--u) + var(--door-extra));
+  height: calc(124 * var(--u));
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: calc(16 * var(--u));
@@ -382,35 +400,12 @@
 
 .room-plate .room-engraved { margin-top: calc(5 * var(--u)); line-height: 1.3; }
 
-.room-file { display: grid; gap: calc(7 * var(--u)); }
-
-.room-field {
-  width: 100%;
-  min-height: max(36px, calc(38 * var(--u)));
-  padding-inline: 0.75rem;
-  border: 1px solid #6b5a43;
-  border-radius: 0.75rem;
-  background: #0c0a08;
-  color: var(--cream);
-  font-size: 16px;
-  caret-color: var(--amber);
-}
-
-.room-field::placeholder { color: #b5a386; opacity: 1; }
-.room-field:hover { border-color: #9a8360; }
-
-.room-status {
-  min-height: 1.1em;
+.room-hint {
   font-family: var(--font-hanken);
   font-weight: 500;
-  font-size: max(12px, calc(13 * var(--u)));
+  font-size: max(13px, calc(14 * var(--u)));
+  line-height: 1.35;
   color: #c9b79b;
-}
-
-.room-status button {
-  color: var(--amber);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 .room :focus-visible {
@@ -424,7 +419,7 @@
   position: absolute;
   z-index: 3;
   left: calc(330 * var(--u));
-  top: calc(46 * var(--u));
+  top: calc(38 * var(--u));
   width: calc(880 * var(--u));
   display: grid;
   gap: calc(44 * var(--u));
@@ -451,7 +446,7 @@
   z-index: -1;
   left: 0;
   right: 0;
-  top: calc(100% + 9 * var(--u));
+  top: calc(100% + 11 * var(--u));
   height: calc(112 * var(--u));
   background: linear-gradient(180deg, rgb(248 186 104 / 0.28), rgb(240 172 84 / 0.16) 22%, rgb(240 172 84 / 0.05) 58%, transparent);
   pointer-events: none;
@@ -460,18 +455,26 @@
 .room-slot:first-child::before { mask-image: linear-gradient(90deg, transparent, #000 34%); }
 .room-slot:last-child::before { mask-image: linear-gradient(90deg, #000 66%, transparent); }
 
-/* Canto de la repisa, continuo de un disco al siguiente. */
+/*
+ * Repisa con grosor: un labio que retiene la funda, cara frontal y la tira de luz debajo.
+ * La veta mide el ancho de toda la repisa y cada tramo muestra su parte, sin costuras.
+ */
 .room-slot::after {
   content: "";
   position: absolute;
   z-index: 1;
   left: 0;
   right: 0;
-  top: calc(160 * var(--u));
-  height: calc(9 * var(--u));
-  background: var(--grain), linear-gradient(180deg, #b47c48 0 14%, #6e4527 15%, #4a2d19 82%, #ffcf8a 88%, #ffcf8a);
-  background-size: 700px 40px, auto;
+  top: calc(157 * var(--u));
+  height: calc(14 * var(--u));
+  background: var(--figure), var(--grain), linear-gradient(180deg, #c08a54 0 12%, #7a4e2c 16%, #4f311b 84%, #ffcf8a 90%, #ffcf8a);
+  background-size: var(--ledge-w, 400%) 100%, var(--ledge-w, 400%) 100%, auto;
+  background-position: var(--ledge-x, 0%) 0, var(--ledge-x, 0%) 0, 0 0;
 }
+
+.room-slot:nth-child(2) { --ledge-x: 33.333%; }
+.room-slot:nth-child(3) { --ledge-x: 66.667%; }
+.room-slot:nth-child(4) { --ledge-x: 100%; }
 
 .record {
   position: relative;
@@ -499,8 +502,8 @@
   border-radius: 1px;
   transform-origin: 50% 100%;
   box-shadow:
-    calc(2 * var(--u)) calc(-1 * var(--u)) calc(6 * var(--u)) rgb(0 0 0 / 0.55),
-    calc(5 * var(--u)) calc(-3 * var(--u)) calc(16 * var(--u)) rgb(0 0 0 / 0.3);
+    calc(2 * var(--u)) calc(2 * var(--u)) calc(5 * var(--u)) rgb(0 0 0 / 0.6),
+    calc(6 * var(--u)) calc(4 * var(--u)) calc(18 * var(--u)) rgb(0 0 0 / 0.38);
   transition:
     transform 550ms cubic-bezier(0.2, 0.75, 0.15, 1),
     box-shadow 550ms ease,
@@ -508,14 +511,14 @@
 }
 
 /* Portadas a la luz de la sala, no a pantalla completa. */
-.record-sleeve { filter: brightness(0.88) saturate(0.92); }
+.record-sleeve { filter: brightness(0.97) saturate(0.96); }
 
 /* Papel: la luz de la repisa superior cae desde arriba y el borde del cartón se nota. */
 .record-sleeve::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(255 200 125 / 0.2), transparent 30%, transparent 82%, rgb(10 6 3 / 0.12));
+  background: linear-gradient(180deg, rgb(255 200 125 / 0.1), transparent 26%, transparent 84%, rgb(10 6 3 / 0.16));
   box-shadow: inset 0 0 0 1px rgb(255 240 215 / 0.1);
   pointer-events: none;
 }
@@ -525,7 +528,7 @@
   z-index: 2;
   left: -12%;
   right: -12%;
-  top: calc(100% + 18 * var(--u));
+  top: calc(100% + 19 * var(--u));
   font-family: var(--font-hanken);
   font-weight: 600;
   font-size: max(12px, calc(14 * var(--u)));
@@ -555,14 +558,6 @@
 
 .record:active .record-sleeve {
   transform: translateZ(calc(20 * var(--u))) rotateX(2deg) scale(0.985);
-}
-
-/* Filtrado: el disco se hunde en la pared, sin mover a los demás. */
-.room-slot[data-dim] .record {
-  opacity: 0.2;
-  transform: scale(0.94);
-  pointer-events: none;
-  transition: opacity 350ms ease, transform 350ms ease;
 }
 
 @media (hover: none) {
@@ -679,126 +674,6 @@
 
   .record:is(:hover, :focus-visible) .record-sleeve { transform: none; }
   .record:is(:hover, :focus-visible) .record-disc { transform: translateX(30%); }
-  .room-slot[data-dim] .record { transform: none; }
-}
-
-/* --- Cámara: de la sala al disco y de vuelta ---------------------------------
-   Solo la funda y el vinilo elegidos viajan (lib/roomCamera.ts les da nombre). La sala
-   no se mueve: la cámara enfoca el disco y lo demás se oscurece y queda desenfocado. */
-
-.album-sleeve { view-transition-name: camera-sleeve; }
-.album-disc { view-transition-name: camera-disc; }
-
-::view-transition-group(camera-sleeve),
-::view-transition-group(camera-disc) {
-  animation-duration: 1000ms;
-  animation-timing-function: cubic-bezier(0.55, 0, 0.15, 1);
-}
-
-::view-transition-group(camera-sleeve) { z-index: 51; }
-::view-transition-group(camera-disc) { z-index: 50; }
-
-/* Entre un álbum y el siguiente, la portada cambia en su sitio, sin viaje largo. */
-:root:active-view-transition-type(nav-forward, nav-back)::view-transition-group(camera-sleeve),
-:root:active-view-transition-type(nav-forward, nav-back)::view-transition-group(camera-disc) {
-  animation-duration: 400ms;
-}
-
-::view-transition-old(.room-dolly) {
-  animation: room-focus-out 1000ms cubic-bezier(0.55, 0, 0.15, 1) both;
-}
-
-::view-transition-new(.album-arrive) {
-  animation: album-arrive 560ms ease-out 480ms both;
-}
-
-::view-transition-old(.album-leave) {
-  animation: album-leave 300ms ease-in both;
-}
-
-::view-transition-new(.room-return) {
-  animation: room-focus-in 950ms cubic-bezier(0.3, 0, 0.1, 1) both;
-}
-
-/* El disco sale de la funda cuando ya ha llegado. */
-:root[data-dolly] .disc-out { animation-delay: 750ms; }
-
-@keyframes room-focus-out {
-  to { filter: brightness(0.3) blur(7px); }
-}
-
-@keyframes room-focus-in {
-  from { filter: brightness(0.3) blur(7px); }
-}
-
-@keyframes album-arrive {
-  from { opacity: 0; transform: scale(1.02); }
-}
-
-@keyframes album-leave {
-  to { opacity: 0; transform: scale(0.985); }
-}
-
-/* Con movimiento reducido no hay cámara: un fundido breve entre la sala y el álbum. */
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(.room-dolly),
-  ::view-transition-old(.album-leave) {
-    animation: album-leave 1ms both;
-  }
-
-  ::view-transition-new(.room-return),
-  ::view-transition-new(.album-arrive) {
-    animation: album-arrive 1ms both;
-  }
-}
-
-/* --- Libreto del álbum: la pared de la sala detrás y una hoja translúcida delante --- */
-
-.album-wall {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(90deg, #4a2f1b 0 0.5rem, #0d0906 0.5rem 0.75rem) 0 0 / 3.5rem 100% no-repeat,
-    radial-gradient(60% 38% at 62% 26%, rgb(240 172 84 / 0.17), transparent 100%),
-    linear-gradient(180deg, #2c2922, #3a3529 42%, #25221b);
-}
-
-/* De noche, el texto secundario sobre la pared iluminada necesita más luz que sobre un fondo liso. */
-:root:not([data-theme="light"]) .album-booklet { --muted: #d3c4ac; }
-
-/* De día, el color de acento debe aguantar también sobre los paños de sol de la pared. */
-[data-theme="light"] .album-booklet { --accent: #754206; }
-
-.album-sheet {
-  position: relative;
-  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-  border-radius: 1.5rem;
-  /* De noche, una hoja cálida y clara frente a la pared; el texto gana contraste dentro de ella. */
-  --surface: #40392d;
-  --surface-2: #2f291f;
-  --line: #66584a;
-  --muted: #d3c4ac;
-  background: rgb(84 75 60 / 0.58);
-  -webkit-backdrop-filter: blur(16px) saturate(1.1);
-  backdrop-filter: blur(16px) saturate(1.1);
-  box-shadow: 0 30px 60px -40px rgb(0 0 0 / 0.75);
-}
-
-.album-glass {
-  background: color-mix(in srgb, var(--surface) 62%, transparent);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-}
-
-/* Por debajo de este ancho el texto llegaría a pisar la tira de listones: se quita. */
-@media (max-width: 1279px) {
-  .album-wall {
-    background:
-      radial-gradient(90% 34% at 60% 20%, rgb(240 172 84 / 0.16), transparent 100%),
-      linear-gradient(180deg, #2c2922, #3a3529 42%, #25221b);
-  }
 }
 
 /* --- Sala de día: la misma sala con otra luz --------------------------------------
@@ -808,6 +683,7 @@
 [data-theme="light"] .room {
   --amber: #8a4f10;
   --cream: #21160e;
+  --shade: 70 48 26;
   /* Con luz de día el grano se nota mucho más: el yeso es apenas perceptible. */
   --plaster: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5 0.65' numOctaves='3' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0 0.14 0 0 0 0.1 -0.03'/%3E%3C/filter%3E%3Crect width='420' height='420' filter='url(%23p)'/%3E%3C/svg%3E");
   background:
@@ -889,9 +765,10 @@
   background:
     linear-gradient(180deg, transparent 54%, rgb(60 38 18 / 0.34) 55%, rgb(60 38 18 / 0.5)),
     linear-gradient(90deg, rgb(255 240 205 / 0.3), transparent 60%),
+    var(--figure),
     var(--grain),
     linear-gradient(180deg, #c08c58, #99693d);
-  background-size: auto, auto, 800px 70px, auto;
+  background-size: auto, auto, 100% 100%, 100% 70px, auto;
   box-shadow: 0 calc(6 * var(--cu)) calc(10 * var(--cu)) rgb(60 40 20 / 0.36);
 }
 
@@ -943,15 +820,7 @@
 }
 
 [data-theme="light"] .room-engraved,
-[data-theme="light"] .room-status { color: #3f3020; }
-
-[data-theme="light"] .room-field {
-  border-color: #8a7557;
-  background: rgb(255 252 245 / 0.72);
-  color: #21160e;
-}
-
-[data-theme="light"] .room-field:hover { border-color: #5a4630; }
+[data-theme="light"] .room-hint { color: #3f3020; }
 
 /* La tira LED, apagada: bajo cada repisa solo queda su sombra. */
 [data-theme="light"] .room-slot::before {
@@ -959,8 +828,9 @@
 }
 
 [data-theme="light"] .room-slot::after {
-  background: var(--grain), linear-gradient(180deg, #d2a06c 0 16%, #a9774a 17%, #7d5531 100%);
-  background-size: 700px 40px, auto;
+  background: var(--figure), var(--grain), linear-gradient(180deg, #e0b482 0 12%, #b07e50 16%, #85592f 100%);
+  background-size: var(--ledge-w, 400%) 100%, var(--ledge-w, 400%) 100%, auto;
+  background-position: var(--ledge-x, 0%) 0, var(--ledge-x, 0%) 0, 0 0;
 }
 
 [data-theme="light"] .record-sleeve {
@@ -981,31 +851,6 @@
 [data-theme="light"] .record-name { color: #2c2016; }
 [data-theme="light"] .record:is(:hover, :focus-visible) .record-name { color: #8a4f10; }
 [data-theme="light"] .record-heard { color: #452502; }
-
-/* El libreto, de día: papel sobre la misma pared soleada. */
-[data-theme="light"] .album-wall {
-  background:
-    linear-gradient(112deg, transparent 30%, rgb(255 246 222 / 0.6) 31% 44%, transparent 45% 47%, rgb(255 246 222 / 0.6) 48% 61%, transparent 62%),
-    repeating-linear-gradient(90deg, #b48a5b 0 0.5rem, #5a3d22 0.5rem 0.75rem) 0 0 / 3.5rem 100% no-repeat,
-    linear-gradient(180deg, #e2d8c6, #ece4d4 42%, #d9cdb9);
-}
-
-[data-theme="light"] .album-sheet {
-  --surface: #f3e9d8;
-  --surface-2: #dccdb3;
-  --line: #c7b497;
-  --muted: #5f4d3c;
-  background: color-mix(in srgb, #fbf6ec 62%, transparent);
-  box-shadow: 0 30px 60px -40px rgb(60 40 20 / 0.5);
-}
-
-@media (max-width: 1279px) {
-  [data-theme="light"] .album-wall {
-    background:
-      linear-gradient(112deg, transparent 20%, rgb(255 246 222 / 0.6) 22% 50%, transparent 52%),
-      linear-gradient(180deg, #e2d8c6, #ece4d4 42%, #d9cdb9);
-  }
-}
 
 /* --- Sala compacta: una pared alta, no la de escritorio encogida ------------ */
 
@@ -1051,7 +896,6 @@
   .room-plate h1 { font-size: calc(30 * var(--u)); }
   .room-slot::before { height: calc(70 * var(--u)); }
   .room-engraved { font-size: 14px; }
-  .room-field { min-height: 44px; }
 
   .room-shelves {
     position: relative;
@@ -1066,7 +910,7 @@
   .room-ledge { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: calc(52 * var(--u)); }
 
   .record { width: calc(150 * var(--u)); }
-  .room-slot::after { top: calc(150 * var(--u)); }
+  .room-slot::after { top: calc(147 * var(--u)); }
   .record-name { font-size: 14px; top: calc(100% + 17 * var(--u)); }
 
   .room-console {
@@ -1109,22 +953,16 @@
   /* Dos discos por fila: cada fila se apaga hacia sus propios extremos. */
   .room-slot:nth-child(odd)::before { mask-image: linear-gradient(90deg, transparent, #000 34%); }
   .room-slot:nth-child(even)::before { mask-image: linear-gradient(90deg, #000 66%, transparent); }
+
+  /* Cada fila es una repisa de dos tramos. */
+  .room-slot { --ledge-w: 200%; }
+  .room-slot:nth-child(odd) { --ledge-x: 0%; }
+  .room-slot:nth-child(even) { --ledge-x: 100%; }
 }
 
-/* Pantallas de 900 a 1100 px: el fichero gana sitio y el mueble crece hacia abajo para contenerlo. */
 @media (min-width: 900px) and (max-width: 1100px) {
-  .room { --door-extra: 46px; }
-
-  .room-door {
-    left: calc(560 * var(--u));
-    width: calc(668 * var(--u));
-  }
-
   /* Nombres más pegados a su repisa y tocadiscos algo menor: quedan holgados sobre la tapa. */
   .record-name { top: calc(100% + 13 * var(--u)); font-size: 12px; }
   .room-turntable { width: calc(360 * var(--cu)); top: calc(5 * var(--cu)); }
 
-  .room-spines { width: calc(236 * var(--cu)); }
-  .room-spines span:nth-child(2n) { display: none; }
-  .room-body { background: linear-gradient(180deg, #1d1b17, #171511); }
 }

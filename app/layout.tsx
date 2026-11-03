@@ -8,6 +8,8 @@ import Footer from "@/components/sections/Footer";
 import { portfolio } from "@/config/portfolio";
 import "./globals.css";
 import "./room.css";
+import "./album.css";
+import "./camera.css";
 
 const gloock = Gloock({
   variable: "--font-gloock",
