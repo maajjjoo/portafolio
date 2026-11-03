@@ -32,7 +32,7 @@ export default function NotFound() {
           href="/"
           className="label mt-8 inline-flex min-h-12 items-center rounded-full bg-wine px-6 text-on-wine transition-transform hover:-translate-y-0.5"
         >
-          Volver a la biblioteca
+          Volver a la sala
         </Link>
       </div>
     </section>

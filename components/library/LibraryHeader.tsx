@@ -15,7 +15,7 @@ import { albumHref, sortedAlbums } from "@/lib/albums";
 const ordered = sortedAlbums(albums);
 
 /**
- * Barra de navegación del sitio: identidad, regreso a la biblioteca y un
+ * Barra de navegación del sitio: identidad, regreso a la sala y un
  * panel "Álbumes" con acceso directo a todas las secciones.
  */
 export default function LibraryHeader() {
@@ -65,7 +65,7 @@ export default function LibraryHeader() {
           </span>
           <span className="hidden leading-tight sm:block">
             <span className="block font-display text-lg">María José</span>
-            <span className="block text-[0.8125rem] text-muted">{portfolio.libraryTitle}</span>
+            <span className="block text-[0.8125rem] text-muted">Portafolio</span>
           </span>
         </Link>
 

@@ -13,6 +13,7 @@ import { albumHref, sortedAlbums } from "@/lib/albums";
 const ordered = sortedAlbums(albums);
 
 const colophon = [
+  { label: "Colección", value: portfolio.libraryTitle },
   { label: "Idea, diseño y desarrollo", value: portfolio.fullName },
   { label: "Tecnologías", value: "Next.js, React, TypeScript y Tailwind CSS" },
   { label: "Tipografías", value: "Gloock y Hanken Grotesk" },

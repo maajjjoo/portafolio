@@ -25,7 +25,7 @@ function isTyping(target: EventTarget | null) {
  * Comportamiento del álbum abierto:
  * - lo marca como escuchado,
  * - mueve el foco al título (para lectores de pantalla),
- * - ← / → pasan al disco anterior o siguiente, Escape vuelve a la biblioteca.
+ * - ← / → pasan al disco anterior o siguiente, Escape vuelve a la sala.
  */
 export default function AlbumKeyboard({ slug, previousHref, nextHref }: AlbumKeyboardProps) {
   const router = useRouter();

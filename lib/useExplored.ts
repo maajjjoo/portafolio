@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 
 /**
  * Recuerda en este navegador qué álbumes ya se abrieron, para marcarlos
- * como "Escuchado" en la biblioteca. Si el almacenamiento no está
+ * como "Escuchado" en la sala. Si el almacenamiento no está
  * disponible, simplemente no se marca nada.
  */
 

@@ -15,7 +15,7 @@ export interface PortfolioConfig {
   shortName: string;
   initials: string;
   title: string;
-  /** Nombre de la colección que se muestra en la biblioteca. */
+  /** Nombre de la colección: un detalle del pie y los créditos; la identidad del sitio es el nombre propio. */
   libraryTitle: string;
   email: string;
   /** Ciudad o país a mostrar. Déjalo en `null` si prefieres no publicarlo. */
