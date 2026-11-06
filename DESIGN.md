@@ -85,7 +85,8 @@ Shared navigation: return to the room, a one-line index and a glass pager. Previ
 ## Motion
 
 - One authored moment: the record's journey. Everything else stays under 300ms and answers an action.
-- The lights rise once per session at the intro, and the visitor can enter at any moment.
+- No intro: the room is there from the first frame.
+- **Changing the light:** the desk lamp is the switch (on is night, off is day), alongside the header button. The new light spreads across the room from whatever was pressed, with a soft edge (`lib/theme.ts`, `.light-switching` in `app/camera.css`). Instant with reduced motion or without View Transitions.
 - **Opening a record:** only that sleeve and vinyl travel. They get transition names just for the transition (`lib/roomCamera.ts`). The room never moves: it dims and falls out of focus. Then the vinyl slides out and spins.
 - **Browser Back and Forward:** React restores those pages inside `popstate`, so View Transitions can't run. `HistoryCamera` measures the record before Next navigates and animates the real elements afterwards (FLIP), without intercepting navigation. It skips hash-only changes, album-to-album moves, reduced motion and browser gesture animations.
 - Never give records permanent transition names: visited albums stay mounted but hidden, and React would pair them again and animate them.
@@ -94,4 +95,4 @@ Shared navigation: return to the room, a one-line index and a glass pager. Previ
 ## Accessibility
 
 - Text meets 4.5:1 in both themes, measured against real pixels, and focus rings use the accent colour with an offset.
-- Decoration is `aria-hidden`. The room's content is plain HTML under the intro, so direct links, screen readers and no-JavaScript visits get the portfolio.
+- Decoration is `aria-hidden`, except the lamp, a labelled button. The room's content is plain HTML, so direct links, screen readers and no-JavaScript visits get the portfolio.

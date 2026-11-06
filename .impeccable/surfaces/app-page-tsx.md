@@ -13,7 +13,7 @@ THESIS: The Listening Experience: a room you never leave. Opening a record keeps
 
 OWN-WORLD: Night: charcoal-olive wall, walnut, amber LEDs. Day: warm ivory wall, light oak, window light, LEDs off. Same objects, brass plates, paper sleeves, vinyl grooves, restrained plant green. Gloock titles, Hanken Grotesk everything else, no uppercase labels. Wall, paper for reading, small glass pieces; rounded text surfaces.
 
-STORY: The visitor sees the lights come up, takes a record off the wall, reads a composition made for that content while the room stays visible behind, returns or moves on, and can contact the owner.
+STORY: The visitor walks into the lit room, takes a record off the wall, reads a composition made for that content while the room stays visible behind, returns or moves on, and can contact the owner.
 
 FIRST VIEWPORT: Room as approved: slatted wall left with hanging plant; two walnut ledges, Lado A and Lado B, four face-out sleeves each, section name under each; credenza with turntable, amplifier, plant and lamp; floor speakers; rug. Name plate on the doors. Primary action: any sleeve. Header says María José, Portafolio.
 
@@ -23,6 +23,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 Signature interaction: only the chosen sleeve and vinyl travel toward the viewer while the stationary room dims and falls out of focus; then the vinyl slides out and spins. Back and Forward keep it.
 
-Motion grammar: lights rising once at the intro; one journey per navigation; everything else under 300ms and caused by the visitor, except the platter.
+Motion grammar: the lamp switching the light; one journey per navigation; everything else under 300ms and caused by the visitor, except the platter.
 
 Process: stop after every stage for the owner's approval, reporting changes, files, validation and limitations.

@@ -11,7 +11,7 @@
 - Dentro de un álbum: «Volver a la sala», disco anterior/siguiente y atajos de teclado (← →, Esc).
 - El contenido se presenta como un **libreto**: un índice breve enlaza con cada parte y, cuando deja de verse, un paginador muestra la parte actual con enlaces a la anterior y la siguiente. Para añadir una parte, indica en `data/albums.ts` el `id` del elemento al que lleva.
 - El botón **Álbumes** de la barra superior da acceso directo a las ocho secciones desde cualquier página.
-- La sala tiene dos luces, de noche y de día, y marca como «Escuchado» los discos ya abiertos (solo en ese navegador).
+- La sala tiene dos luces, de noche y de día (la lámpara del mueble es el interruptor), y marca como «Escuchado» los discos ya abiertos (solo en ese navegador).
 - Si el sistema pide reducir el movimiento, no hay giros ni deslizamientos.
 
 | Nº | Álbum | Sección de la entrega | Ruta |
