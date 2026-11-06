@@ -358,6 +358,19 @@
 
 .room-lamp svg { display: block; width: 100%; overflow: visible; }
 
+/* La lámpara es el interruptor de la sala: al pasar por encima se anuncia la luz que va a cambiar. */
+.room-lamp {
+  z-index: 2;
+  padding: 0;
+  border: 0;
+  border-radius: 0.75rem;
+  background: none;
+  cursor: pointer;
+}
+
+.lamp-glow { transition: opacity 300ms ease; }
+.room-lamp:is(:hover, :focus-visible) .lamp-glow { opacity: 0.55; }
+
 /* --- Puertas del mueble: placa con el nombre e indicación ------------------ */
 
 .room-door {
@@ -564,114 +577,7 @@
   .record-disc { transform: translateX(14%); }
 }
 
-/* --- Introducción -------------------------------------------------------- */
-
-.room-intro {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 120;
-  place-items: center;
-  padding: 1.5rem;
-  text-align: center;
-  color: #efe3cf;
-  background: radial-gradient(60% 50% at 50% 50%, rgb(8 6 4 / 0.72), rgb(8 6 4 / 0.4));
-}
-
-.intro-pending .room-intro { display: grid; }
-
-.intro-pending { overflow: hidden; }
-
-.intro-pending .room-lit {
-  animation: lights-rise 8s cubic-bezier(0.3, 0.1, 0.2, 1) both;
-}
-
-.intro-pending body > header { visibility: hidden; }
-
-.room-intro-phrase {
-  max-width: 22ch;
-  font-family: var(--font-gloock);
-  font-size: clamp(2rem, 5.2vw, 4.25rem);
-  line-height: 1.08;
-  text-wrap: balance;
-}
-
-.room-intro-phrase span {
-  display: block;
-  animation: intro-line 1600ms ease-out both;
-}
-
-.room-intro-phrase span:nth-child(1) { animation-delay: 1400ms; }
-.room-intro-phrase span:nth-child(2) { animation-delay: 3400ms; color: #f0bb6e; }
-
-.room-intro-enter {
-  display: inline-flex;
-  align-items: center;
-  min-height: 3.25rem;
-  margin-top: 2.5rem;
-  padding-inline: 2rem;
-  border: 1px solid #f0bb6e;
-  border-radius: 9999px;
-  color: #efe3cf;
-  font-family: var(--font-hanken);
-  font-weight: 600;
-  font-size: 1.125rem;
-  transition: background-color 250ms ease, color 250ms ease;
-  animation: intro-enter 1200ms ease-out 5400ms both;
-}
-
-.room-intro-enter:hover { background: #f0bb6e; color: #1a100a; }
-
-.room-intro-enter:focus-visible {
-  outline: 2px solid #f0bb6e;
-  outline-offset: 4px;
-}
-
-/* Al entrar: se encienden las luces y se aparta el velo. */
-.intro-leaving .room-intro {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 900ms ease;
-}
-
-.intro-leaving .room-lit {
-  animation: lights-full 1100ms ease-out both;
-}
-
-.intro-leaving body > header {
-  visibility: visible;
-  animation: intro-line 900ms ease-out both;
-}
-
-@keyframes lights-rise {
-  from { filter: brightness(0); }
-  to { filter: brightness(0.38); }
-}
-
-@keyframes lights-full {
-  from { filter: brightness(0.38); }
-  to { filter: brightness(1); }
-}
-
-@keyframes intro-line {
-  from { opacity: 0; transform: translateY(0.3em); }
-  to { opacity: 1; transform: none; }
-}
-
-/* El botón se ve desde el principio: se puede entrar sin esperar. */
-@keyframes intro-enter {
-  from { background: transparent; }
-  to { background: rgb(240 187 110 / 0.16); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .room-intro-phrase span,
-  .room-intro-enter,
-  .intro-pending .room-lit,
-  .intro-leaving .room-lit {
-    animation-delay: 0ms !important;
-  }
-
   .record:is(:hover, :focus-visible) .record-sleeve { transform: none; }
   .record:is(:hover, :focus-visible) .record-disc { transform: translateX(30%); }
 }
@@ -802,7 +708,8 @@
 [data-theme="light"] .room-lamp { filter: drop-shadow(calc(4 * var(--cu)) calc(3 * var(--cu)) calc(4 * var(--cu)) rgb(60 40 20 / 0.36)); }
 
 /* De día la lámpara está apagada. */
-[data-theme="light"] .lamp-glow { display: none; }
+[data-theme="light"] .lamp-glow { opacity: 0; }
+[data-theme="light"] .room-lamp:is(:hover, :focus-visible) .lamp-glow { opacity: 0.6; }
 [data-theme="light"] .lamp-rim { fill: #3a3228; }
 [data-theme="light"] .lamp-bulb { fill: #cfc4b0; }
 

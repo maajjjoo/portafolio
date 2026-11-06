@@ -1,4 +1,6 @@
-/** Lo que hay en la sala y no se usa: pared, suelo, altavoces, planta. Todo es decorativo. */
+import LampSwitch from "@/components/room/LampSwitch";
+
+/** Lo que hay en la sala: pared, suelo, altavoces, planta. Todo es decorativo salvo la lámpara, que cambia la luz. */
 
 const leaves = [
   [58, 26, 22, -18], [34, 62, 24, 28], [76, 84, 22, -30], [44, 120, 26, 22], [84, 148, 22, -24],
@@ -56,41 +58,6 @@ function DeskPlant() {
       <ellipse cx="62" cy="80" rx="23" ry="4.5" fill="#6a5a44" />
       <ellipse cx="62" cy="80" rx="20" ry="3.4" fill="#120d09" />
     </svg>
-  );
-}
-
-/** Lámpara de mesa: pantalla de metal lacado, luz solo por debajo, vástago y base de latón. */
-function DeskLamp() {
-  return (
-    <div className="room-lamp" aria-hidden="true">
-      <svg viewBox="0 0 76 78">
-        <defs>
-          <radialGradient id="lamp-shade" cx="0.68" cy="0.2" r="0.85">
-            <stop offset="0" stopColor="#5b5346" />
-            <stop offset="0.35" stopColor="#262219" />
-            <stop offset="1" stopColor="#0d0b09" />
-          </radialGradient>
-          <linearGradient id="lamp-brass" x1="0" x2="1">
-            <stop offset="0" stopColor="#3b2a12" />
-            <stop offset="0.6" stopColor="#c79a55" />
-            <stop offset="1" stopColor="#6b4c20" />
-          </linearGradient>
-          <radialGradient id="lamp-light">
-            <stop offset="0" stopColor="#ffd38f" stopOpacity="0.42" />
-            <stop offset="0.55" stopColor="#ffd38f" stopOpacity="0.12" />
-            <stop offset="1" stopColor="#ffd38f" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-        <ellipse className="lamp-glow" cx="38" cy="50" rx="50" ry="30" fill="url(#lamp-light)" />
-        <rect x="35.5" y="30" width="5" height="42" fill="url(#lamp-brass)" />
-        <ellipse cx="38" cy="73" rx="17" ry="4" fill="#1a1208" />
-        <ellipse cx="38" cy="71.5" rx="17" ry="4" fill="url(#lamp-brass)" />
-        <path d="M4 34C4 12 20 3 38 3S72 12 72 34Z" fill="url(#lamp-shade)" />
-        <ellipse className="lamp-rim" cx="38" cy="34" rx="34" ry="3.6" fill="#ffd79a" />
-        <ellipse className="lamp-bulb" cx="38" cy="34" rx="12" ry="2.2" fill="#fff4dc" />
-        <circle cx="38" cy="2.5" r="2.5" fill="url(#lamp-brass)" />
-      </svg>
-    </div>
   );
 }
 
@@ -249,17 +216,17 @@ function Speaker({ side }: { side: "l" | "r" }) {
 
 function Console() {
   return (
-    <div className="room-console" aria-hidden="true">
+    <div className="room-console">
       <Turntable />
-      <div className="room-amp">
+      <div className="room-amp" aria-hidden="true">
         <span className="room-knob" />
         <span className="room-amp-dial" />
         <span className="room-knob" />
       </div>
       <DeskPlant />
-      <DeskLamp />
-      <div className="room-slab" />
-      <div className="room-body">
+      <LampSwitch />
+      <div className="room-slab" aria-hidden="true" />
+      <div className="room-body" aria-hidden="true">
         <Spines />
       </div>
     </div>
