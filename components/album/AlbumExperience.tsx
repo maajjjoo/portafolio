@@ -34,15 +34,9 @@ export default function AlbumExperience({ album, adjacent }: AlbumExperienceProp
 
           <div data-album-fade className="max-w-[38rem]">
             <h1 id="album-titulo" tabIndex={-1} className="title-album focus:outline-none">
-              <SplitText text={album.title} delay={350} step={40} />
+              <SplitText text={album.section} delay={350} step={40} />
             </h1>
-            <p className="fade-up mt-3 text-lg font-medium text-accent" style={delay(600)}>
-              {album.section}
-            </p>
-            <p className="fade-up mt-5 text-lg leading-relaxed text-muted" style={delay(700)}>
-              {album.description}
-            </p>
-            <div className="fade-up" style={delay(850)}>
+            <div className="fade-up" style={delay(600)}>
               <AlbumTracklist album={album} />
             </div>
           </div>

@@ -47,13 +47,9 @@ export default async function Credits() {
                   >
                     <span className="label w-14 shrink-0 text-muted">{album.catalog}</span>
                     <span className="size-10 shrink-0 overflow-hidden rounded-[2px]">
-                      <CoverArt album={album} />
+                      <CoverArt album={album} place="credits" />
                     </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block font-display text-2xl leading-tight">{album.title}</span>
-                      <span className="block text-sm text-muted">{album.section}</span>
-                    </span>
-                    <span className="label hidden text-muted sm:block">Lado {album.side}</span>
+                    <span className="min-w-0 flex-1 font-display text-2xl leading-tight">{album.section}</span>
                   </Link>
                 </li>
               ))}

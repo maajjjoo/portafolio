@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/album/[slug]">): 
   const album = getAlbum(slug);
   if (!album) return { title: `Disco no encontrado · ${portfolio.libraryTitle}` };
   return {
-    title: `${album.section} — ${album.title} · ${portfolio.fullName}`,
+    title: `${album.section} · ${portfolio.fullName}`,
     description: album.description,
   };
 }

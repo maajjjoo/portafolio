@@ -29,7 +29,7 @@ function NeighborLink({ album, direction }: { album: Album; direction: "previous
       <ArrowRightIcon width={18} height={18} className={`shrink-0 text-muted transition-transform group-hover:text-accent ${isNext ? "group-hover:translate-x-1" : "rotate-180 group-hover:-translate-x-1"}`} />
       <span>
         <span className="block text-sm text-muted">{isNext ? "Siguiente disco" : "Disco anterior"}</span>
-        <span className="block font-display text-xl leading-snug">{album.title}</span>
+        <span className="block font-display text-xl leading-snug">{album.section}</span>
       </span>
     </Link>
   );

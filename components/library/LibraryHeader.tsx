@@ -110,10 +110,7 @@ export default function LibraryHeader() {
                     <span className="size-10 shrink-0 overflow-hidden rounded-[2px]">
                       <CoverArt album={album} place="menu" />
                     </span>
-                    <span className="min-w-0">
-                      <span className="block text-[0.8125rem] text-muted">{album.section}</span>
-                      <span className="block truncate font-display text-xl">{album.title}</span>
-                    </span>
+                    <span className="min-w-0 truncate font-display text-xl">{album.section}</span>
                   </Link>
                 </li>
               );

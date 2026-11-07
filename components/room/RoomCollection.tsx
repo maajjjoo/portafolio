@@ -55,7 +55,7 @@ function RoomRecord({ album, heard }: { album: Album; heard: boolean }) {
         href={albumHref(album.slug)}
         transitionTypes={["room-open"]}
         onClick={openRecord}
-        aria-label={`${album.title}: ${album.section}. Disco ${album.order}, lado ${album.side}.${heard ? " Ya escuchado." : ""} Abrir álbum`}
+        aria-label={`${album.section}. Disco ${album.order}, lado ${album.side}.${heard ? " Ya escuchado." : ""} Abrir álbum`}
         className="record"
       >
         <span className="record-stage">
