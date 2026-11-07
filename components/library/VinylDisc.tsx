@@ -15,7 +15,6 @@ export default function VinylDisc({ album, spinning = false, className = "" }: V
         className="vinyl-label"
         style={{ backgroundColor: album.cover.background, color: album.cover.foreground }}
       >
-        <span className="vinyl-label-catalog">{album.catalog}</span>
         <span className="vinyl-label-title">{album.title}</span>
         <span className="vinyl-label-hole" />
       </div>

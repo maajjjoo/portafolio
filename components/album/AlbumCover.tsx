@@ -17,7 +17,7 @@ export default function AlbumCover({ album }: { album: Album }) {
         </div>
       </div>
       <div className="album-sleeve relative aspect-square overflow-hidden rounded-[2px] shadow-card">
-        <CoverArt album={album} />
+        <CoverArt album={album} place="album" />
       </div>
     </div>
   );
