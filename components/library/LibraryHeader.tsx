@@ -56,16 +56,13 @@ export default function LibraryHeader() {
   }
 
   return (
-    <header style={{ viewTransitionName: "site-header" }} className="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
-      <nav aria-label="Principal" className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-3 px-5 sm:px-8">
+    <header style={{ viewTransitionName: "site-header" }} className="sticky top-0 z-50 h-18 px-3 py-2 sm:px-5">
+      <nav aria-label="Principal" className="glass mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 rounded-full pr-1.5 pl-1.5 shadow-card sm:pl-2">
         <Link href="/" transitionTypes={["room-close"]} className="group flex items-center gap-3" aria-label={`${portfolio.fullName}: ir a la sala`}>
           <span className="grid size-10 place-items-center rounded-full bg-wine font-display text-lg text-on-wine transition-transform duration-700 group-hover:rotate-[360deg]">
             {portfolio.initials}
           </span>
-          <span className="hidden leading-tight sm:block">
-            <span className="block font-display text-lg">María José</span>
-            <span className="block text-[0.8125rem] text-muted">Portafolio</span>
-          </span>
+          <span className="hidden font-display text-lg sm:block">María José</span>
         </Link>
 
         <div className="flex items-center gap-2">
@@ -75,7 +72,7 @@ export default function LibraryHeader() {
             onClick={toggle}
             aria-expanded={open}
             aria-controls="panel-albumes"
-            className="label inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 transition-colors hover:border-ink"
+            className="label inline-flex min-h-11 items-center gap-2 rounded-full px-4 transition-colors hover:bg-ink/10"
           >
             {open ? <CloseIcon width={16} height={16} /> : <MenuIcon width={16} height={16} />}
             Álbumes
@@ -84,9 +81,8 @@ export default function LibraryHeader() {
         </div>
       </nav>
 
-      <div ref={panelRef} id="panel-albumes" hidden={!open} className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-bg">
-        <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8">
-          <p className="label mb-4 text-muted">Toda la colección · elige un disco</p>
+      <div ref={panelRef} id="panel-albumes" hidden={!open} className="mx-auto mt-2 max-h-[calc(100dvh-5.5rem)] max-w-6xl overflow-y-auto rounded-[var(--radius-sheet)] border border-line bg-bg shadow-card">
+        <div className="p-3 sm:p-4">
           <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
             <li className="sm:hidden">
               <Link
@@ -112,7 +108,7 @@ export default function LibraryHeader() {
                     className="group flex min-h-14 items-center gap-3 rounded-xl border border-line px-3 py-2 transition-colors hover:border-ink aria-[current=page]:border-wine aria-[current=page]:bg-surface"
                   >
                     <span className="size-10 shrink-0 overflow-hidden rounded-[2px]">
-                      <CoverArt album={album} />
+                      <CoverArt album={album} place="menu" />
                     </span>
                     <span className="min-w-0">
                       <span className="block text-[0.8125rem] text-muted">{album.section}</span>
