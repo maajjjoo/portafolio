@@ -3,19 +3,17 @@ import type { Album } from "@/data/albums";
 interface CoverArtProps {
   album: Album;
   /** Distingue los id internos del SVG cuando la misma portada está dos veces en la página (sala y álbum). */
-  place?: "room" | "album" | "menu";
+  place?: "room" | "album" | "menu" | "credits";
   className?: string;
 }
 
 /**
  * Portada original en SVG, impresa como un cartel: formas grandes de color plano, tintas que se
- * solapan y grano de papel. Solo lleva el título. Es decorativa: el nombre accesible lo da el
- * enlace o el título que la acompaña.
+ * solapan y grano de papel. No lleva texto. Es decorativa: el nombre accesible lo da el
+ * enlace o el nombre de la sección que la acompaña.
  */
 export default function CoverArt({ album, place = "room", className = "" }: CoverArtProps) {
-  const { background: bg, foreground: fg } = album.cover;
-  // En el sobre, el título va en claro sobre la solapa de abajo.
-  const titleInk = album.cover.motif === "waves" ? album.cover.accent : fg;
+  const { background: bg } = album.cover;
   const id = `${place}-${album.slug}`;
 
   return (
@@ -36,10 +34,10 @@ export default function CoverArt({ album, place = "room", className = "" }: Cove
       </defs>
 
       <rect width="300" height="300" fill={bg} />
-      <Motif album={album} id={id} />
-      <text x="20" y="278" fill={titleInk} fontSize="33" style={{ fontFamily: "var(--font-gloock)" }}>
-        {album.title}
-      </text>
+      {/* Sin texto: solo el dibujo, un poco más abajo para llenar la funda. */}
+      <g transform="translate(0 14)">
+        <Motif album={album} id={id} />
+      </g>
 
       {/* Papel: grano y la luz que cae sobre la funda. */}
       <rect width="300" height="300" filter={`url(#grano-${id})`} opacity="0.32" style={{ mixBlendMode: "overlay" }} />
