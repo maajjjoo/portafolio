@@ -66,10 +66,10 @@ function RoomRecord({ album, heard }: { album: Album; heard: boolean }) {
             <CoverArt album={album} />
           </span>
         </span>
-        {/* Fuera de la portada, para no tapar el catálogo ni el título. */}
+        {/* Fuera de la portada, para no tapar el título. Un punto marca los discos ya escuchados. */}
         <span className="record-name">
           {album.section}
-          {heard ? <span className="record-heard"> · Escuchado</span> : null}
+          {heard ? <span className="record-heard" aria-hidden="true" /> : null}
         </span>
       </Link>
     </li>

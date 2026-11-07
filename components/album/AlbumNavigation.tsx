@@ -12,7 +12,6 @@ export default function AlbumNavigation({ adjacent }: { adjacent: AdjacentAlbums
         {adjacent.previous ? <NeighborLink album={adjacent.previous} direction="previous" /> : <RoomLink />}
         {adjacent.next ? <NeighborLink album={adjacent.next} direction="next" /> : <RoomLink alignEnd />}
       </div>
-      <p className="mt-8 hidden text-sm text-muted lg:block">Atajos: ← disco anterior · → disco siguiente · Esc volver a la sala</p>
     </nav>
   );
 }

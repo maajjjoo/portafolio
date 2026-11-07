@@ -549,9 +549,15 @@
   color: #fff6e8;
 }
 
+/* Disco ya escuchado: un punto ámbar junto al nombre, sin más texto. */
 .record-heard {
-  font-weight: 500;
-  color: #ffe2b5;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 0.45em;
+  border-radius: 9999px;
+  vertical-align: 0.2em;
+  background: #ffcf8a;
 }
 
 .room-slot:has(.record:is(:hover, :focus-visible)) { z-index: 4; }
@@ -757,7 +763,7 @@
 
 [data-theme="light"] .record-name { color: #2c2016; }
 [data-theme="light"] .record:is(:hover, :focus-visible) .record-name { color: #8a4f10; }
-[data-theme="light"] .record-heard { color: #452502; }
+[data-theme="light"] .record-heard { background: #8a4f10; }
 
 /* --- Sala compacta: una pared alta, no la de escritorio encogida ------------ */
 

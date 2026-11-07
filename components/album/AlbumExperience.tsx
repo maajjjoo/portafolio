@@ -25,11 +25,8 @@ export default function AlbumExperience({ album, adjacent }: AlbumExperienceProp
       <div aria-hidden="true" className="album-wall" />
 
       <div className="mx-auto max-w-[76rem] px-5 pt-6 sm:px-8">
-        <div data-album-fade className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+        <div data-album-fade>
           <BackToLibrary />
-          <p className="text-sm text-muted">
-            Disco {adjacent.position} de {adjacent.total} · {album.catalog} · Lado {album.side}
-          </p>
         </div>
 
         <div className="grid items-center gap-10 py-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:py-16">
@@ -40,7 +37,7 @@ export default function AlbumExperience({ album, adjacent }: AlbumExperienceProp
               <SplitText text={album.title} delay={350} step={40} />
             </h1>
             <p className="fade-up mt-3 text-lg font-medium text-accent" style={delay(600)}>
-              {album.section === album.category ? album.section : `${album.section} · ${album.category}`}
+              {album.section}
             </p>
             <p className="fade-up mt-5 text-lg leading-relaxed text-muted" style={delay(700)}>
               {album.description}

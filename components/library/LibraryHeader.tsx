@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 
 import CoverArt from "@/components/library/CoverArt";
 import { CloseIcon, MenuIcon } from "@/components/ui/Icons";
-import RollText from "@/components/ui/RollText";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { portfolio } from "@/config/portfolio";
 import { albums } from "@/data/albums";
@@ -70,16 +69,6 @@ export default function LibraryHeader() {
         </Link>
 
         <div className="flex items-center gap-2">
-          <Link
-            href="/"
-            transitionTypes={["room-close"]}
-            aria-current={onLibrary ? "page" : undefined}
-            className={`label hidden min-h-11 items-center rounded-full px-4 transition-colors hover:text-ink sm:inline-flex ${
-              onLibrary ? "text-ink" : "text-muted"
-            }`}
-          >
-            <RollText>Sala</RollText>
-          </Link>
           <button
             ref={buttonRef}
             type="button"
