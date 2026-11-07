@@ -69,7 +69,7 @@ Everything that holds text is rounded: large surfaces at `1.5rem`, groups and no
 ## Less on screen
 
 - Each album states its name once in big type, then the plain section name, a one-line description and the index. No catalogue line, category or shortcut hints.
-- The header holds the name, Álbumes and the light switch. The footer is one line: copyright, profiles and back to top.
+- The header is a floating glass pill: initials and first name, Álbumes and the light switch. Vinyl labels carry no text, only the album colour and an accent ring. The footer is one line: copyright, profiles and back to top.
 - **Hover and focus:** the sleeve leans out and its disc slides out to the right.
 
 ## The eight albums
