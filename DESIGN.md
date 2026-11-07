@@ -62,13 +62,13 @@ Everything that holds text is rounded: large surfaces at `1.5rem`, groups and no
 
 ## Covers
 
-- Printed like posters: one large flat-colour idea per record, inks that overlap (multiply) and paper grain (`feTurbulence`). Only the title is printed; catalogue numbers live in Créditos.
+- Printed like posters: one large flat-colour idea per record, inks that overlap (multiply) and paper grain (`feTurbulence`). Covers carry no text at all; catalogue numbers live in Créditos.
 - Hola, mundo a striped rising sun with the initials; Quién soy an arched door with a circle that does not fit; Repositorio a branch graph over huge braces; Otras voces two overlapping speech bubbles; Línea de tiempo a road climbing through contour lines; Escríbeme an envelope with its seal; Stack isometric layers; Créditos finales credits rolling up beside a barcode.
 - SVG ids carry where the cover is drawn (`place`: room or album), because both can be in the page at once.
 
 ## Less on screen
 
-- Each album states its name once in big type, then the plain section name, a one-line description and the index. No catalogue line, category or shortcut hints.
+- Records are named only by their plain section (Bienvenida, Sobre mí, Proyectos…), everywhere: under the sleeve, as the album heading, in the menu, in previous/next and in the page title. The artistic titles in `data/albums.ts` are no longer shown. Each album opens with its section name and the index, nothing else.
 - The header is a floating glass pill: initials and first name, Álbumes and the light switch. Vinyl labels carry no text, only the album colour and an accent ring. The footer is one line: copyright, profiles and back to top.
 - **Hover and focus:** the sleeve leans out and its disc slides out to the right.
 
