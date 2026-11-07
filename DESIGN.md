@@ -58,7 +58,18 @@ Everything that holds text is rounded: large surfaces at `1.5rem`, groups and no
 - Sized in one unit, `--u`, so it scales as one object and never crops a record.
 - Desktop: two ledges of four sleeves (Lado A, Lado B) above a credenza, with speakers either side.
 - Below 900px: a deliberately tall wall, with the name plate first. Speakers and rug are dropped, and on phones also the amplifier and plant, so the turntable stays legible.
-- Every sleeve is a real link, with its plain section name under it. "Escuchado" sits beside that name, never on the cover.
+- Every sleeve is a real link, with its plain section name under it. A small amber dot beside the name marks a record already heard; the link's label says it in words.
+
+## Covers
+
+- Printed like posters: one large flat-colour idea per record, inks that overlap (multiply) and paper grain (`feTurbulence`). Only the title is printed; catalogue numbers live in Créditos.
+- Hola, mundo a striped rising sun with the initials; Quién soy an arched door with a circle that does not fit; Repositorio a branch graph over huge braces; Otras voces two overlapping speech bubbles; Línea de tiempo a road climbing through contour lines; Escríbeme an envelope with its seal; Stack isometric layers; Créditos finales credits rolling up beside a barcode.
+- SVG ids carry where the cover is drawn (`place`: room or album), because both can be in the page at once.
+
+## Less on screen
+
+- Each album states its name once in big type, then the plain section name, a one-line description and the index. No catalogue line, category or shortcut hints.
+- The header holds the name, Álbumes and the light switch. The footer is one line: copyright, profiles and back to top.
 - **Hover and focus:** the sleeve leans out and its disc slides out to the right.
 
 ## The eight albums
