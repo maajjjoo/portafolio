@@ -49,6 +49,28 @@ export const projectStatusLabels: Record<ProjectStatus, string> = {
 export const projects: Project[] = [
   // Primero los principales de este semestre (featured), luego los demás.
   {
+    id: "caso-404",
+    title: "El Caso 404",
+    description:
+      "Videojuego 3D de investigación criminal en primera persona. Exploras escenas, recolectas evidencias, interrogas a personajes controlados por IA y tomas decisiones que llevan a distintos finales. ALEX, tu asistente de IA, parece ayudarte, pero manipula la investigación.",
+    highlights: [
+      "Proyecto en equipo de tres personas, hecho en Unity.",
+      "La verdad de cada caso está en los datos del juego; la IA solo da voz a los personajes.",
+      "Los diálogos con IA pasan por un servidor propio, así que las claves no quedan dentro del juego.",
+    ],
+    tags: ["Unity", "C#", "JavaScript"],
+    status: "en-desarrollo",
+    repositories: [{ label: "Juego", url: "https://github.com/Josecampoe/CriminalisticaGame" }],
+    demo: null,
+    demoUnavailableReason: "Es un juego para computador y todavía no tiene una versión pública para jugar.",
+    image: {
+      src: "/images/projects/caso-404.png",
+      alt: "Captura de El Caso 404 en desarrollo: un bar en penumbra visto en primera persona, con la barra, taburetes y un personaje sentado al fondo.",
+    },
+    motif: "desktop",
+    featured: true,
+  },
+  {
     id: "smartcontrol",
     title: "SmartControl",
     description:
