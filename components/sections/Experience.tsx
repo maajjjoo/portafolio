@@ -48,7 +48,7 @@ export default async function Experience() {
     <section id={sectionIds.experience} aria-labelledby="experiencia-titulo">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <SectionHeading
-          title="Trayectoria académica y profesional"
+          title="Mi trayectoria"
           titleId="experiencia-titulo"
           intro="Ordenada de lo más reciente a lo más antiguo."
         />

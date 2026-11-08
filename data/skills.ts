@@ -19,15 +19,15 @@ export interface SkillCategory {
 }
 
 export const skillLevelLabels: Record<SkillLevel, string> = {
-  proyectos: "Experiencia en proyectos",
-  aprendizaje: "En aprendizaje",
+  proyectos: "Usada en proyectos",
+  aprendizaje: "Aprendiendo",
 };
 
 export const skillCategories: SkillCategory[] = [
   {
     id: "lenguajes",
     title: "Lenguajes",
-    description: "Lo que escribo en el día a día de la carrera y de mis proyectos.",
+    description: "Los que he usado en clase y en mis proyectos.",
     skills: [
       { name: "TypeScript", level: "proyectos" },
       { name: "JavaScript", level: "proyectos" },
@@ -41,7 +41,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "frontend",
     title: "Frontend",
-    description: "Interfaces web y de escritorio.",
+    description: "Para hacer interfaces web y de escritorio.",
     skills: [
       { name: "React", level: "proyectos" },
       { name: "HTML y CSS", level: "proyectos" },
@@ -53,7 +53,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "backend",
     title: "Backend",
-    description: "APIs y servicios que dan soporte a mis aplicaciones.",
+    description: "Para los servidores y las APIs de mis aplicaciones.",
     skills: [
       { name: "Node.js", level: "proyectos" },
       { name: "Express", level: "proyectos" },
@@ -85,7 +85,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "herramientas",
     title: "Herramientas",
-    description: "Control de versiones, despliegue e integración de IA.",
+    description: "Para guardar versiones, publicar y usar IA.",
     skills: [
       { name: "Git", level: "proyectos" },
       { name: "GitHub", level: "proyectos" },

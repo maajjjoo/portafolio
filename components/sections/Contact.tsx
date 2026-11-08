@@ -36,7 +36,7 @@ export default function Contact() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
           <div>
             <h2 id="contacto-titulo" data-reveal className="title-section">
-              Hablemos de algo <span className="text-accent">increíble</span>
+              Hablemos
             </h2>
             <p data-reveal className="mt-8 max-w-md text-lg leading-relaxed text-muted">
               Si quieres comentarme algo sobre mis proyectos, proponer una colaboración o simplemente saludar,

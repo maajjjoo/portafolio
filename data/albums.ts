@@ -142,7 +142,7 @@ export const albums: Album[] = [
     title: "Línea de tiempo",
     section: "Experiencia",
     category: "Trayectoria",
-    description: "Mi trayectoria académica y profesional, de lo más reciente a lo más antiguo.",
+    description: "Mis estudios y, cuando la tenga, mi experiencia laboral.",
     tracks: [
       { title: "Experiencia académica", anchor: "experiencia-academica" },
       { title: "Experiencia profesional", anchor: "experiencia-profesional" },

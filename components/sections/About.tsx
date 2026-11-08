@@ -29,7 +29,7 @@ export default async function About() {
   return (
     <section id={sectionIds.about} aria-labelledby="sobre-mi-titulo">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
-        <SectionHeading title="Aprendo construyendo cosas útiles" titleId="sobre-mi-titulo" />
+        <SectionHeading title="Aprendo haciendo proyectos" titleId="sobre-mi-titulo" />
 
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-16">
           <div data-reveal className="space-y-6 text-lg leading-relaxed">
@@ -38,9 +38,9 @@ export default async function About() {
               el <span className="text-accent italic">{formatSemester(semester.semester)}</span>.
             </p>
             <p id="sobre-mi-intereses" className="text-muted">
-              Me interesa el desarrollo de interfaces, la construcción de APIs y la integración de herramientas de
-              inteligencia artificial en aplicaciones que de verdad ayuden a alguien. Son temas que he explorado en mis
-              proyectos académicos y personales, tanto en web como en móvil y escritorio.
+              Me interesan las interfaces, el backend y cómo usar la inteligencia artificial dentro de aplicaciones
+              que le sirvan a alguien. Los he ido probando en proyectos de clase y personales, en web, en móvil y en
+              escritorio.
             </p>
             <p className="text-muted">
               Todavía estoy en formación, así que cada proyecto es también una forma de aprender algo nuevo: una

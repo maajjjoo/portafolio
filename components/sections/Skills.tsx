@@ -17,9 +17,9 @@ export default function Skills() {
     <section id={sectionIds.skills} aria-labelledby="habilidades-titulo">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <SectionHeading
-          title="Herramientas con las que trabajo"
+          title="Tecnologías que he usado"
           titleId="habilidades-titulo"
-          intro="Sin porcentajes inventados: distingo entre lo que ya he usado en proyectos y lo que estoy aprendiendo ahora."
+          intro="No me considero experta en ninguna. Separo las que ya usé en algún proyecto de las que apenas estoy aprendiendo."
         />
 
         <ul data-reveal className="mb-10 flex flex-wrap gap-6 text-sm" aria-label="Leyenda">

@@ -18,7 +18,7 @@ export default function Testimonials() {
   const hasPublished = testimonials.some((item) => item.status === "publicado");
   const hasPending = testimonials.some((item) => item.status === "pendiente");
 
-  let intro = "Comentarios de profesores y compañeros con quienes he trabajado.";
+  let intro = "Comentarios de profesores y compañeros con quienes he compartido clases o proyectos.";
   if (!hasPublished) intro = "Todavía estoy reuniendo testimonios de profesores y compañeros. Cuando los tenga, aparecerán aquí.";
   else if (hasPending) intro += " Sigo reuniendo más.";
 
@@ -26,7 +26,7 @@ export default function Testimonials() {
     <section id={sectionIds.testimonials} aria-labelledby="testimonios-titulo">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
         <SectionHeading
-          title="Palabras de quienes han trabajado conmigo"
+          title="Lo que dicen profesores y compañeros"
           titleId="testimonios-titulo"
           intro={intro}
         />
