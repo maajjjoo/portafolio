@@ -1,17 +1,11 @@
-import type { CSSProperties } from "react";
-
 import AlbumContent from "@/components/album/AlbumContent";
 import AlbumCover from "@/components/album/AlbumCover";
 import AlbumKeyboard from "@/components/album/AlbumKeyboard";
 import AlbumNavigation from "@/components/album/AlbumNavigation";
-import AlbumNowPlaying from "@/components/album/AlbumNowPlaying";
-import AlbumTracklist from "@/components/album/AlbumTracklist";
 import BackToLibrary from "@/components/ui/BackToLibrary";
 import SplitText from "@/components/ui/SplitText";
 import type { Album } from "@/data/albums";
 import { albumHref, type AdjacentAlbums } from "@/lib/albums";
-
-const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
 interface AlbumExperienceProps {
   album: Album;
@@ -36,9 +30,6 @@ export default function AlbumExperience({ album, adjacent }: AlbumExperienceProp
             <h1 id="album-titulo" tabIndex={-1} className="title-album focus:outline-none">
               <SplitText text={album.section} delay={350} step={40} />
             </h1>
-            <div className="fade-up" style={delay(600)}>
-              <AlbumTracklist album={album} />
-            </div>
           </div>
         </div>
       </div>
@@ -47,7 +38,6 @@ export default function AlbumExperience({ album, adjacent }: AlbumExperienceProp
         <div className="album-sheet">
           <AlbumContent slug={album.slug} />
         </div>
-        <AlbumNowPlaying album={album} />
       </div>
 
       <AlbumNavigation adjacent={adjacent} />
