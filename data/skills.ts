@@ -14,7 +14,22 @@ export interface SkillCategory {
   skills: Skill[];
 }
 
+// Primero los frameworks, que es con lo que más he construido. Solo lo que he usado varias veces.
 export const skillCategories: SkillCategory[] = [
+  {
+    id: "frameworks",
+    title: "Frameworks",
+    description: "Con los que he construido mis aplicaciones.",
+    skills: [
+      { name: "React" },
+      { name: "React Native" },
+      { name: "Expo" },
+      { name: "Spring Boot" },
+      { name: "Express" },
+      { name: "Tauri" },
+      { name: "Tailwind CSS" },
+    ],
+  },
   {
     id: "lenguajes",
     title: "Lenguajes",
@@ -24,51 +39,16 @@ export const skillCategories: SkillCategory[] = [
       { name: "JavaScript" },
       { name: "Java" },
       { name: "Python" },
-      { name: "Rust" },
-      { name: "Kotlin" },
-      { name: "C#" },
-    ],
-  },
-  {
-    id: "frontend",
-    title: "Frontend",
-    description: "Para hacer interfaces web y de escritorio.",
-    skills: [
-      { name: "React" },
       { name: "HTML y CSS" },
-      { name: "Tailwind CSS" },
-      { name: "Vite" },
-      { name: "Next.js" },
     ],
   },
   {
-    id: "backend",
-    title: "Backend",
-    description: "Para los servidores y las APIs de mis aplicaciones.",
+    id: "backend-datos",
+    title: "Backend y datos",
+    description: "Para los servidores, las APIs y las bases de datos.",
     skills: [
       { name: "Node.js" },
-      { name: "Express" },
-      { name: "Spring Boot" },
       { name: "Prisma" },
-      { name: ".NET" },
-    ],
-  },
-  {
-    id: "movil-escritorio",
-    title: "Móvil y escritorio",
-    description: "Aplicaciones fuera del navegador.",
-    skills: [
-      { name: "React Native" },
-      { name: "Expo" },
-      { name: "Tauri" },
-      { name: "Wear OS" },
-    ],
-  },
-  {
-    id: "bases-de-datos",
-    title: "Bases de datos",
-    description: "Persistencia local y en servidor.",
-    skills: [
       { name: "PostgreSQL" },
       { name: "SQLite" },
     ],
@@ -80,9 +60,9 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: "Git" },
       { name: "GitHub" },
+      { name: "Vite" },
       { name: "Vercel" },
       { name: "API de Gemini" },
-      { name: "Android Studio" },
     ],
   },
 ];

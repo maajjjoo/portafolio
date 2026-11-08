@@ -14,12 +14,12 @@ export default function Skills() {
           intro="Las que he utilizado en mis proyectos."
         />
 
-        <div className="grid overflow-hidden rounded-2xl border-t border-l border-line sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid overflow-hidden rounded-2xl border-t border-l border-line sm:grid-cols-2">
           {skillCategories.map((category, index) => (
             <article
               key={category.id}
               data-reveal
-              style={{ "--reveal-delay": `${(index % 3) * 100}ms` } as CSSProperties}
+              style={{ "--reveal-delay": `${(index % 2) * 100}ms` } as CSSProperties}
               aria-labelledby={`skills-${category.id}`}
               className="group border-r border-b border-line p-6 sm:p-8"
             >
