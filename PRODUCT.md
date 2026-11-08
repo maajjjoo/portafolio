@@ -49,7 +49,7 @@ It first has to pass the course submission. Beyond that, success means a visitor
 
 - **Projects (`data/projects.ts`):** AI Code Tutor, PollyStock, Studia and SmartControl, all in development or at an early stage.
 - **Links:** public repositories for AI Code Tutor (frontend only), PollyStock and Studia. SmartControl has no public repository. AI Code Tutor is the only project with a demo, and its backend returned 503 when last checked.
-- **Education:** Ingeniería de Software at Universidad Cooperativa de Colombia, last confirmed as 5th semester.
+- **Education:** Ingeniería de Software at Universidad Cooperativa de Colombia. The semester is deliberately not shown anywhere.
 - **Contact:** public email, GitHub and LinkedIn (`config/portfolio.ts`).
 
 **Absent, and must not be fabricated:**

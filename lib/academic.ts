@@ -1,27 +1,19 @@
 import { cacheLife } from "next/cache";
 
 import { portfolio } from "@/config/portfolio";
-import { calculateSemester, calendarDateInTimeZone, type SemesterResult } from "@/lib/semester";
-
 export interface AcademicSnapshot {
-  semester: SemesterResult;
   currentYear: number;
 }
 
 /**
- * Lee la fecha actual una vez y la comparte con todos los componentes.
+ * Lee el año actual una vez y lo comparte con el pie y los créditos.
  * Se cachea por días: en Vercel la página se regenera sola, así que el
- * semestre y el año del pie cambian sin volver a desplegar.
+ * año cambia sin volver a desplegar.
  */
 export async function getAcademicSnapshot(): Promise<AcademicSnapshot> {
   "use cache";
   cacheLife("days");
 
-  const today = calendarDateInTimeZone(new Date(), portfolio.academic.timeZone);
-  const semester = calculateSemester(portfolio.academic, today);
-  if (semester.status !== "calculated") {
-    console.warn(`Semestre sin calcular: ${semester.reason} Ver README → "Semestre automático".`);
-  }
-
-  return { semester, currentYear: today.year };
+  const year = new Intl.DateTimeFormat("en-CA", { timeZone: portfolio.academic.timeZone, year: "numeric" }).format(new Date());
+  return { currentYear: Number(year) };
 }

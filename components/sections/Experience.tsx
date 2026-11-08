@@ -1,12 +1,9 @@
 import Link from "next/link";
 
 import SectionHeading from "@/components/ui/SectionHeading";
-import SemesterStatus from "@/components/ui/SemesterStatus";
 import { sectionIds } from "@/config/navigation";
 import { experience, experienceTypeLabels, type ExperienceItem, type ExperienceType } from "@/data/experience";
-import { getAcademicSnapshot } from "@/lib/academic";
 import { albumHref } from "@/lib/albums";
-import type { SemesterResult } from "@/lib/semester";
 
 const monthFormatter = new Intl.DateTimeFormat("es-CO", { month: "short", year: "numeric", timeZone: "UTC" });
 
@@ -39,8 +36,7 @@ const typeAnchors: Record<ExperienceType, string> = {
   profesional: "experiencia-profesional",
 };
 
-export default async function Experience() {
-  const { semester } = await getAcademicSnapshot();
+export default function Experience() {
   const items = [...experience].sort((a, b) => sortKey(b).localeCompare(sortKey(a)));
   const hasProfessional = items.some((item) => item.type === "profesional");
 
@@ -67,7 +63,6 @@ export default async function Experience() {
               <TimelineItem
                 key={item.id}
                 item={item}
-                semester={semester}
                 anchor={items.find((other) => other.type === item.type) === item ? typeAnchors[item.type] : undefined}
               />
             ))}
@@ -105,7 +100,7 @@ export default async function Experience() {
   );
 }
 
-function TimelineItem({ item, semester, anchor }: { item: ExperienceItem; semester: SemesterResult; anchor?: string }) {
+function TimelineItem({ item, anchor }: { item: ExperienceItem; anchor?: string }) {
   const styles = typeStyles[item.type];
 
   return (
@@ -122,11 +117,6 @@ function TimelineItem({ item, semester, anchor }: { item: ExperienceItem; semest
         <h3 className="mt-5 font-display text-3xl">{item.title}</h3>
         <p className="mt-1 text-muted">{item.organization}</p>
         <p className="mt-4 leading-relaxed">{item.description}</p>
-        {item.showCurrentSemester ? (
-          <p className="mt-5 rounded-xl bg-surface-2 px-4 py-3 text-sm font-semibold">
-            Semestre actual: <SemesterStatus result={semester} />
-          </p>
-        ) : null}
       </article>
     </li>
   );

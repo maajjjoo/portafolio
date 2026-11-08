@@ -1,5 +1,3 @@
-import type { AcademicConfig } from "@/lib/semester";
-
 /**
  * Fuente única de verdad para la información personal del portafolio.
  * Cualquier componente que muestre estos datos debe leerlos desde aquí.
@@ -25,7 +23,11 @@ export interface PortfolioConfig {
     linkedin: SocialLink;
   };
   university: string;
-  academic: AcademicConfig;
+  academic: {
+    degree: string;
+    /** Zona horaria usada para saber en qué año estamos. */
+    timeZone: string;
+  };
 }
 
 export const portfolio: PortfolioConfig = {
@@ -49,17 +51,6 @@ export const portfolio: PortfolioConfig = {
   university: "Universidad Cooperativa de Colombia",
   academic: {
     degree: "Ingeniería de Software",
-    /** Último semestre confirmado, correspondiente a `referenceDate`. */
-    referenceSemester: 5,
-    /**
-     * ⚠️ PENDIENTE DE CONFIGURAR
-     * Fecha real (formato "AAAA-MM-DD") en la que empezó tu 5.º semestre.
-     * Mientras sea `null`, el sitio muestra el semestre 5 con una nota
-     * indicando que falta configurar la fecha. Ver README → "Semestre automático".
-     */
-    referenceDate: null,
-    monthsPerSemester: 6,
-    /** Zona horaria usada para saber qué día es "hoy". */
     timeZone: "America/Bogota",
   },
 };

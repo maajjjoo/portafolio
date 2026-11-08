@@ -20,8 +20,6 @@ export interface ExperienceItem {
   endDate: string | null;
   isCurrent: boolean;
   description: string;
-  /** Añade el semestre calculado automáticamente a la descripción. */
-  showCurrentSemester?: boolean;
 }
 
 export const experienceTypeLabels: Record<ExperienceType, string> = {
@@ -39,6 +37,5 @@ export const experience: ExperienceItem[] = [
     endDate: null,
     isCurrent: true,
     description: "Pregrado en curso.",
-    showCurrentSemester: true,
   },
 ];

@@ -77,7 +77,7 @@ Everything that holds text is rounded: large surfaces at `1.5rem`, groups and no
 
 | Album | Composition | Paper | Glass |
 |---|---|---|---|
-| Hola, mundo | Open scene: name and arched portrait directly on the wall | None | Strip with university and semester |
+| Hola, mundo | Open scene: name and arched portrait directly on the wall | None | Strip with the university |
 | Quién soy | Magazine text: large opening line, narrow column | Margin strip with education | None |
 | Repositorio | One spread per project, alternating image and text | Under text, only if needed to read | None |
 | Otras voces | Quiet slots while pending; large staggered quotes when real | Small, per quote | None |

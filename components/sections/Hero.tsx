@@ -6,18 +6,14 @@ import { ArrowRightIcon, CapIcon, DownloadIcon, GitHubIcon, LinkedInIcon } from 
 import RollText from "@/components/ui/RollText";
 import { sectionIds } from "@/config/navigation";
 import { portfolio } from "@/config/portfolio";
-import { getAcademicSnapshot } from "@/lib/academic";
 import { albumHref } from "@/lib/albums";
-import { formatSemester } from "@/lib/semester";
 
 // Se calcula al compilar en next.config.ts según exista public/cv.pdf.
 const cvAvailable = process.env.CV_AVAILABLE === "true";
 
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
-export default async function Hero() {
-  const { semester } = await getAcademicSnapshot();
-
+export default function Hero() {
   return (
     <section id={sectionIds.hero} aria-labelledby="hero-titulo" className="relative isolate overflow-hidden">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 sm:px-8 md:py-24 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,22rem)]">
@@ -40,11 +36,7 @@ export default async function Hero() {
             <span className="grid size-12 shrink-0 place-items-center rounded-full border border-line text-accent">
               <CapIcon />
             </span>
-            <span className="label leading-relaxed">
-              {portfolio.university}
-              <br />
-              <span className="text-muted">{formatSemester(semester.semester)}</span>
-            </span>
+            <span className="label leading-relaxed">{portfolio.university}</span>
           </p>
 
           <div id="bienvenida-cv" className="fade-up mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start" style={delay(750)}>

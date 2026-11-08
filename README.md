@@ -39,7 +39,7 @@ npm install        # instalar dependencias
 npm run dev        # servidor de desarrollo en http://localhost:3000
 npm run lint       # ESLint
 npm run typecheck  # comprobación de tipos de TypeScript
-npm test           # pruebas unitarias (álbumes, semestre y formulario)
+npm test           # pruebas unitarias (álbumes, pistas y formulario)
 npm run build      # compilación de producción
 npm run start      # servir la compilación de producción
 ```
@@ -58,9 +58,9 @@ components/
   sections/             el contenido de cada sección (Hero, About, Projects, …, Credits, Footer)
   ui/                   piezas reutilizables (iconos, textos animados, tema, volver)
   providers/            animaciones al hacer scroll
-config/                 portfolio.ts (datos personales y semestre), navigation.ts (IDs)
+config/                 portfolio.ts (datos personales), navigation.ts (IDs)
 data/                   albums.ts, projects.ts, testimonials.ts, experience.ts, skills.ts
-lib/                    albums.ts, semester.ts, contact.ts (+ pruebas) y useExplored.ts
+lib/                    albums.ts, tracks.ts, contact.ts (+ pruebas) y useExplored.ts
 public/                 archivos estáticos (cv.pdf e images/perfil.* cuando estén listos)
 ```
 
@@ -77,23 +77,9 @@ El botón **Descargar CV** aparece deshabilitado con la etiqueta «CV en prepara
 
 La comprobación se hace al compilar (`next.config.ts`), así que el botón se activa solo en la siguiente compilación.
 
-### 2. Semestre automático
+### 2. Semestre
 
-El semestre se calcula en `lib/semester.ts` a partir de `config/portfolio.ts → academic`:
-
-| Campo | Valor actual | Significado |
-| --- | --- | --- |
-| `referenceSemester` | `5` | Semestre que cursabas en la fecha de referencia. |
-| `referenceDate` | `null` ⚠️ | **Pendiente.** Fecha real (`"AAAA-MM-DD"`) en que empezó tu 5.º semestre. |
-| `monthsPerSemester` | `6` | Meses por semestre. |
-| `timeZone` | `"America/Bogota"` | Zona horaria para saber qué día es hoy. |
-
-Cálculo: `semestreActual = referenceSemester + floor(mesesCompletos / monthsPerSemester)`. Un mes cuenta como completo solo cuando se llega al mismo día del mes de la fecha de referencia. Por ejemplo, con `referenceDate: "2026-02-15"`, el 14 de agosto de 2026 sigue mostrando 5.º semestre y el 15 de agosto pasa a 6.º.
-
-- Mientras `referenceDate` sea `null`, el sitio muestra **5.º semestre** con la nota «Último semestre confirmado.». El motivo aparece solo como aviso en la consola del servidor.
-- Si la fecha es inválida (por ejemplo `2026-02-30`) o está en el futuro, también se muestra el último semestre confirmado con la misma nota y el motivo en la consola.
-- No se asume un número total de semestres en la carrera.
-- La página se regenera automáticamente una vez al día en Vercel (`cacheLife("days")` en `lib/academic.ts`), así que el semestre y el año del pie se actualizan sin redesplegar.
+El sitio no muestra el semestre en ninguna parte, a propósito. Solo aparecen la carrera y la universidad (`config/portfolio.ts`).
 
 ### 3. Testimonios (se necesitan al menos tres reales)
 
