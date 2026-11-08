@@ -36,6 +36,8 @@ export interface Project {
   image?: { src: string; alt: string };
   /** Ilustración usada mientras no haya captura real. */
   motif: ProjectMotif;
+  /** Proyecto principal de este semestre: va arriba, antes que los demás. */
+  featured?: boolean;
 }
 
 export const projectStatusLabels: Record<ProjectStatus, string> = {
@@ -45,24 +47,52 @@ export const projectStatusLabels: Record<ProjectStatus, string> = {
 };
 
 export const projects: Project[] = [
+  // Primero los principales de este semestre (featured), luego los demás.
   {
-    id: "ai-code-tutor",
-    title: "AI Code Tutor",
+    id: "smartcontrol",
+    title: "SmartControl",
     description:
-      "Tutor de programación asistido por IA, pensado para que los estudiantes entiendan los conceptos y lleguen a la solución por sí mismos en lugar de recibir la tarea resuelta.",
+      "Proyecto en etapa inicial que explora cómo controlar un computador con Windows mediante gestos de la muñeca, usando un smartwatch con Wear OS.",
     highlights: [
-      "Editor de código integrado en el navegador con Monaco Editor.",
-      "Frontend en React y TypeScript; backend en Java con Spring Boot y PostgreSQL.",
+      "Alcance inicial: modo presentación (avanzar y retroceder diapositivas) y modo multimedia (reproducir y pausar).",
+      "Primera versión del reconocimiento basada en reglas sobre el giroscopio; aún no hay modelo de aprendizaje automático.",
+      "Aplicación complementaria para Windows con una lista blanca de acciones permitidas, en construcción.",
     ],
-    tags: ["React", "TypeScript", "Monaco Editor", "Java", "Spring Boot", "PostgreSQL"],
-    status: "en-desarrollo",
-    repositories: [{ label: "Frontend", url: "https://github.com/maajjjoo/ai-code-tutor-frontend" }],
+    tags: ["Kotlin", "Wear OS", "C#", ".NET"],
+    status: "etapa-inicial",
+    repositories: [{ label: "Prototipo", url: "https://github.com/maajjjoo/smartwatch-vista" }],
     demo: {
-      label: "Ver demo",
-      url: "https://code-tutor-frontend.vercel.app",
-      note: "Frontend publicado. Algunas funciones dependen del backend, que puede tardar en responder o no estar disponible.",
+      label: "Ver prototipo",
+      url: "https://smartwatch-vista.vercel.app",
+      note: "Prototipo interactivo de la interfaz del reloj en el navegador; la conexión con el computador es simulada.",
     },
-    motif: "editor",
+    image: {
+      src: "/images/projects/smartcontrol.jpg",
+      alt: "Captura del prototipo de SmartControl: la pantalla redonda del reloj con los modos Presentación y Música, junto a los controles del prototipo.",
+    },
+    motif: "watch",
+    featured: true,
+  },
+  {
+    id: "studia",
+    title: "Studia",
+    description:
+      "Aplicación de escritorio para organizar la vida académica: materias, horarios, tareas y sesiones de estudio con concentración.",
+    highlights: [
+      "Gestión de materias, horario de clases, tareas y calendario.",
+      "Modo enfoque con temporizador Pomodoro y bloqueo de aplicaciones y sitios web en Windows.",
+      "Asistente académico con IA a través de un backend que mantiene la clave de la API fuera de la app.",
+    ],
+    tags: ["Tauri", "React", "TypeScript", "Rust", "Vite", "Node.js", "Gemini"],
+    status: "en-desarrollo",
+    repositories: [
+      { label: "App de escritorio", url: "https://github.com/maajjjoo/studia-frontend" },
+      { label: "Backend", url: "https://github.com/maajjjoo/studia-backend" },
+    ],
+    demo: null,
+    demoUnavailableReason: "Es una aplicación de escritorio para Windows; no tiene demo web.",
+    motif: "desktop",
+    featured: true,
   },
   {
     id: "pollystock",
@@ -84,42 +114,25 @@ export const projects: Project[] = [
     demo: null,
     demoUnavailableReason: "Es una aplicación móvil; todavía no tiene una versión pública para probar.",
     motif: "mobile",
+    featured: true,
   },
   {
-    id: "studia",
-    title: "Studia",
+    id: "ai-code-tutor",
+    title: "AI Code Tutor",
     description:
-      "Aplicación de escritorio para organizar la vida académica: materias, horarios, tareas y sesiones de estudio con concentración.",
+      "Tutor de programación asistido por IA, pensado para que los estudiantes entiendan los conceptos y lleguen a la solución por sí mismos en lugar de recibir la tarea resuelta.",
     highlights: [
-      "Gestión de materias, horario de clases, tareas y calendario.",
-      "Modo enfoque con temporizador Pomodoro y bloqueo de aplicaciones y sitios web en Windows.",
-      "Asistente académico con IA a través de un backend que mantiene la clave de la API fuera de la app.",
+      "Editor de código integrado en el navegador con Monaco Editor.",
+      "Frontend en React y TypeScript; backend en Java con Spring Boot y PostgreSQL.",
     ],
-    tags: ["Tauri", "React", "TypeScript", "Rust", "Vite", "Node.js", "Gemini"],
+    tags: ["React", "TypeScript", "Monaco Editor", "Java", "Spring Boot", "PostgreSQL"],
     status: "en-desarrollo",
-    repositories: [
-      { label: "App de escritorio", url: "https://github.com/maajjjoo/studia-frontend" },
-      { label: "Backend", url: "https://github.com/maajjjoo/studia-backend" },
-    ],
-    demo: null,
-    demoUnavailableReason: "Es una aplicación de escritorio para Windows; no tiene demo web.",
-    motif: "desktop",
-  },
-  {
-    id: "smartcontrol",
-    title: "SmartControl",
-    description:
-      "Proyecto en etapa inicial que explora cómo controlar un computador con Windows mediante gestos de la muñeca, usando un smartwatch con Wear OS.",
-    highlights: [
-      "Alcance inicial: modo presentación (avanzar y retroceder diapositivas) y modo multimedia (reproducir y pausar).",
-      "Primera versión del reconocimiento basada en reglas sobre el giroscopio; aún no hay modelo de aprendizaje automático.",
-      "Aplicación complementaria para Windows con una lista blanca de acciones permitidas, en construcción.",
-    ],
-    tags: ["Kotlin", "Wear OS", "C#", ".NET"],
-    status: "etapa-inicial",
-    repositories: [],
-    demo: null,
-    demoUnavailableReason: "Requiere un reloj con Wear OS y un computador con Windows; no tiene demo web.",
-    motif: "watch",
+    repositories: [{ label: "Frontend", url: "https://github.com/maajjjoo/ai-code-tutor-frontend" }],
+    demo: {
+      label: "Ver demo",
+      url: "https://code-tutor-frontend.vercel.app",
+      note: "Frontend publicado. Algunas funciones dependen del backend, que puede tardar en responder o no estar disponible.",
+    },
+    motif: "editor",
   },
 ];

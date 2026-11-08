@@ -30,19 +30,34 @@ export default function Projects() {
           }
         />
 
-        <ul className="grid overflow-hidden rounded-2xl border-t border-l border-line md:grid-cols-2">
-          {projects.map((project, index) => (
-            <li
-              key={project.id}
-              data-reveal
-              style={{ "--reveal-delay": `${(index % 2) * 120}ms` } as CSSProperties}
-              className="flex border-r border-b border-line"
-            >
-              <ProjectCard project={project} />
-            </li>
-          ))}
-        </ul>
+        <ProjectGroup id="proyectos-semestre" title="Este semestre" projects={featured} />
+        {others.length > 0 ? <ProjectGroup id="proyectos-otros" title="Otros proyectos" projects={others} /> : null}
       </div>
+    </section>
+  );
+}
+
+const featured = projects.filter((project) => project.featured);
+const others = projects.filter((project) => !project.featured);
+
+function ProjectGroup({ id, title, projects: list }: { id: string; title: string; projects: Project[] }) {
+  return (
+    <section aria-labelledby={id} className="mt-14 first-of-type:mt-0">
+      <h3 id={id} className="mb-5 font-display text-3xl">
+        {title}
+      </h3>
+      <ul className="grid overflow-hidden rounded-2xl border-t border-l border-line md:grid-cols-2">
+        {list.map((project, index) => (
+          <li
+            key={project.id}
+            data-reveal
+            style={{ "--reveal-delay": `${(index % 2) * 120}ms` } as CSSProperties}
+            className="flex border-r border-b border-line"
+          >
+            <ProjectCard project={project} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
@@ -55,9 +70,9 @@ function ProjectCard({ project }: { project: Project }) {
       <header className="mb-5 flex items-start justify-between gap-4">
         <div className="flex items-baseline gap-4">
           <div>
-            <h3 id={titleId} className="font-display text-2xl text-ink">
+            <h4 id={titleId} className="font-display text-2xl text-ink">
               {project.title}
-            </h3>
+            </h4>
             <p className="mt-1 text-sm text-muted">{projectStatusLabels[project.status]}</p>
           </div>
         </div>
