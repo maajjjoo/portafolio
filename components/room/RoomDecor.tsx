@@ -185,18 +185,19 @@ function FramedPrint() {
   );
 }
 
-const spineColors = ["#6e2f1c", "#d6c7ab", "#2d3a26", "#8a5a34", "#1f1b17", "#b8842f", "#3c4a52", "#e0d3b8", "#51291a", "#6b6252", "#a03f22", "#2a2119"];
+// Lomos de vinilos: sobre todo negros y grafito; cada tanto uno crema, ámbar o vino.
+const spineColors = ["#1c1815", "#252019", "#16130f", "#2c2620", "#1f1a15", "#d8c6a3", "#201b16", "#18140f", "#b07c2e", "#29231c", "#1a1612", "#6e2f1c"];
 
 function Spines() {
   return (
     <div className="room-spines" aria-hidden="true">
-      {Array.from({ length: 74 }, (_, i) => (
+      {Array.from({ length: 56 }, (_, i) => (
         <span
           key={i}
           style={{
-            height: `${86 + ((i * 37) % 13)}%`,
-            backgroundColor: spineColors[(i * 7 + (i % 5)) % spineColors.length],
-            filter: `brightness(${0.42 + ((i * 13) % 5) * 0.09})`,
+            height: `${94 + ((i * 37) % 5)}%`,
+            backgroundColor: spineColors[(i * 7 + (i % 3)) % spineColors.length],
+            filter: `brightness(${0.62 + ((i * 13) % 4) * 0.08})`,
           }}
         />
       ))}
@@ -249,7 +250,6 @@ export function RoomFurniture() {
   return (
     <>
       <HangingVine />
-      <div aria-hidden="true" className="room-rug" />
       <Speaker side="l" />
       <Speaker side="r" />
       <Console />

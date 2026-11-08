@@ -56,7 +56,7 @@ export default function LibraryHeader() {
   }
 
   return (
-    <header style={{ viewTransitionName: "site-header" }} className="sticky top-0 z-50 h-18 px-3 py-2 sm:px-5">
+    <header style={{ viewTransitionName: "site-header" }} className="header-fade sticky top-0 z-50 h-18 px-3 py-2 sm:px-5">
       <nav aria-label="Principal" className="glass mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 rounded-full pr-1.5 pl-1.5 shadow-card sm:pl-2">
         <Link href="/" transitionTypes={["room-close"]} className="group flex items-center gap-3" aria-label={`${portfolio.fullName}: ir a la sala`}>
           <span className="grid size-10 place-items-center rounded-full bg-wine font-display text-lg text-on-wine transition-transform duration-700 group-hover:rotate-[360deg]">

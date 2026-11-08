@@ -159,6 +159,16 @@
   box-shadow: var(--shadow);
 }
 
+/* Detrás de la cabecera flotante: lo que pasa por debajo se desvanece en vez de cortarse. */
+.header-fade::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -1.5rem;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 70%, transparent) 55%, transparent);
+}
+
 @utility glass {
   border: 1px solid var(--glass-edge);
   background: var(--glass);
