@@ -1,0 +1,122 @@
+/* --- Versión moderna (prueba en /moderno) --------------------------------------
+   Sin sala: fondo liso con una luz cálida, el nombre muy grande y los discos sueltos.
+   Al pasar por encima, el disco se levanta y el vinilo sale de la funda. */
+
+.modern {
+  position: relative;
+  min-height: calc(100svh - 4.5rem);
+  overflow: hidden;
+  background:
+    radial-gradient(55% 45% at 78% 70%, rgb(232 173 90 / 0.13), transparent 70%),
+    radial-gradient(40% 35% at 10% 10%, rgb(232 173 90 / 0.06), transparent 70%),
+    var(--bg);
+}
+
+[data-theme="light"] .modern {
+  background:
+    radial-gradient(55% 45% at 78% 70%, rgb(201 136 60 / 0.16), transparent 70%),
+    radial-gradient(40% 35% at 10% 10%, rgb(255 255 255 / 0.5), transparent 70%),
+    var(--bg);
+}
+
+.modern-inner {
+  max-width: 76rem;
+  margin-inline: auto;
+  padding: clamp(2.5rem, 7vw, 6rem) clamp(1.25rem, 4vw, 2rem) clamp(4rem, 8vw, 7rem);
+}
+
+.modern-head h1 {
+  max-width: 14ch;
+  font-family: var(--font-gloock);
+  font-size: clamp(2.75rem, 7.4vw, 6.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.modern-head p {
+  margin-top: 1.25rem;
+  max-width: 40ch;
+  font-size: clamp(1rem, 1.4vw, 1.1875rem);
+  color: var(--muted);
+}
+
+.modern-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 3vw, 2.75rem);
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  /* Deja sitio a la derecha para que el último vinilo pueda salir. */
+  padding-right: clamp(0rem, 3vw, 2.5rem);
+}
+
+@media (max-width: 899px) {
+  .modern-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-right: 0; }
+}
+
+.modern-record {
+  display: block;
+  outline-offset: 6px;
+  border-radius: 0.75rem;
+}
+
+.modern-stage {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+}
+
+.modern-disc {
+  position: absolute;
+  inset: 4%;
+  transition: transform 700ms var(--ease-object);
+}
+
+.modern-sleeve {
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.08) inset,
+    0 24px 40px -22px rgb(0 0 0 / 0.75);
+  transition: transform 450ms var(--ease-object), box-shadow 450ms var(--ease-object);
+}
+
+[data-theme="light"] .modern-sleeve {
+  box-shadow: 0 24px 36px -22px rgb(70 45 20 / 0.5);
+}
+
+.modern-record:is(:hover, :focus-visible) .modern-sleeve {
+  transform: translateY(-8px);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.08) inset,
+    0 34px 50px -24px rgb(0 0 0 / 0.85);
+}
+
+.modern-record:is(:hover, :focus-visible) .modern-disc {
+  transform: translate(34%, -8px) rotate(120deg);
+}
+
+.modern-name {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  transition: color 250ms ease;
+}
+
+.modern-record:is(:hover, :focus-visible) .modern-name { color: var(--accent); }
+
+/* En pantallas táctiles el vinilo ya asoma un poco: se nota que es un disco. */
+@media (hover: none) {
+  .modern-disc { transform: translateX(14%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modern-record:is(:hover, :focus-visible) .modern-sleeve { transform: none; }
+  .modern-record:is(:hover, :focus-visible) .modern-disc { transform: translateX(30%); }
+}

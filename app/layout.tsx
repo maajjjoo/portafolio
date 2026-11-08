@@ -10,6 +10,7 @@ import "./globals.css";
 import "./room.css";
 import "./album.css";
 import "./camera.css";
+import "./modern.css";
 
 const gloock = Gloock({
   variable: "--font-gloock",

@@ -23,8 +23,8 @@ function clearNames() {
 /** Da a la funda y al vinilo de este disco, y a ningún otro, su papel en la transición. */
 export function nameRecord(record: HTMLElement) {
   clearNames();
-  const sleeve = record.querySelector<HTMLElement>(".record-sleeve");
-  const disc = record.querySelector<HTMLElement>(".record-disc");
+  const sleeve = record.querySelector<HTMLElement>(".record-sleeve, [data-camera=sleeve]");
+  const disc = record.querySelector<HTMLElement>(".record-disc, [data-camera=disc]");
   if (!sleeve || !disc) return;
 
   sleeve.style.viewTransitionName = "camera-sleeve";
@@ -54,7 +54,8 @@ export function returnToLastRecord() {
   if (!slug) return;
   delete root.dataset.lastAlbum;
 
-  const record = document.querySelector<HTMLElement>(`.record[href="/album/${CSS.escape(slug)}"]`);
+  const href = `/album/${CSS.escape(slug)}`;
+  const record = document.querySelector<HTMLElement>(`.record[href="${href}"], [data-record][href="${href}"]`);
   if (!record) return;
   nameRecord(record);
   record.focus({ preventScroll: true });

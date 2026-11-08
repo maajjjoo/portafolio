@@ -3,7 +3,7 @@ import type { Album } from "@/data/albums";
 interface CoverArtProps {
   album: Album;
   /** Distingue los id internos del SVG cuando la misma portada está dos veces en la página (sala y álbum). */
-  place?: "room" | "album" | "menu" | "credits";
+  place?: "room" | "album" | "menu" | "credits" | "modern";
   className?: string;
 }
 
