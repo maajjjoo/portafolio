@@ -36,7 +36,7 @@ There are three, each with a job:
 
 - **Wall:** the ground. Text can sit directly on it, in a colour measured against the light behind it.
 - **Paper (`paper`):** near-opaque, only where long text or a form needs it. Never a large panel hiding the room.
-- **Glass (`glass`):** translucent with controlled blur, only for small pieces: pager, return control, data strips.
+- **Glass (`glass`):** translucent with controlled blur, only for small pieces: the header, return control, data strips.
 
 Shared tokens: `--radius-sheet`, `--radius-group`, `--radius-field`, `--space-section`, `--ease-object`, `--paper`, `--glass`, `--glass-edge`.
 
@@ -68,7 +68,7 @@ Everything that holds text is rounded: large surfaces at `1.5rem`, groups and no
 
 ## Less on screen
 
-- Records are named only by their plain section (Bienvenida, Sobre mí, Proyectos…), everywhere: under the sleeve, as the album heading, in the menu, in previous/next and in the page title. The artistic titles in `data/albums.ts` are no longer shown. Each album opens with its section name and the index, nothing else.
+- Records are named only by their plain section (Bienvenida, Sobre mí, Proyectos…), everywhere: under the sleeve, as the album heading, in the menu, in previous/next and in the page title. The artistic titles in `data/albums.ts` are no longer shown. Each album opens with its section name and nothing else: no index and no floating pager, because every album is short.
 - The header is a floating glass pill: initials and first name, Álbumes and the light switch. Vinyl labels carry no text, only the album colour and an accent ring. The footer is one line: copyright, profiles and back to top.
 - **Hover and focus:** the sleeve leans out and its disc slides out to the right.
 
@@ -85,7 +85,7 @@ Everything that holds text is rounded: large surfaces at `1.5rem`, groups and no
 | Stack | Typographic index on the wall: large category, skills in line | None | None |
 | Créditos finales | Back cover: catalogue, colophon, rights, way back to the room | Colophon strip | None |
 
-Shared navigation: return to the room, a one-line index and a glass pager. Previous and next stay quiet at the end.
+Shared navigation: return to the room, and previous and next, quiet at the end.
 
 ## Content rules
 
