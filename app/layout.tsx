@@ -10,7 +10,6 @@ import "./globals.css";
 import "./room.css";
 import "./album.css";
 import "./camera.css";
-import "./modern.css";
 
 const gloock = Gloock({
   variable: "--font-gloock",
@@ -44,7 +43,7 @@ export const viewport: Viewport = {
 
 // Aplica la luz guardada antes de pintar, para evitar parpadeos, y marca que hay JavaScript
 // para activar las animaciones.
-const themeScript = `(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");d.setAttribute("data-theme",t==="light"?"light":"dark");if(location.pathname==="/moderno")d.dataset.look="modern"}catch(e){}})()`;
+const themeScript = `(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");d.setAttribute("data-theme",t==="light"?"light":"dark")}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
