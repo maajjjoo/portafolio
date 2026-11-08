@@ -19,7 +19,7 @@ export default function Skills() {
         <SectionHeading
           title="Tecnologías que he usado"
           titleId="habilidades-titulo"
-          intro="No me considero experta en ninguna. Separo las que ya usé en algún proyecto de las que apenas estoy aprendiendo."
+          intro="Las que he manejado en clase y en mis proyectos, y las que estoy empezando a aprender."
         />
 
         <ul data-reveal className="mb-10 flex flex-wrap gap-6 text-sm" aria-label="Leyenda">

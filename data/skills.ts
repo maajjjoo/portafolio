@@ -19,8 +19,8 @@ export interface SkillCategory {
 }
 
 export const skillLevelLabels: Record<SkillLevel, string> = {
-  proyectos: "Usada en proyectos",
-  aprendizaje: "Aprendiendo",
+  proyectos: "La he manejado",
+  aprendizaje: "Estoy aprendiendo",
 };
 
 export const skillCategories: SkillCategory[] = [
