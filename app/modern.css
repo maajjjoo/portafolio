@@ -1,21 +1,65 @@
 /* --- Versión moderna (prueba en /moderno) --------------------------------------
-   Sin sala: fondo liso con una luz cálida, el nombre muy grande y los discos sueltos.
+   Sin sala: fondo liso con luces de color, el nombre muy grande y los discos sueltos.
    Al pasar por encima, el disco se levanta y el vinilo sale de la funda. */
+
+/* Paleta moderna: grafito o blanco roto, con violeta, azul, coral y lima. Mientras esta página
+   está abierta, ModernHome marca <html data-look="modern"> y la cabecera y el pie la usan también. */
+:root[data-look="modern"] {
+  --bg: #0d0d11;
+  --surface: #16161c;
+  --surface-2: #1f1f27;
+  --ink: #f3f3f6;
+  --muted: #a3a3b2;
+  --line: #2b2b35;
+  --wine: #8b6cff;
+  --on-wine: #ffffff;
+  --accent: #b4a1ff;
+  --accent-soft: #241d3d;
+  --foot-bg: #09090c;
+  --foot-ink: #f3f3f6;
+  --foot-muted: #a3a3b2;
+  --foot-line: #2b2b35;
+  --foot-accent: #b4a1ff;
+  --glass: rgb(22 22 28 / 0.6);
+  --glass-edge: rgb(255 255 255 / 0.1);
+}
+
+:root[data-look="modern"][data-theme="light"] {
+  --bg: #f4f4f1;
+  --surface: #ffffff;
+  --surface-2: #e9e9e4;
+  --ink: #111116;
+  --muted: #5a5a66;
+  --line: #dadad3;
+  --wine: #111116;
+  --on-wine: #ffffff;
+  --accent: #5a3ce0;
+  --accent-soft: #e6e0ff;
+  --foot-bg: #eaeae5;
+  --foot-ink: #111116;
+  --foot-muted: #5a5a66;
+  --foot-line: #d4d4cc;
+  --foot-accent: #5a3ce0;
+  --glass: rgb(255 255 255 / 0.62);
+  --glass-edge: rgb(17 17 22 / 0.08);
+}
 
 .modern {
   position: relative;
   min-height: calc(100svh - 4.5rem);
   overflow: hidden;
   background:
-    radial-gradient(55% 45% at 78% 70%, rgb(232 173 90 / 0.13), transparent 70%),
-    radial-gradient(40% 35% at 10% 10%, rgb(232 173 90 / 0.06), transparent 70%),
+    radial-gradient(45% 40% at 85% 75%, rgb(139 108 255 / 0.22), transparent 70%),
+    radial-gradient(35% 35% at 55% 95%, rgb(61 90 254 / 0.16), transparent 70%),
+    radial-gradient(30% 30% at 8% 5%, rgb(255 107 74 / 0.1), transparent 70%),
     var(--bg);
 }
 
 [data-theme="light"] .modern {
   background:
-    radial-gradient(55% 45% at 78% 70%, rgb(201 136 60 / 0.16), transparent 70%),
-    radial-gradient(40% 35% at 10% 10%, rgb(255 255 255 / 0.5), transparent 70%),
+    radial-gradient(45% 40% at 85% 75%, rgb(139 108 255 / 0.2), transparent 70%),
+    radial-gradient(35% 35% at 55% 95%, rgb(61 90 254 / 0.12), transparent 70%),
+    radial-gradient(30% 30% at 8% 5%, rgb(255 107 74 / 0.12), transparent 70%),
     var(--bg);
 }
 
@@ -27,10 +71,11 @@
 
 .modern-head h1 {
   max-width: 14ch;
-  font-family: var(--font-gloock);
+  font-family: var(--font-hanken);
+  font-weight: 700;
   font-size: clamp(2.75rem, 7.4vw, 6.25rem);
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
@@ -78,7 +123,7 @@
   display: block;
   height: 100%;
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 0.875rem;
   box-shadow:
     0 1px 0 rgb(255 255 255 / 0.08) inset,
     0 24px 40px -22px rgb(0 0 0 / 0.75);
@@ -86,7 +131,7 @@
 }
 
 [data-theme="light"] .modern-sleeve {
-  box-shadow: 0 24px 36px -22px rgb(70 45 20 / 0.5);
+  box-shadow: 0 24px 36px -22px rgb(20 20 40 / 0.4);
 }
 
 .modern-record:is(:hover, :focus-visible) .modern-sleeve {
