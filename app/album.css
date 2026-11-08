@@ -5,10 +5,11 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  /* La misma pared de la sala, desenfocada: una luz cálida sobre la portada y otra más lejana. */
   background:
-    repeating-linear-gradient(90deg, #4a2f1b 0 0.5rem, #0d0906 0.5rem 0.75rem) 0 0 / 3.5rem 100% no-repeat,
-    radial-gradient(60% 38% at 62% 26%, rgb(240 172 84 / 0.17), transparent 100%),
-    linear-gradient(180deg, #2c2922, #3a3529 42%, #25221b);
+    radial-gradient(45% 40% at 22% 22%, rgb(240 172 84 / 0.16), transparent 100%),
+    radial-gradient(40% 45% at 88% 70%, rgb(240 172 84 / 0.07), transparent 100%),
+    linear-gradient(180deg, #2a2720, #34302a 45%, #1d1b16);
 }
 
 /* De noche, el texto secundario sobre la pared iluminada necesita más luz que sobre un fondo liso. */
@@ -21,31 +22,24 @@
   position: relative;
   border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
   border-radius: 1.5rem;
-  /* De noche, una hoja cálida y clara frente a la pared; el texto gana contraste dentro de ella. */
-  --surface: #40392d;
-  --surface-2: #2f291f;
-  --line: #66584a;
+  /* De noche, un vidrio ahumado: deja ver la luz de la pared sin teñir el texto de marrón. */
+  --surface: #2b261f;
+  --surface-2: #221e19;
+  --line: #463d31;
   --muted: #d3c4ac;
-  background: rgb(84 75 60 / 0.58);
-  -webkit-backdrop-filter: blur(16px) saturate(1.1);
-  backdrop-filter: blur(16px) saturate(1.1);
-  box-shadow: 0 30px 60px -40px rgb(0 0 0 / 0.75);
-}
-
-/* Por debajo de este ancho el texto llegaría a pisar la tira de listones: se quita. */
-@media (max-width: 1279px) {
-  .album-wall {
-    background:
-      radial-gradient(90% 34% at 60% 20%, rgb(240 172 84 / 0.16), transparent 100%),
-      linear-gradient(180deg, #2c2922, #3a3529 42%, #25221b);
-  }
+  border-color: rgb(255 236 210 / 0.1);
+  background: linear-gradient(180deg, rgb(36 32 26 / 0.72), rgb(24 21 17 / 0.78));
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+  backdrop-filter: blur(20px) saturate(1.15);
+  box-shadow:
+    inset 0 1px 0 rgb(255 236 210 / 0.08),
+    0 40px 80px -50px rgb(0 0 0 / 0.9);
 }
 
 /* El libreto, de día: papel sobre la misma pared soleada. */
 [data-theme="light"] .album-wall {
   background:
-    linear-gradient(112deg, transparent 30%, rgb(255 246 222 / 0.6) 31% 44%, transparent 45% 47%, rgb(255 246 222 / 0.6) 48% 61%, transparent 62%),
-    repeating-linear-gradient(90deg, #b48a5b 0 0.5rem, #5a3d22 0.5rem 0.75rem) 0 0 / 3.5rem 100% no-repeat,
+    linear-gradient(112deg, transparent 30%, rgb(255 246 222 / 0.55) 31% 44%, transparent 45% 47%, rgb(255 246 222 / 0.55) 48% 61%, transparent 62%),
     linear-gradient(180deg, #e2d8c6, #ece4d4 42%, #d9cdb9);
 }
 
@@ -54,14 +48,11 @@
   --surface-2: #dccdb3;
   --line: #c7b497;
   --muted: #5f4d3c;
-  background: color-mix(in srgb, #fbf6ec 62%, transparent);
-  box-shadow: 0 30px 60px -40px rgb(60 40 20 / 0.5);
+  border-color: rgb(255 255 255 / 0.7);
+  background: color-mix(in srgb, #fbf6ec 70%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.8),
+    0 40px 80px -50px rgb(60 40 20 / 0.55);
 }
 
-@media (max-width: 1279px) {
-  [data-theme="light"] .album-wall {
-    background:
-      linear-gradient(112deg, transparent 20%, rgb(255 246 222 / 0.6) 22% 50%, transparent 52%),
-      linear-gradient(180deg, #e2d8c6, #ece4d4 42%, #d9cdb9);
-  }
-}
+
