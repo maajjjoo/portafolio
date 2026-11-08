@@ -51,13 +51,14 @@ Everything that holds text is rounded: large surfaces at `1.5rem`, groups and no
 - At night, light comes only from the LED strips and the lamp. Strips sit under the ledges, so light runs down the wall and fades, within the ledge's exact width.
 - By day, window light replaces them: LEDs and lamp are off, and shadow sits where night has glow. Speakers and records stay black.
 - Shadows always have a direction from the room's light. No coloured halos.
-- Each material has its own treatment: oiled wood, matte doors with seams, brushed aluminium and brass plates, paper sleeves with a card edge, vinyl with static reflections, wool rug.
+- Each material has its own treatment: oiled wood, matte doors with seams, brushed aluminium and brass plates, paper sleeves with a card edge, vinyl with static reflections. The credenza stores records on edge: mostly black spines with an occasional cream, amber or wine one. No rug.
 
 ## The room
 
 - Sized in one unit, `--u`, so it scales as one object and never crops a record.
+- The wall runs up behind the floating header; the header fades what scrolls under it.
 - Desktop: two ledges of four sleeves (Lado A, Lado B) above a credenza, with speakers either side.
-- Below 900px: a deliberately tall wall, with the name plate first. Speakers and rug are dropped, and on phones also the amplifier and plant, so the turntable stays legible.
+- Below 900px: a deliberately tall wall, with the name plate first. Speakers are dropped, and on phones also the amplifier and plant, so the turntable stays legible.
 - Every sleeve is a real link, with its plain section name under it. A small amber dot beside the name marks a record already heard; the link's label says it in words.
 
 ## Covers
