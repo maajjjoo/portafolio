@@ -174,7 +174,7 @@ export const albums: Album[] = [
     title: "Stack",
     section: "Habilidades",
     category: "Extras",
-    description: "Las tecnologías que he usado en proyectos y las que estoy aprendiendo.",
+    description: "Las tecnologías que he utilizado en mis proyectos.",
     tracks: skillCategories.map((category) => ({ title: category.title, anchor: `skills-${category.id}` })),
     cover: { motif: "rings", background: palette.charcoal, foreground: palette.gold, accent: palette.burgundy },
   },

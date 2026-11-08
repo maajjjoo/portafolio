@@ -2,15 +2,7 @@ import type { CSSProperties } from "react";
 
 import SectionHeading from "@/components/ui/SectionHeading";
 import { sectionIds } from "@/config/navigation";
-import { skillCategories, skillLevelLabels, type SkillLevel } from "@/data/skills";
-
-function LevelMark({ level }: { level: SkillLevel }) {
-  return level === "proyectos" ? (
-    <span aria-hidden="true" className="size-2.5 shrink-0 rotate-45 bg-accent" />
-  ) : (
-    <span aria-hidden="true" className="size-2.5 shrink-0 rotate-45 border border-muted" />
-  );
-}
+import { skillCategories } from "@/data/skills";
 
 export default function Skills() {
   return (
@@ -19,17 +11,8 @@ export default function Skills() {
         <SectionHeading
           title="Tecnologías que he usado"
           titleId="habilidades-titulo"
-          intro="Las que he manejado en clase y en mis proyectos, y las que estoy empezando a aprender."
+          intro="Las que he utilizado en mis proyectos."
         />
-
-        <ul data-reveal className="mb-10 flex flex-wrap gap-6 text-sm" aria-label="Leyenda">
-          {(Object.keys(skillLevelLabels) as SkillLevel[]).map((level) => (
-            <li key={level} className="label flex items-center gap-3 text-muted">
-              <LevelMark level={level} />
-              {skillLevelLabels[level]}
-            </li>
-          ))}
-        </ul>
 
         <div className="grid overflow-hidden rounded-2xl border-t border-l border-line sm:grid-cols-2 lg:grid-cols-3">
           {skillCategories.map((category, index) => (
@@ -50,13 +33,10 @@ export default function Skills() {
                 {category.skills.map((skill) => (
                   <li
                     key={skill.name}
-                    className={`flex items-center gap-2.5 rounded-lg border px-3 py-2.5 text-sm transition-transform duration-300 hover:-translate-y-0.5 ${
-                      skill.level === "proyectos" ? "border-line" : "border-dashed border-line text-muted"
-                    }`}
+                    className="flex items-center gap-2.5 rounded-lg border border-line px-3 py-2.5 text-sm transition-transform duration-300 hover:-translate-y-0.5"
                   >
-                    <LevelMark level={skill.level} />
+                    <span aria-hidden="true" className="size-2.5 shrink-0 rotate-45 bg-accent" />
                     {skill.name}
-                    <span className="sr-only">: {skillLevelLabels[skill.level]}</span>
                   </li>
                 ))}
               </ul>

@@ -1,14 +1,10 @@
 /**
- * Tecnologías agrupadas por categoría. No se usan porcentajes:
- * - "proyectos": la he usado en al menos un proyecto propio o académico.
- * - "aprendizaje": la estoy aprendiendo o la uso en un proyecto que apenas empieza.
+ * Tecnologías que he utilizado en mis proyectos, agrupadas por categoría.
+ * Sin porcentajes ni niveles: solo va lo que de verdad he usado.
  */
-
-export type SkillLevel = "proyectos" | "aprendizaje";
 
 export interface Skill {
   name: string;
-  level: SkillLevel;
 }
 
 export interface SkillCategory {
@@ -18,24 +14,19 @@ export interface SkillCategory {
   skills: Skill[];
 }
 
-export const skillLevelLabels: Record<SkillLevel, string> = {
-  proyectos: "La he manejado",
-  aprendizaje: "Estoy aprendiendo",
-};
-
 export const skillCategories: SkillCategory[] = [
   {
     id: "lenguajes",
     title: "Lenguajes",
     description: "Los que he usado en clase y en mis proyectos.",
     skills: [
-      { name: "TypeScript", level: "proyectos" },
-      { name: "JavaScript", level: "proyectos" },
-      { name: "Java", level: "proyectos" },
-      { name: "Python", level: "proyectos" },
-      { name: "Rust", level: "aprendizaje" },
-      { name: "Kotlin", level: "aprendizaje" },
-      { name: "C#", level: "aprendizaje" },
+      { name: "TypeScript" },
+      { name: "JavaScript" },
+      { name: "Java" },
+      { name: "Python" },
+      { name: "Rust" },
+      { name: "Kotlin" },
+      { name: "C#" },
     ],
   },
   {
@@ -43,11 +34,11 @@ export const skillCategories: SkillCategory[] = [
     title: "Frontend",
     description: "Para hacer interfaces web y de escritorio.",
     skills: [
-      { name: "React", level: "proyectos" },
-      { name: "HTML y CSS", level: "proyectos" },
-      { name: "Tailwind CSS", level: "proyectos" },
-      { name: "Vite", level: "proyectos" },
-      { name: "Next.js", level: "aprendizaje" },
+      { name: "React" },
+      { name: "HTML y CSS" },
+      { name: "Tailwind CSS" },
+      { name: "Vite" },
+      { name: "Next.js" },
     ],
   },
   {
@@ -55,11 +46,11 @@ export const skillCategories: SkillCategory[] = [
     title: "Backend",
     description: "Para los servidores y las APIs de mis aplicaciones.",
     skills: [
-      { name: "Node.js", level: "proyectos" },
-      { name: "Express", level: "proyectos" },
-      { name: "Spring Boot", level: "proyectos" },
-      { name: "Prisma", level: "proyectos" },
-      { name: ".NET", level: "aprendizaje" },
+      { name: "Node.js" },
+      { name: "Express" },
+      { name: "Spring Boot" },
+      { name: "Prisma" },
+      { name: ".NET" },
     ],
   },
   {
@@ -67,10 +58,10 @@ export const skillCategories: SkillCategory[] = [
     title: "Móvil y escritorio",
     description: "Aplicaciones fuera del navegador.",
     skills: [
-      { name: "React Native", level: "proyectos" },
-      { name: "Expo", level: "proyectos" },
-      { name: "Tauri", level: "proyectos" },
-      { name: "Wear OS", level: "aprendizaje" },
+      { name: "React Native" },
+      { name: "Expo" },
+      { name: "Tauri" },
+      { name: "Wear OS" },
     ],
   },
   {
@@ -78,8 +69,8 @@ export const skillCategories: SkillCategory[] = [
     title: "Bases de datos",
     description: "Persistencia local y en servidor.",
     skills: [
-      { name: "PostgreSQL", level: "proyectos" },
-      { name: "SQLite", level: "proyectos" },
+      { name: "PostgreSQL" },
+      { name: "SQLite" },
     ],
   },
   {
@@ -87,11 +78,11 @@ export const skillCategories: SkillCategory[] = [
     title: "Herramientas",
     description: "Para guardar versiones, publicar y usar IA.",
     skills: [
-      { name: "Git", level: "proyectos" },
-      { name: "GitHub", level: "proyectos" },
-      { name: "Vercel", level: "proyectos" },
-      { name: "API de Gemini", level: "proyectos" },
-      { name: "Android Studio", level: "aprendizaje" },
+      { name: "Git" },
+      { name: "GitHub" },
+      { name: "Vercel" },
+      { name: "API de Gemini" },
+      { name: "Android Studio" },
     ],
   },
 ];

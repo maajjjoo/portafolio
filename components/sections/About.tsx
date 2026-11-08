@@ -10,7 +10,6 @@ import { formatSemester } from "@/lib/semester";
 
 const mainTechnologies = skillCategories
   .flatMap((category) => category.skills)
-  .filter((skill) => skill.level === "proyectos")
   .map((skill) => skill.name)
   .slice(0, 10);
 

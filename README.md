@@ -152,7 +152,7 @@ Para añadir un enlace, edita `repositories` o `demo` en `data/projects.ts`. Par
 - **Ubicación:** `config/portfolio.ts → location` (está en `null`, así que no se muestra).
 - **Fecha de inicio de la carrera:** `data/experience.ts → startDate` (formato `"AAAA-MM"`).
 - **Experiencia profesional:** añade entradas con `type: "profesional"` solo para trabajo real en software. Mientras no haya ninguna, se muestra un estado «pendiente».
-- **Habilidades:** revisa `data/skills.ts`. Las tecnologías salen de tus repositorios y de lo que indicaste; ajusta los niveles si algo no te representa.
+- **Habilidades:** revisa `data/skills.ts`. Las tecnologías salen de tus repositorios y de lo que indicaste; todas aparecen como utilizadas en tus proyectos, sin niveles; quita las que no te representen.
 - **Foto:** mientras no exista, el álbum «Hola, mundo» muestra un arco vinotinto con el monograma «MJ» y la nota «Foto próximamente». Para poner tu foto, guárdala como **`public/images/perfil.png`** (también sirve `.jpg`, `.jpeg` o `.webp`) y vuelve a compilar o desplegar: se detecta sola (`next.config.ts`). Funciona mejor una foto vertical (proporción 3:4) con la cara en la parte superior, porque el marco recorta los lados y la parte de abajo.
 
 ## Publicar en GitHub
