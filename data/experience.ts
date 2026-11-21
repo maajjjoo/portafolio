@@ -38,4 +38,14 @@ export const experience: ExperienceItem[] = [
     isCurrent: true,
     description: "Pregrado en curso.",
   },
+  {
+    id: "udenar-ingles",
+    type: "academica",
+    title: "Curso de inglés",
+    organization: "Universidad de Nariño",
+    startDate: null,
+    endDate: null,
+    isCurrent: false,
+    description: "Curso terminado, con certificado.",
+  },
 ];

@@ -11,6 +11,14 @@ export type ProjectStatus = "en-desarrollo" | "etapa-inicial" | "terminado";
 
 export type ProjectMotif = "editor" | "mobile" | "desktop" | "watch";
 
+/** Si lo hice sola o con un equipo. */
+export type ProjectTeam = "individual" | "equipo";
+
+export const projectTeamLabels: Record<ProjectTeam, string> = {
+  individual: "Individual",
+  equipo: "En equipo",
+};
+
 export interface ProjectLink {
   label: string;
   url: string;
@@ -28,6 +36,7 @@ export interface Project {
   highlights: string[];
   tags: string[];
   status: ProjectStatus;
+  team: ProjectTeam;
   repositories: ProjectLink[];
   demo: ProjectDemo | null;
   /** Por qué no hay demo pública, cuando `demo` es `null`. */
@@ -54,12 +63,13 @@ export const projects: Project[] = [
     description:
       "Videojuego 3D de investigación criminal en primera persona. Exploras escenas, recolectas evidencias, interrogas a personajes controlados por IA y tomas decisiones que llevan a distintos finales. ALEX, tu asistente de IA, parece ayudarte, pero manipula la investigación.",
     highlights: [
-      "Proyecto en equipo de tres personas, hecho en Unity.",
+      "Hecho en Unity con un equipo de tres personas.",
       "La verdad de cada caso está en los datos del juego; la IA solo da voz a los personajes.",
       "Los diálogos con IA pasan por un servidor propio, así que las claves no quedan dentro del juego.",
     ],
     tags: ["Unity", "C#", "JavaScript"],
     status: "en-desarrollo",
+    team: "equipo",
     repositories: [{ label: "Juego", url: "https://github.com/Josecampoe/CriminalisticaGame" }],
     demo: null,
     demoUnavailableReason: "Es un juego para computador y todavía no tiene una versión pública para jugar.",
@@ -82,6 +92,7 @@ export const projects: Project[] = [
     ],
     tags: ["Kotlin", "Wear OS", "C#", ".NET"],
     status: "etapa-inicial",
+    team: "individual",
     repositories: [{ label: "Prototipo", url: "https://github.com/maajjjoo/smartwatch-vista" }],
     demo: {
       label: "Ver prototipo",
@@ -107,6 +118,7 @@ export const projects: Project[] = [
     ],
     tags: ["Tauri", "React", "TypeScript", "Rust", "Vite", "Node.js", "Gemini"],
     status: "en-desarrollo",
+    team: "individual",
     repositories: [
       { label: "App de escritorio", url: "https://github.com/maajjjoo/studia-frontend" },
       { label: "Backend", url: "https://github.com/maajjjoo/studia-backend" },
@@ -129,6 +141,7 @@ export const projects: Project[] = [
     ],
     tags: ["React Native", "Expo", "TypeScript", "Node.js", "Express", "Prisma", "SQLite", "Gemini"],
     status: "en-desarrollo",
+    team: "individual",
     repositories: [
       { label: "App móvil", url: "https://github.com/maajjjoo/pollystock-frontend" },
       { label: "Backend", url: "https://github.com/maajjjoo/pollystock-backend" },
@@ -149,6 +162,7 @@ export const projects: Project[] = [
     ],
     tags: ["React", "TypeScript", "Monaco Editor", "Java", "Spring Boot", "PostgreSQL"],
     status: "en-desarrollo",
+    team: "equipo",
     repositories: [{ label: "Frontend", url: "https://github.com/maajjjoo/ai-code-tutor-frontend" }],
     demo: {
       label: "Ver demo",

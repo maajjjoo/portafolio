@@ -14,6 +14,7 @@ function formatMonth(value: string) {
 
 function formatPeriod(item: ExperienceItem) {
   if (item.isCurrent && !item.startDate) return "En curso";
+  if (!item.startDate && !item.endDate) return "Terminado";
   const start = item.startDate ? formatMonth(item.startDate) : "Inicio por confirmar";
   const end = item.isCurrent ? "Actualidad" : item.endDate ? formatMonth(item.endDate) : "Fin por confirmar";
   return `${start} — ${end}`;

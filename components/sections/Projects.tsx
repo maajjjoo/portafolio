@@ -6,7 +6,7 @@ import RollText from "@/components/ui/RollText";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { sectionIds } from "@/config/navigation";
 import { portfolio } from "@/config/portfolio";
-import { projects, projectStatusLabels, type Project, type ProjectMotif } from "@/data/projects";
+import { projects, projectStatusLabels, projectTeamLabels, type Project, type ProjectMotif } from "@/data/projects";
 
 export default function Projects() {
   return (
@@ -73,7 +73,7 @@ function ProjectCard({ project }: { project: Project }) {
             <h4 id={titleId} className="font-display text-2xl text-ink">
               {project.title}
             </h4>
-            <p className="mt-1 text-sm text-muted">{projectStatusLabels[project.status]}</p>
+            <p className="mt-1 text-sm text-muted">{projectStatusLabels[project.status]} · {projectTeamLabels[project.team]}</p>
           </div>
         </div>
       </header>
