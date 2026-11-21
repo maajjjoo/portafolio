@@ -113,6 +113,22 @@
   filter: brightness(0.72);
 }
 
+/* Con foto: un cuadro grande, con paspartú, y menos oscurecido para que se vea la cara. */
+.room-frame-photo {
+  left: calc(26 * var(--u));
+  top: calc(84 * var(--u));
+  width: calc(250 * var(--u));
+  height: calc(330 * var(--u));
+  padding: calc(16 * var(--u));
+  border-width: calc(7 * var(--u));
+  filter: brightness(0.92);
+}
+
+/* La planta se cuelga al otro lado para no tapar la foto. */
+@media (min-width: 900px) {
+  .room:has(.room-frame-photo) .room-vine { left: calc(1236 * var(--u)); }
+}
+
 /* El cristal del marco recoge algo de luz. */
 .room-frame::after {
   content: "";

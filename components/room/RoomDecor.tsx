@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import LampSwitch from "@/components/room/LampSwitch";
 
 /** Lo que hay en la sala: pared, suelo, altavoces, planta. Todo es decorativo salvo la lámpara, que cambia la luz. */
@@ -169,8 +171,24 @@ function Turntable() {
   );
 }
 
-/** Grabado original del marco: surcos de un disco, sin referencias a obras reales. */
+// La misma foto de perfil que usa Bienvenida (next.config.ts la busca en public/images/perfil.*).
+const photoSrc = process.env.PROFILE_PHOTO_SRC ?? "";
+
+/**
+ * El cuadro de la pared: la foto de María José si existe, para verla sin entrar a su perfil.
+ * Mientras no haya foto, un grabado original de los surcos de un disco.
+ */
 function FramedPrint() {
+  if (photoSrc) {
+    return (
+      <div className="room-frame room-frame-photo" aria-hidden="true">
+        <span className="relative block size-full overflow-hidden">
+          <Image src={photoSrc} alt="" fill sizes="200px" className="object-cover object-top" />
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div className="room-frame" aria-hidden="true">
       <svg viewBox="0 0 100 140" className="size-full">
