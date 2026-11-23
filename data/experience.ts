@@ -41,11 +41,11 @@ export const experience: ExperienceItem[] = [
   {
     id: "udenar-ingles",
     type: "academica",
-    title: "Curso de inglés",
+    title: "Curso de inglés, nivel B2",
     organization: "Universidad de Nariño",
     startDate: null,
     endDate: null,
     isCurrent: false,
-    description: "Curso terminado, con certificado.",
+    description: "Nivel de inglés B2, con certificado.",
   },
 ];
