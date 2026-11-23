@@ -114,15 +114,40 @@
 }
 
 /* Con foto: un cuadro grande, con paspartú, y menos oscurecido para que se vea la cara. */
+/* La foto como un póster de estudio: marco negro fino, sin paspartú, retroiluminado en vinotinto. */
 .room-frame-photo {
-  left: calc(14 * var(--u));
+  left: calc(18 * var(--u));
   /* El panel de listones empieza en el borde de la pantalla, detrás de la cabecera flotante. */
   top: calc(4.5rem + 10 * var(--u));
-  width: calc(280 * var(--u));
+  width: calc(268 * var(--u));
   height: auto;
-  padding: calc(12 * var(--u));
-  border-width: calc(6 * var(--u));
-  filter: brightness(0.94) sepia(0.12);
+  padding: calc(4 * var(--u));
+  background: #07080c;
+  border: calc(2 * var(--u)) solid #2a2f3e;
+  border-radius: calc(6 * var(--u));
+  filter: none;
+  box-shadow:
+    0 0 calc(70 * var(--u)) calc(6 * var(--u)) rgb(170 40 70 / 0.4),
+    0 0 calc(18 * var(--u)) rgb(214 58 92 / 0.25),
+    calc(6 * var(--u)) calc(14 * var(--u)) calc(26 * var(--u)) rgb(0 0 0 / 0.7);
+}
+
+.room-frame-photo .room-frame-window { border-radius: calc(3 * var(--u)); }
+
+/* Reflejo del vidrio: una franja de luz en diagonal, muy suave. */
+.room-frame-photo::after {
+  inset: calc(4 * var(--u));
+  border-radius: calc(3 * var(--u));
+  background:
+    linear-gradient(125deg, rgb(255 255 255 / 0.1) 0%, transparent 28%),
+    linear-gradient(118deg, transparent 58%, rgb(255 230 240 / 0.08) 61%, transparent 72%);
+  pointer-events: none;
+}
+
+/* De día no hay luces de estudio: solo la sombra del póster sobre la pared. */
+[data-theme="light"] .room-frame-photo {
+  border-color: #1b1d24;
+  box-shadow: calc(6 * var(--u)) calc(12 * var(--u)) calc(22 * var(--u)) rgb(60 40 30 / 0.45);
 }
 
 /* La ventana tiene la proporción exacta de la foto (vertical, 9:16): se ve completa, sin recortes. */
