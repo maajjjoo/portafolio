@@ -76,8 +76,11 @@ export const projects: Project[] = [
     status: "en-desarrollo",
     team: "equipo",
     repositories: [{ label: "Juego", url: "https://github.com/Josecampoe/CriminalisticaGame" }],
-    demo: null,
-    demoUnavailableReason: "Es un juego para computador y todavía no tiene una versión pública para jugar.",
+    demo: {
+      label: "Descargar para Windows",
+      url: "https://github.com/Josecampoe/CriminalisticaGame/releases/latest",
+      note: "Abre la última versión en GitHub; se descarga como .zip para Windows.",
+    },
     image: {
       src: "/images/projects/caso-404.png",
       alt: "Captura de El Caso 404 en desarrollo: un bar en penumbra visto en primera persona, con la barra, taburetes y un personaje sentado al fondo.",
@@ -128,8 +131,11 @@ export const projects: Project[] = [
       { label: "App de escritorio", url: "https://github.com/maajjjoo/studia-frontend" },
       { label: "Backend", url: "https://github.com/maajjjoo/studia-backend" },
     ],
-    demo: null,
-    demoUnavailableReason: "Es una aplicación de escritorio para Windows; no tiene demo web.",
+    demo: {
+      label: "Descargar para Windows",
+      url: "https://github.com/maajjjoo/studia-frontend/releases/latest",
+      note: "Abre la última versión en GitHub, con el instalador para Windows (.exe o .msi).",
+    },
     image: {
       src: "/images/projects/studia.png",
       alt: "Captura de Studia: la pantalla de inicio con el saludo, los accesos rápidos, las tareas del día y el calendario del mes.",
@@ -185,6 +191,10 @@ export const projects: Project[] = [
       label: "Ver demo",
       url: "https://code-tutor-frontend.vercel.app",
       note: "Frontend publicado. Algunas funciones dependen del backend, que puede tardar en responder o no estar disponible.",
+    },
+    image: {
+      src: "/images/projects/ai-code-tutor.png",
+      alt: "Captura de AI Code Tutor: la portada con el título «Aprende a programar con un tutor inteligente a tu lado» y un editor con código en Python.",
     },
     motif: "editor",
   },
