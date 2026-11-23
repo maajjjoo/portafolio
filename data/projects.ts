@@ -155,8 +155,11 @@ export const projects: Project[] = [
       { label: "App móvil", url: "https://github.com/maajjjoo/pollystock-frontend" },
       { label: "Backend", url: "https://github.com/maajjjoo/pollystock-backend" },
     ],
-    demo: null,
-    demoUnavailableReason: "Es una aplicación móvil; todavía no tiene una versión pública para probar.",
+    demo: {
+      label: "Instalar en Android",
+      url: "https://expo.dev/accounts/majjjjoo/projects/polly-stock/builds/3e6d7b91-1b1f-4484-95d4-e2671e44a473",
+      note: "Abre la compilación de Android en Expo, desde donde se instala en el celular.",
+    },
     image: {
       src: "/images/projects/pollystock.png",
       alt: "Captura de PollyStock en un celular: el inicio con el resumen del inventario, las alertas de stock y el diagnóstico con IA.",
