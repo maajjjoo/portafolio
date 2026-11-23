@@ -6,21 +6,13 @@ import { portfolio } from "@/config/portfolio";
 const photoSrc = process.env.PROFILE_PHOTO_SRC ?? "";
 
 /**
- * Foto de perfil como la portada de un disco: la foto completa, sin recortes, y detrás un vinilo
- * que sale deslizándose y gira despacio. Mientras no exista la foto se muestra un monograma.
+ * Foto de perfil completa, sin recortes, en una tarjeta con un brillo vinotinto detrás.
+ * Mientras no exista la foto se muestra un monograma.
  * Para añadirla, guarda public/images/perfil.png (o .jpg/.webp) y vuelve a compilar.
  */
 export default function Portrait() {
   return (
     <div className="portrait">
-      <div aria-hidden="true" className="portrait-disc">
-        <div className="vinyl vinyl-spin">
-          <div className="vinyl-label portrait-disc-label">
-            <span className="vinyl-label-hole" />
-          </div>
-        </div>
-      </div>
-
       <div className="portrait-photo">
         {photoSrc ? (
           <Image
