@@ -115,20 +115,23 @@
 
 /* Con foto: un cuadro grande, con paspartú, y menos oscurecido para que se vea la cara. */
 .room-frame-photo {
-  left: calc(22 * var(--u));
-  top: calc(86 * var(--u));
-  width: calc(232 * var(--u));
+  left: calc(14 * var(--u));
+  /* El panel de listones empieza en el borde de la pantalla, detrás de la cabecera flotante. */
+  top: calc(4.5rem + 10 * var(--u));
+  width: calc(300 * var(--u));
   height: auto;
-  padding: calc(16 * var(--u));
-  border-width: calc(7 * var(--u));
+  padding: calc(12 * var(--u));
+  border-width: calc(6 * var(--u));
   filter: brightness(0.94) sepia(0.12);
 }
 
-/* La ventana del paspartú tiene la proporción de la foto (vertical, 9:16): se ve entera, sin recortes. */
+/* Ventana 3:4 centrada en la cara: solo quedan fuera las zonas oscuras de arriba y abajo de la foto. */
 .room-frame-window {
   height: auto;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 3 / 4;
 }
+
+.room-frame-window img { object-position: 50% 42% !important; }
 
 /* Sin foto todavía: el aviso va sobre el grabado, abajo. */
 .room-frame-pending {
