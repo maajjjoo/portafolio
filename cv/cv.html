@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CV · María José De La Cruz Madroñero</title>
+<!-- Fuente del CV. Para regenerar public/cv.pdf: ver README → «CV». -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --navy: #141a2b;
+    --navy-2: #1d2438;
+    --wine: #8e1f36;
+    --wine-soft: #f4e3e7;
+    --ink: #1a1c24;
+    --muted: #5b6072;
+    --line: #e4e1e3;
+    --cream: #ede8e6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 210mm; height: 297mm; }
+  body {
+    font-family: "Hanken Grotesk", system-ui, sans-serif;
+    color: var(--ink);
+    font-size: 9.6pt;
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page { display: grid; grid-template-columns: 68mm 1fr; height: 297mm; }
+
+  /* --- Columna lateral --- */
+  aside {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 16mm 9mm 12mm;
+    display: flex;
+    flex-direction: column;
+    gap: 8mm;
+    position: relative;
+    overflow: hidden;
+  }
+  aside::before {
+    content: "";
+    position: absolute;
+    top: -30mm;
+    left: -20mm;
+    width: 110mm;
+    height: 90mm;
+    background: radial-gradient(closest-side, rgb(170 40 70 / 0.45), transparent);
+  }
+  .photo {
+    position: relative;
+    width: 38mm;
+    height: 38mm;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 0 0 1.2mm var(--wine), 0 0 0 2.2mm rgb(255 255 255 / 0.12);
+  }
+  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
+  aside h2 {
+    position: relative;
+    font-family: "Gloock", serif;
+    font-weight: 400;
+    font-size: 12.5pt;
+    color: #fff;
+    padding-bottom: 1.6mm;
+    margin-bottom: 2.6mm;
+    border-bottom: 0.3mm solid rgb(255 255 255 / 0.16);
+  }
+  .contact li, .skills li, .langs li, .likes li { list-style: none; }
+  .contact li { margin-bottom: 2.2mm; }
+  .contact .k { display: block; font-size: 7.4pt; color: #aab0c2; }
+  .contact .v { display: block; font-weight: 600; word-break: break-word; color: inherit; text-decoration: none; }
+  .group { margin-bottom: 3mm; }
+  .group .k { font-size: 7.6pt; color: #e8798e; font-weight: 700; margin-bottom: 1.2mm; }
+  .chips { display: flex; flex-wrap: wrap; gap: 1.2mm; }
+  .chips span {
+    font-size: 7.8pt;
+    padding: 0.7mm 2.2mm;
+    border-radius: 99px;
+    background: rgb(255 255 255 / 0.08);
+    border: 0.25mm solid rgb(255 255 255 / 0.14);
+  }
+  .langs li { display: flex; justify-content: space-between; margin-bottom: 1.4mm; }
+  .langs .lvl { color: #e8798e; font-weight: 700; }
+  .likes { display: flex; gap: 1.2mm; flex-wrap: wrap; }
+
+  /* --- Columna principal --- */
+  main { padding: 16mm 13mm 12mm 12mm; display: flex; flex-direction: column; gap: 7mm; }
+  header h1 {
+    font-family: "Gloock", serif;
+    font-weight: 400;
+    font-size: 27pt;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    color: var(--navy);
+  }
+  header .role { margin-top: 2.4mm; font-size: 11.5pt; font-weight: 600; color: var(--wine); }
+  header .summary { margin-top: 3.6mm; color: var(--muted); font-size: 9.8pt; max-width: 112mm; }
+  section h3 {
+    display: flex;
+    align-items: center;
+    gap: 2.6mm;
+    font-family: "Gloock", serif;
+    font-weight: 400;
+    font-size: 13.5pt;
+    color: var(--navy);
+    margin-bottom: 3mm;
+  }
+  section h3::after { content: ""; flex: 1; height: 0.3mm; background: var(--line); }
+  .entry { margin-bottom: 3.6mm; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry .top { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .entry .title { font-weight: 700; font-size: 10.4pt; }
+  .entry .meta { font-size: 8pt; color: var(--wine); font-weight: 600; white-space: nowrap; }
+  .entry .org { color: var(--muted); font-size: 9pt; }
+  .entry p { margin-top: 0.8mm; }
+  .tags { margin-top: 1.2mm; display: flex; gap: 1.2mm; flex-wrap: wrap; }
+  .tags span {
+    font-size: 7.6pt;
+    padding: 0.5mm 2mm;
+    border-radius: 99px;
+    background: var(--wine-soft);
+    color: var(--wine);
+    font-weight: 600;
+  }
+  .projects { display: grid; gap: 3.4mm; }
+  .project { padding-left: 3.4mm; border-left: 0.6mm solid var(--wine); }
+  footer { margin-top: auto; font-size: 7.6pt; color: var(--muted); }
+  footer a { color: var(--wine); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="page">
+  <aside>
+    <div class="photo"><img src="../public/images/perfil.jpg" alt="Foto de María José"></div>
+
+    <div>
+      <h2>Contacto</h2>
+      <ul class="contact">
+        <li><span class="k">Correo</span><a class="v" href="mailto:majose2006@gmail.com">majose2006@gmail.com</a></li>
+        <li><span class="k">GitHub</span><a class="v" href="https://github.com/maajjjoo">github.com/maajjjoo</a></li>
+        <li><span class="k">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/mar%C3%ADa-jos%C3%A9-de-la-cruz-855440409/">María José De La Cruz</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Habilidades</h2>
+      <div class="group">
+        <div class="k">Frameworks</div>
+        <div class="chips"><span>React</span><span>React Native</span><span>Expo</span><span>Spring Boot</span><span>Express</span><span>Tauri</span><span>Unity</span><span>Tailwind CSS</span></div>
+      </div>
+      <div class="group">
+        <div class="k">Lenguajes</div>
+        <div class="chips"><span>TypeScript</span><span>JavaScript</span><span>Java</span><span>Python</span><span>C#</span><span>HTML y CSS</span></div>
+      </div>
+      <div class="group">
+        <div class="k">Backend y datos</div>
+        <div class="chips"><span>Node.js</span><span>Prisma</span><span>PostgreSQL</span><span>SQLite</span></div>
+      </div>
+      <div class="group">
+        <div class="k">Herramientas</div>
+        <div class="chips"><span>Git</span><span>GitHub</span><span>Vite</span><span>Vercel</span><span>API de Gemini</span></div>
+      </div>
+    </div>
+
+    <div>
+      <h2>Idiomas</h2>
+      <ul class="langs">
+        <li><span>Español</span><span class="lvl">Nativo</span></li>
+        <li><span>Inglés</span><span class="lvl">B2</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Me gusta</h2>
+      <div class="likes chips"><span>Música</span><span>Moda</span><span>Series</span></div>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <h1>María José<br>De La Cruz Madroñero</h1>
+      <p class="role">Estudiante de Ingeniería de Software</p>
+      <p class="summary">
+        Estudio Ingeniería de Software en la Universidad Cooperativa de Colombia. Me interesan las interfaces,
+        el backend y cómo usar la inteligencia artificial dentro de aplicaciones que le sirvan a alguien. He hecho
+        proyectos web, móviles, de escritorio y un videojuego, en clase y por mi cuenta.
+      </p>
+    </header>
+
+    <section>
+      <h3>Formación</h3>
+      <div class="entry">
+        <div class="top"><span class="title">Ingeniería de Software</span><span class="meta">En curso</span></div>
+        <div class="org">Universidad Cooperativa de Colombia</div>
+      </div>
+      <div class="entry">
+        <div class="top"><span class="title">Curso de inglés · Nivel B2</span><span class="meta">Con certificado</span></div>
+        <div class="org">Universidad de Nariño</div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Proyectos</h3>
+      <div class="projects">
+        <div class="project entry">
+          <div class="top"><span class="title">El Caso 404</span><span class="meta">En equipo · En desarrollo</span></div>
+          <p>Videojuego 3D de investigación criminal en primera persona: explorar escenas, recolectar evidencias, interrogar personajes controlados por IA y decidir el final.</p>
+          <div class="tags"><span>Unity</span><span>C#</span><span>JavaScript</span></div>
+        </div>
+        <div class="project entry">
+          <div class="top"><span class="title">SmartControl</span><span class="meta">Individual · Etapa inicial</span></div>
+          <p>Control de un computador con Windows mediante gestos de la muñeca, con un smartwatch Wear OS. Modo presentación y modo multimedia.</p>
+          <div class="tags"><span>Kotlin</span><span>Wear OS</span><span>C#</span><span>.NET</span></div>
+        </div>
+        <div class="project entry">
+          <div class="top"><span class="title">Studia</span><span class="meta">Individual · En desarrollo</span></div>
+          <p>Aplicación de escritorio para organizar la vida académica: materias, horario, tareas, modo enfoque con Pomodoro y asistente con IA.</p>
+          <div class="tags"><span>Tauri</span><span>React</span><span>TypeScript</span><span>Rust</span><span>Node.js</span></div>
+        </div>
+        <div class="project entry">
+          <div class="top"><span class="title">PollyStock</span><span class="meta">Individual · En desarrollo</span></div>
+          <p>Aplicación móvil de inventario para negocios: productos con foto, entradas y salidas, alertas de stock bajo y asistente con IA (Gemini).</p>
+          <div class="tags"><span>React Native</span><span>Expo</span><span>Node.js</span><span>Prisma</span></div>
+        </div>
+        <div class="project entry">
+          <div class="top"><span class="title">AI Code Tutor</span><span class="meta">En equipo · En desarrollo</span></div>
+          <p>Tutor de programación con IA que guía al estudiante hasta la solución en lugar de darle la respuesta.</p>
+          <div class="tags"><span>React</span><span>TypeScript</span><span>Spring Boot</span><span>PostgreSQL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>El código de mis proyectos está en <a href="https://github.com/maajjjoo">github.com/maajjjoo</a>.</footer>
+  </main>
+</div>
+</body>
+</html>
