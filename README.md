@@ -103,7 +103,7 @@ El sitio no muestra el semestre en ninguna parte, a propósito. Solo aparecen la
 
 ### 4. Formulario de contacto (Formspree)
 
-El formulario está implementado (validación, estados de carga, éxito y error), pero **no envía mensajes hasta que lo configures**. Mientras tanto aparece deshabilitado con un aviso y el enlace a tu correo.
+El formulario ya funciona sin configurar nada: valida los campos y, al enviarlo, abre la aplicación de correo de quien escribe con el mensaje listo para mandarte (`mailto:`). Si configuras Formspree, los mensajes se envían directamente desde la página, sin abrir el correo:
 
 1. Crea una cuenta en [formspree.io](https://formspree.io) y un formulario nuevo; confirma tu correo `majose2006@gmail.com`.
 2. Copia el endpoint, con la forma `https://formspree.io/f/xxxxxxx`.
@@ -127,9 +127,8 @@ Enlaces verificados (públicos en GitHub el 25/10/2026):
 Tareas pendientes de despliegue:
 
 - **AI Code Tutor:** confirmar cuál es el repositorio público del backend (hay un repo `backenddd` con un proyecto Spring Boot llamado `ai-platform`, pero no se pudo confirmar que sea este) y revisar por qué `https://ai-code-tutor-backend.onrender.com` responde 503.
-- **PollyStock:** publicar una demo (por ejemplo, la versión web de Expo o un enlace de Expo Go) si la entrega exige demo en vivo.
-- **Studia:** al ser una app de escritorio, considera publicar un instalador en *GitHub Releases* y enlazarlo como demo.
-- **SmartControl:** crear el repositorio en GitHub y añadir su URL.
+- **PollyStock y Studia:** añadir los enlaces de instalación (el APK de EAS y el instalador de Windows) como `demo` en `data/projects.ts`.
+- **AI Code Tutor:** sin captura real todavía (su demo no carga porque el backend no responde); mientras tanto muestra una ilustración.
 
 Para añadir un enlace, edita `repositories` o `demo` en `data/projects.ts`. Para añadir capturas reales, guárdalas en `public/images/projects/` y añade `image: { src: "/images/projects/nombre.png", alt: "Descripción" }` al proyecto; mientras no haya captura se muestra una ilustración.
 
@@ -139,7 +138,7 @@ Para añadir un enlace, edita `repositories` o `demo` en `data/projects.ts`. Par
 - **Fecha de inicio de la carrera:** `data/experience.ts → startDate` (formato `"AAAA-MM"`).
 - **Experiencia profesional:** añade entradas con `type: "profesional"` solo para trabajo real en software. Mientras no haya ninguna, se muestra un estado «pendiente».
 - **Habilidades:** revisa `data/skills.ts`. Las tecnologías salen de tus repositorios y de lo que indicaste; todas aparecen como utilizadas en tus proyectos, sin niveles; quita las que no te representen.
-- **Foto:** mientras no exista, el álbum «Hola, mundo» muestra un arco vinotinto con el monograma «MJ» y la nota «Foto próximamente». Para poner tu foto, guárdala como **`public/images/perfil.png`** (también sirve `.jpg`, `.jpeg` o `.webp`) y vuelve a compilar o desplegar: se detecta sola (`next.config.ts`). Funciona mejor una foto vertical (proporción 3:4) con la cara en la parte superior, porque el marco recorta los lados y la parte de abajo.
+- **Foto:** está en `public/images/perfil.jpg`. Se muestra completa, sin recortes: en Bienvenida en una tarjeta vertical y en la sala como póster retroiluminado. Ambos marcos usan la proporción 9:16 de la foto; si la cambias por otra con otra proporción, ajusta `aspect-ratio` en `.portrait-photo` (`app/globals.css`) y `.room-frame-window` (`app/room.css`).
 
 ## Publicar en GitHub
 
@@ -184,13 +183,13 @@ El repositorio Git local ya existe, con un commit por etapa. Para subirlo:
 - [ ] Descarga del CV con el PDF real (pendiente: `public/cv.pdf`)
 - [x] Sobre mí con presentación personal
 - [x] Sección de proyectos
-- [ ] Repositorio de GitHub verificado en cada proyecto (falta SmartControl)
-- [ ] Demo en vivo verificada en cada proyecto (solo AI Code Tutor tiene, y su backend respondió 503)
+- [x] Repositorio de GitHub en cada proyecto (SmartControl enlaza su prototipo; El Caso 404, el repositorio del equipo)
+- [ ] Demo o instalador en cada proyecto (SmartControl tiene prototipo web; faltan los enlaces de instalación de Studia y PollyStock)
 - [ ] Al menos tres testimonios reales
 - [ ] Experiencia académica completa (está la universidad y el programa; falta la fecha de inicio)
 - [ ] Experiencia profesional (no hay; se muestra honestamente como pendiente)
 - [x] Correo público
-- [ ] Formulario de contacto funcional (implementado y probado con respuestas simuladas; falta configurar Formspree)
+- [x] Formulario de contacto funcional (abre el correo con el mensaje listo; Formspree es opcional)
 - [x] Pie de página con nombre y año actual
 - [x] Al menos una sección adicional (Habilidades)
 
