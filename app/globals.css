@@ -44,7 +44,7 @@
   --foot-ink: #21160e;
   --foot-muted: #4d3e2f;
   --foot-line: #b3a285;
-  --foot-accent: #7d4608;
+  --foot-accent: #7c1a2f;
   --paper: #fbf6ec;
   --paper-ink: #21160e;
   --glass: rgb(251 246 236 / 0.62);
@@ -56,10 +56,10 @@
   --ink: #21160e;
   --muted: #5f4d3c;
   --line: #c7b497;
-  --wine: #2a1a11;
-  --on-wine: #f0dfc2;
-  --accent: #8a4f10;
-  --accent-soft: #f0e3c6;
+  --wine: #8e1f36;
+  --on-wine: #f8e9ec;
+  --accent: #8e1f36;
+  --accent-soft: #f2dde1;
   --gold: #6f5414;
   --gold-soft: #e6d4a8;
   --glow: rgb(224 162 74 / 0.18);
@@ -432,11 +432,22 @@
   }
 }
 
-/* ---------- Foto de Bienvenida: portada con su vinilo ---------- */
+/* ---------- Foto de Bienvenida: completa, en una tarjeta con brillo ---------- */
 .portrait {
   position: relative;
-  width: 100%;
-  padding-right: 32%;
+  width: min(100%, 19rem);
+  margin-inline: auto;
+}
+
+/* Un halo vinotinto detrás de la foto, como la luz de un estudio. */
+.portrait::before {
+  content: "";
+  position: absolute;
+  inset: 8% -10% -4%;
+  z-index: 0;
+  border-radius: 2rem;
+  background: radial-gradient(60% 55% at 50% 45%, rgb(170 40 70 / 0.45), transparent 75%);
+  filter: blur(24px);
 }
 
 .portrait-photo {
@@ -447,37 +458,8 @@
   border-radius: 1.25rem;
   background: var(--surface-2);
   box-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.08),
-    0 0 60px -6px var(--glow),
+    0 0 0 1px rgb(255 255 255 / 0.1),
     0 30px 60px -30px rgb(0 0 0 / 0.75);
 }
 
-/* El vinilo asoma detrás de la foto, a la derecha, y gira despacio. */
-.portrait-disc {
-  position: absolute;
-  top: 18%;
-  right: 0;
-  width: 60%;
-}
-
-.portrait-disc .vinyl {
-  box-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.12) inset,
-    0 0 40px -8px var(--glow),
-    0 18px 40px -18px rgb(0 0 0 / 0.7);
-}
-
-.portrait-disc-label { background: var(--wine); }
-
-@media (prefers-reduced-motion: no-preference) {
-  .portrait-disc {
-    animation: portrait-disc-out 1200ms var(--ease-object) 600ms both;
-  }
-
-  .portrait-disc .vinyl-spin { animation-duration: 9s; }
-}
-
-@keyframes portrait-disc-out {
-  from { transform: translateX(-38%); }
-  to { transform: none; }
-}
+[data-theme="light"] .portrait::before { opacity: 0.35; }

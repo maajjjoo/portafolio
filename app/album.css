@@ -16,7 +16,7 @@
 :root:not([data-theme="light"]) .album-booklet { --muted: #c3c8d8; }
 
 /* De día, el color de acento debe aguantar también sobre los paños de sol de la pared. */
-[data-theme="light"] .album-booklet { --accent: #754206; }
+[data-theme="light"] .album-booklet { --accent: #7c1a2f; }
 
 .album-sheet {
   position: relative;

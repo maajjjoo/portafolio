@@ -647,7 +647,7 @@
    donde de noche hay resplandor. Los altavoces y los discos siguen siendo negros. */
 
 [data-theme="light"] .room {
-  --amber: #8a4f10;
+  --amber: #8e1f36;
   --cream: #21160e;
   --shade: 70 48 26;
   /* Con luz de día el grano se nota mucho más: el yeso es apenas perceptible. */
@@ -807,8 +807,8 @@
 }
 
 [data-theme="light"] .record-name { color: #2c2016; }
-[data-theme="light"] .record:is(:hover, :focus-visible) .record-name { color: #8a4f10; }
-[data-theme="light"] .record-heard { background: #8a4f10; }
+[data-theme="light"] .record:is(:hover, :focus-visible) .record-name { color: #8e1f36; }
+[data-theme="light"] .record-heard { background: #8e1f36; }
 
 /* --- Sala compacta: una pared alta, no la de escritorio encogida ------------ */
 
