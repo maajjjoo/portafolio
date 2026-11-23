@@ -62,7 +62,7 @@ const palette = {
   cream: "#e9dcc4",
   burgundy: "#6e2f1c",
   charcoal: "#1a1512",
-  green: "#3f4f3a",
+  green: "#243250",
   gold: "#d2a04f",
   rose: "#d9976a",
 } as const;

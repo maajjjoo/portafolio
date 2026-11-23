@@ -7,30 +7,30 @@
 :root,
 [data-theme="dark"] {
   color-scheme: dark;
-  /* Tonos de la foto: café casi negro con fondo rojizo, malva, rosa empolvado y luz dorada. */
-  --bg: #150e0d;
-  --surface: #201615;
-  --surface-2: #2c1f1d;
-  --ink: #f2e3d8;
-  --muted: #c2a79a;
-  --line: #422e2a;
-  --wine: #d6927a;
-  --on-wine: #1e0f0c;
-  --accent: #e3a585;
-  --accent-soft: #3d2420;
-  --gold: #d9b07e;
-  --gold-soft: #30231a;
-  --glow: rgb(214 140 112 / 0.16);
+  /* Estudio de grabación: negro azulado, azul noche y luces vinotinto. */
+  --bg: #0a0c12;
+  --surface: #121622;
+  --surface-2: #1a1f2e;
+  --ink: #ede8e6;
+  --muted: #aab0c2;
+  --line: #272d3f;
+  --wine: #8e1f36;
+  --on-wine: #f8e9ec;
+  --accent: #e8798e;
+  --accent-soft: #2b1420;
+  --gold: #d0a96e;
+  --gold-soft: #262016;
+  --glow: rgb(142 31 54 / 0.22);
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 24px 48px -28px rgb(0 0 0 / 0.8);
-  --foot-bg: #0f0909;
-  --foot-ink: #f2e3d8;
-  --foot-muted: #c2a79a;
-  --foot-line: #422e2a;
-  --foot-accent: #e3a585;
-  --paper: #33231f;
-  --paper-ink: #f2e3d8;
-  --glass: rgb(32 20 19 / 0.62);
-  --glass-edge: rgb(242 220 208 / 0.16);
+  --foot-bg: #06070b;
+  --foot-ink: #ede8e6;
+  --foot-muted: #aab0c2;
+  --foot-line: #272d3f;
+  --foot-accent: #e8798e;
+  --paper: #161b29;
+  --paper-ink: #ede8e6;
+  --glass: rgb(14 17 27 / 0.64);
+  --glass-edge: rgb(220 226 245 / 0.13);
   --radius-sheet: 1.5rem;
   --radius-group: 1rem;
   --radius-field: 0.75rem;

@@ -16,11 +16,11 @@ Decoration that neither orients nor informs is left out. The reference is `desig
 
 | Role | Night | Day |
 |---|---|---|
-| Wall | `#35231f` dark mauve-brown, taken from the owner photo | `#e2d8c6` warm ivory |
+| Wall | `#141a2b` night navy, like a recording booth | `#e2d8c6` warm ivory |
 | Wood | `#5a3a24` walnut | `#c9a06e` light oak |
-| Text | `#f2e3d8` warm cream | `#21160e` |
+| Text | `#ede8e6` | `#21160e` |
 | Secondary text | `#b8a68d`, `#d3c4ac` over the lit wall | `#5f4d3c` |
-| Accent | `#e3a585` dusty rose-gold | `#8a4f10`, `#754206` over the sunlit wall |
+| Accent | `#8e1f36` wine for surfaces, `#e8798e` wine-rose for text and focus | `#8a4f10`, `#754206` over the sunlit wall |
 | Light | Warm LEDs and lamp | Side window light |
 | Plant green | `#47573f` | `#47573f` |
 

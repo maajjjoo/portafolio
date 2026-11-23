@@ -6,7 +6,7 @@
 .room {
   --u: min(calc(100vw / 1440), calc((100svh - 4.5rem) / 828));
   --cu: var(--u);
-  --amber: #e0a24a;
+  --amber: #ec8296;
   --cream: #efe3cf;
   --walnut: #5a3a24;
   /* Color de las sombras, que cambia con la luz del tema. */
@@ -30,8 +30,8 @@
   background:
     var(--plaster),
     linear-gradient(180deg, rgb(8 7 5 / 0.62), transparent 26%),
-    radial-gradient(26% 34% at 74% 63%, rgb(232 156 100 / 0.18), transparent 100%),
-    radial-gradient(70% 72% at 54% 42%, #4b3431 0%, #35231f 50%, #1b1110 100%);
+    radial-gradient(26% 34% at 74% 63%, rgb(170 40 70 / 0.22), transparent 100%),
+    radial-gradient(70% 72% at 54% 42%, #1f2840 0%, #141a2b 50%, #080a11 100%);
 }
 
 /* Viñeta: la luz cae antes de llegar a los bordes. */
@@ -70,7 +70,7 @@
   height: calc(138 * var(--u));
   background:
     linear-gradient(180deg, rgb(6 4 2 / 0.86), transparent 42%),
-    radial-gradient(46% 70% at 54% 0%, rgb(232 156 100 / 0.16), transparent 100%),
+    radial-gradient(46% 70% at 54% 0%, rgb(150 35 62 / 0.18), transparent 100%),
     repeating-linear-gradient(0deg, rgb(0 0 0 / 0.3) 0 1px, transparent 1px calc(34 * var(--u))),
     var(--grain),
     linear-gradient(100deg, #2e1c10, #4c2f1b 50%, #27180d);
@@ -83,7 +83,7 @@
   position: absolute;
   inset: calc(-14 * var(--u)) 0 auto;
   height: calc(14 * var(--u));
-  background: linear-gradient(180deg, #2b201d, #170f0e);
+  background: linear-gradient(180deg, #171c2a, #090b11);
   box-shadow: inset 0 1px 0 rgb(255 225 170 / 0.1);
 }
 
@@ -266,7 +266,7 @@
     linear-gradient(90deg, transparent calc(50% + 136 * var(--cu)), #060504 calc(50% + 136 * var(--cu)), #060504 calc(50% + 137.5 * var(--cu)), transparent calc(50% + 137.5 * var(--cu))),
     linear-gradient(180deg, rgb(0 0 0 / 0.55), transparent 16%),
     var(--plaster),
-    linear-gradient(180deg, #211716, #170f0e);
+    linear-gradient(180deg, #111522, #090b11);
   box-shadow:
     0 calc(14 * var(--cu)) calc(16 * var(--cu)) rgb(0 0 0 / 0.82),
     0 calc(30 * var(--cu)) calc(44 * var(--cu)) rgb(0 0 0 / 0.5);
@@ -435,7 +435,7 @@
   font-family: var(--font-hanken);
   font-weight: 600;
   font-size: max(12px, calc(13 * var(--u)));
-  color: #c9b79b;
+  color: #b9bfd0;
 }
 
 .room-plate .room-engraved { margin-top: calc(5 * var(--u)); line-height: 1.3; }
@@ -445,7 +445,7 @@
   font-weight: 500;
   font-size: max(13px, calc(14 * var(--u)));
   line-height: 1.35;
-  color: #c9b79b;
+  color: #b9bfd0;
 }
 
 .room :focus-visible {
@@ -488,7 +488,7 @@
   right: 0;
   top: calc(100% + 11 * var(--u));
   height: calc(112 * var(--u));
-  background: linear-gradient(180deg, rgb(246 178 122 / 0.28), rgb(236 160 108 / 0.16) 22%, rgb(236 160 108 / 0.05) 58%, transparent);
+  background: linear-gradient(180deg, rgb(214 58 92 / 0.3), rgb(170 40 70 / 0.17) 22%, rgb(170 40 70 / 0.05) 58%, transparent);
   pointer-events: none;
 }
 
@@ -584,7 +584,7 @@
   margin-left: 0.45em;
   border-radius: 9999px;
   vertical-align: 0.2em;
-  background: #ffcf8a;
+  background: #ff9fb1;
 }
 
 .room-slot:has(.record:is(:hover, :focus-visible)) { z-index: 4; }
@@ -870,7 +870,7 @@
 
 @media (max-width: 899px) {
   .room-spines { width: auto; right: calc(12 * var(--cu)); }
-  .room-body { background: linear-gradient(180deg, #211716, #170f0e); }
+  .room-body { background: linear-gradient(180deg, #111522, #090b11); }
 }
 
 /* Teléfono: el tocadiscos manda; el amplificador y la planta no caben a una escala legible. */
