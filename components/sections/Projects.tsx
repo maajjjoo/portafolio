@@ -79,7 +79,13 @@ function ProjectCard({ project }: { project: Project }) {
       </header>
 
       <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line bg-surface-2">
-        {project.image ? (
+        {project.image?.phone ? (
+          <div className="absolute inset-0 grid place-items-center bg-[radial-gradient(80%_80%_at_50%_0%,var(--glow)_0%,transparent_70%)]">
+            <div className="relative h-[90%] aspect-[433/967] overflow-hidden rounded-[1.4rem] border-[5px] border-[#14110e] shadow-card transition-transform duration-700 group-hover:-translate-y-1">
+              <Image src={project.image.src} alt={project.image.alt} fill sizes="200px" className="object-cover object-top" />
+            </div>
+          </div>
+        ) : project.image ? (
           <Image
             src={project.image.src}
             alt={project.image.alt}

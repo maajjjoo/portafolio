@@ -183,7 +183,7 @@ function FramedPrint() {
     return (
       <div className="room-frame room-frame-photo" aria-hidden="true">
         <span className="relative block size-full overflow-hidden">
-          <Image src={photoSrc} alt="" fill sizes="200px" className="object-cover object-top" />
+          <Image src={photoSrc} alt="" fill sizes="320px" className="object-cover object-top" />
         </span>
       </div>
     );

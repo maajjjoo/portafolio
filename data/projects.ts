@@ -42,7 +42,12 @@ export interface Project {
   /** Por qué no hay demo pública, cuando `demo` es `null`. */
   demoUnavailableReason?: string;
   /** Captura real del proyecto (opcional). */
-  image?: { src: string; alt: string };
+  image?: {
+    src: string;
+    alt: string;
+    /** Captura de celular: se muestra entera dentro de un marco de teléfono. */
+    phone?: boolean;
+  };
   /** Ilustración usada mientras no haya captura real. */
   motif: ProjectMotif;
   /** Proyecto principal de este semestre: va arriba, antes que los demás. */
@@ -125,6 +130,10 @@ export const projects: Project[] = [
     ],
     demo: null,
     demoUnavailableReason: "Es una aplicación de escritorio para Windows; no tiene demo web.",
+    image: {
+      src: "/images/projects/studia.png",
+      alt: "Captura de Studia: la pantalla de inicio con el saludo, los accesos rápidos, las tareas del día y el calendario del mes.",
+    },
     motif: "desktop",
     featured: true,
   },
@@ -148,6 +157,11 @@ export const projects: Project[] = [
     ],
     demo: null,
     demoUnavailableReason: "Es una aplicación móvil; todavía no tiene una versión pública para probar.",
+    image: {
+      src: "/images/projects/pollystock.png",
+      alt: "Captura de PollyStock en un celular: el inicio con el resumen del inventario, las alertas de stock y el diagnóstico con IA.",
+      phone: true,
+    },
     motif: "mobile",
     featured: true,
   },
