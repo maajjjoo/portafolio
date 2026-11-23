@@ -124,8 +124,7 @@ Enlaces verificados (públicos en GitHub el 25/10/2026):
 Tareas pendientes de despliegue:
 
 - **AI Code Tutor:** confirmar cuál es el repositorio público del backend (hay un repo `backenddd` con un proyecto Spring Boot llamado `ai-platform`, pero no se pudo confirmar que sea este) y revisar por qué `https://ai-code-tutor-backend.onrender.com` responde 503.
-- **Studia:** añadir el enlace del instalador de Windows como `demo` en `data/projects.ts` (PollyStock ya enlaza su compilación de Android en Expo).
-- **AI Code Tutor:** sin captura real todavía (su demo no carga porque el backend no responde); mientras tanto muestra una ilustración.
+- Todos los proyectos tienen enlace para probarlos: El Caso 404 y Studia enlazan la última versión en GitHub Releases (`/releases/latest`, así que siguen sirviendo con versiones nuevas), PollyStock su compilación de Android en Expo, SmartControl su prototipo web y AI Code Tutor su demo en Vercel (que depende de su backend).
 
 Para añadir un enlace, edita `repositories` o `demo` en `data/projects.ts`. Para añadir capturas reales, guárdalas en `public/images/projects/` y añade `image: { src: "/images/projects/nombre.png", alt: "Descripción" }` al proyecto; mientras no haya captura se muestra una ilustración.
 
@@ -181,7 +180,7 @@ El repositorio Git local ya existe, con un commit por etapa. Para subirlo:
 - [x] Sobre mí con presentación personal
 - [x] Sección de proyectos
 - [x] Repositorio de GitHub en cada proyecto (SmartControl enlaza su prototipo; El Caso 404, el repositorio del equipo)
-- [ ] Demo o instalador en cada proyecto (SmartControl tiene prototipo web; faltan los enlaces de instalación de Studia y PollyStock)
+- [x] Demo o instalador en cada proyecto
 - [ ] Al menos tres testimonios reales
 - [ ] Experiencia académica completa (está la universidad y el programa; falta la fecha de inicio)
 - [ ] Experiencia profesional (no hay; se muestra honestamente como pendiente)
