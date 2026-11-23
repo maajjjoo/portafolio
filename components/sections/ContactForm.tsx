@@ -4,7 +4,7 @@ import { useRef, useState, type FormEvent } from "react";
 
 import { contactErrorMessage, validateContact, type ContactErrors, type ContactValues } from "@/lib/contact";
 
-type Status = "idle" | "sending" | "success" | "error";
+type Status = "idle" | "sending" | "success" | "error" | "mailto";
 
 interface ContactFormProps {
   /** Endpoint de Formspree; `null` si el formulario aún no está configurado. */
@@ -38,13 +38,24 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!endpoint || status === "sending") return;
+    if (status === "sending") return;
 
     const found = validateContact(values);
     setErrors(found);
     const firstInvalid = fields.find((field) => found[field.name]);
     if (firstInvalid) {
       formRef.current?.querySelector<HTMLElement>(`[name="${firstInvalid.name}"]`)?.focus();
+      return;
+    }
+
+    // Sin Formspree: el mensaje se abre ya escrito en la app de correo de quien escribe.
+    if (!endpoint) {
+      const subject = `Mensaje desde tu portafolio, de ${values.name.trim()}`;
+      const body = `${values.message.trim()}
+
+— ${values.name.trim()} (${values.email.trim()})`;
+      window.location.href = `mailto:${fallbackEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setStatus("mailto");
       return;
     }
 
@@ -98,7 +109,7 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
 
       {!configured ? (
         <p role="note" className="mt-4 rounded-xl border border-dashed border-line bg-surface-2 px-4 py-3 text-sm leading-relaxed">
-          El formulario estará disponible pronto. Mientras tanto, escríbeme directamente a{" "}
+          Al enviar, se abrirá tu aplicación de correo con el mensaje listo para mandar a{" "}
           <a href={`mailto:${fallbackEmail}`} className="font-semibold underline decoration-accent underline-offset-4">
             {fallbackEmail}
           </a>
@@ -106,7 +117,7 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
         </p>
       ) : null}
 
-      <fieldset disabled={!configured || status === "sending"} className="mt-6 space-y-5">
+      <fieldset disabled={status === "sending"} className="mt-6 space-y-5">
         <legend className="sr-only">Datos del mensaje</legend>
         {fields.map((field) => {
           const error = errors[field.name];
@@ -165,8 +176,10 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
               <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
               Enviando…
             </>
-          ) : (
+          ) : configured ? (
             "Enviar mensaje"
+          ) : (
+            "Enviar por correo"
           )}
         </button>
       </fieldset>
@@ -175,6 +188,15 @@ export default function ContactForm({ endpoint, fallbackEmail }: ContactFormProp
         {status === "success" ? (
           <p role="status" className="rounded-xl bg-gold-soft px-4 py-3 text-sm font-semibold text-gold">
             ¡Gracias! Tu mensaje se envió correctamente. Te responderé lo antes posible.
+          </p>
+        ) : null}
+        {status === "mailto" ? (
+          <p role="status" className="rounded-xl bg-gold-soft px-4 py-3 text-sm font-semibold text-gold">
+            Se abrió tu aplicación de correo con el mensaje listo. Si no se abrió, escríbeme a{" "}
+            <a href={`mailto:${fallbackEmail}`} className="underline underline-offset-4">
+              {fallbackEmail}
+            </a>
+            .
           </p>
         ) : null}
         {status === "error" ? (
