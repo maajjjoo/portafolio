@@ -431,3 +431,53 @@
     animation-delay: 0s !important;
   }
 }
+
+/* ---------- Foto de Bienvenida: portada con su vinilo ---------- */
+.portrait {
+  position: relative;
+  width: 100%;
+  padding-right: 32%;
+}
+
+.portrait-photo {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: var(--surface-2);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.08),
+    0 0 60px -6px var(--glow),
+    0 30px 60px -30px rgb(0 0 0 / 0.75);
+}
+
+/* El vinilo asoma detrás de la foto, a la derecha, y gira despacio. */
+.portrait-disc {
+  position: absolute;
+  top: 18%;
+  right: 0;
+  width: 60%;
+}
+
+.portrait-disc .vinyl {
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.12) inset,
+    0 0 40px -8px var(--glow),
+    0 18px 40px -18px rgb(0 0 0 / 0.7);
+}
+
+.portrait-disc-label { background: var(--wine); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .portrait-disc {
+    animation: portrait-disc-out 1200ms var(--ease-object) 600ms both;
+  }
+
+  .portrait-disc .vinyl-spin { animation-duration: 9s; }
+}
+
+@keyframes portrait-disc-out {
+  from { transform: translateX(-38%); }
+  to { transform: none; }
+}
