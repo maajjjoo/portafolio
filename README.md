@@ -70,12 +70,9 @@ Todo el contenido sale de `config/` y `data/`. Cada sección se escribe una sola
 
 ### 1. CV
 
-El botón **Descargar CV** aparece deshabilitado con la etiqueta «CV en preparación» porque no existe `public/cv.pdf`.
+El CV está en **`public/cv.pdf`** y el botón **Descargar CV** de Bienvenida lo ofrece (se detecta al compilar, en `next.config.ts`).
 
-1. Guarda tu CV real como **`public/cv.pdf`** (exactamente ese nombre, en minúsculas).
-2. Vuelve a compilar (`npm run build`) o haz un nuevo despliegue en Vercel.
-
-La comprobación se hace al compilar (`next.config.ts`), así que el botón se activa solo en la siguiente compilación.
+Su fuente es **`cv/cv.html`**: una página A4 con la misma paleta del portafolio y solo datos que ya están en el sitio. Para cambiarlo, edita ese archivo, ábrelo en Chrome y usa *Imprimir → Guardar como PDF* con márgenes «Ninguno» y «Gráficos de fondo» activado; guarda el resultado como `public/cv.pdf` y vuelve a compilar o desplegar.
 
 ### 2. Semestre
 
@@ -127,7 +124,7 @@ Enlaces verificados (públicos en GitHub el 25/10/2026):
 Tareas pendientes de despliegue:
 
 - **AI Code Tutor:** confirmar cuál es el repositorio público del backend (hay un repo `backenddd` con un proyecto Spring Boot llamado `ai-platform`, pero no se pudo confirmar que sea este) y revisar por qué `https://ai-code-tutor-backend.onrender.com` responde 503.
-- **PollyStock y Studia:** añadir los enlaces de instalación (el APK de EAS y el instalador de Windows) como `demo` en `data/projects.ts`.
+- **Studia:** añadir el enlace del instalador de Windows como `demo` en `data/projects.ts` (PollyStock ya enlaza su compilación de Android en Expo).
 - **AI Code Tutor:** sin captura real todavía (su demo no carga porque el backend no responde); mientras tanto muestra una ilustración.
 
 Para añadir un enlace, edita `repositories` o `demo` en `data/projects.ts`. Para añadir capturas reales, guárdalas en `public/images/projects/` y añade `image: { src: "/images/projects/nombre.png", alt: "Descripción" }` al proyecto; mientras no haya captura se muestra una ilustración.
@@ -180,7 +177,7 @@ El repositorio Git local ya existe, con un commit por etapa. Para subirlo:
 
 - [x] Navegación con nombre, logo o iniciales
 - [x] Hero con perfil personal
-- [ ] Descarga del CV con el PDF real (pendiente: `public/cv.pdf`)
+- [x] Descarga del CV con el PDF real (`public/cv.pdf`)
 - [x] Sobre mí con presentación personal
 - [x] Sección de proyectos
 - [x] Repositorio de GitHub en cada proyecto (SmartControl enlaza su prototipo; El Caso 404, el repositorio del equipo)
