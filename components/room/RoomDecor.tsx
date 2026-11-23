@@ -175,8 +175,8 @@ function Turntable() {
 const photoSrc = process.env.PROFILE_PHOTO_SRC ?? "";
 
 /**
- * El cuadro de la pared: la foto de María José si existe, para verla sin entrar a su perfil.
- * Mientras no haya foto, un grabado original de los surcos de un disco.
+ * El cuadro grande de la pared, hecho para la foto de María José.
+ * Mientras no haya foto, un grabado original de los surcos de un disco y el aviso de que llega pronto.
  */
 function FramedPrint() {
   if (photoSrc) {
@@ -190,8 +190,9 @@ function FramedPrint() {
   }
 
   return (
-    <div className="room-frame" aria-hidden="true">
-      <svg viewBox="0 0 100 140" className="size-full">
+    <div className="room-frame room-frame-photo" aria-hidden="true">
+      <span className="room-frame-pending">Foto próximamente</span>
+      <svg viewBox="0 0 100 140" preserveAspectRatio="xMidYMid slice" className="size-full">
         <rect width="100" height="140" fill="#1f1a15" />
         {[40, 34, 28, 22, 16].map((r) => (
           <circle key={r} cx="50" cy="62" r={r} fill="none" stroke="#c9a46a" strokeWidth="0.7" opacity="0.8" />

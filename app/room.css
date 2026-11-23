@@ -124,6 +124,17 @@
   filter: brightness(0.92);
 }
 
+/* Sin foto todavía: el aviso va sobre el grabado, abajo. */
+.room-frame-pending {
+  position: absolute;
+  inset: auto 0 calc(26 * var(--u));
+  z-index: 1;
+  text-align: center;
+  font-size: max(11px, calc(13 * var(--u)));
+  font-weight: 600;
+  color: #e9d6b2;
+}
+
 /* La planta se cuelga al otro lado para no tapar la foto. */
 @media (min-width: 900px) {
   .room:has(.room-frame-photo) .room-vine { left: calc(1236 * var(--u)); }
