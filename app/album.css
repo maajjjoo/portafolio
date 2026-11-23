@@ -7,13 +7,13 @@
   pointer-events: none;
   /* La misma pared de la sala, desenfocada: una luz cálida sobre la portada y otra más lejana. */
   background:
-    radial-gradient(45% 40% at 22% 22%, rgb(240 172 84 / 0.16), transparent 100%),
-    radial-gradient(40% 45% at 88% 70%, rgb(240 172 84 / 0.07), transparent 100%),
-    linear-gradient(180deg, #2a2720, #34302a 45%, #1d1b16);
+    radial-gradient(45% 40% at 22% 22%, rgb(232 156 100 / 0.16), transparent 100%),
+    radial-gradient(40% 45% at 88% 70%, rgb(214 140 140 / 0.07), transparent 100%),
+    linear-gradient(180deg, #2c1f1d, #36262a 45%, #1c1211);
 }
 
 /* De noche, el texto secundario sobre la pared iluminada necesita más luz que sobre un fondo liso. */
-:root:not([data-theme="light"]) .album-booklet { --muted: #d3c4ac; }
+:root:not([data-theme="light"]) .album-booklet { --muted: #d8c2b4; }
 
 /* De día, el color de acento debe aguantar también sobre los paños de sol de la pared. */
 [data-theme="light"] .album-booklet { --accent: #754206; }
@@ -23,12 +23,12 @@
   border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
   border-radius: 1.5rem;
   /* De noche, un vidrio ahumado: deja ver la luz de la pared sin teñir el texto de marrón. */
-  --surface: #2b261f;
-  --surface-2: #221e19;
-  --line: #463d31;
+  --surface: #2d201e;
+  --surface-2: #231817;
+  --line: #4a3530;
   --muted: #d3c4ac;
   border-color: rgb(255 236 210 / 0.1);
-  background: linear-gradient(180deg, rgb(36 32 26 / 0.72), rgb(24 21 17 / 0.78));
+  background: linear-gradient(180deg, rgb(40 27 26 / 0.72), rgb(25 16 15 / 0.78));
   -webkit-backdrop-filter: blur(20px) saturate(1.15);
   backdrop-filter: blur(20px) saturate(1.15);
   box-shadow:

@@ -30,8 +30,8 @@
   background:
     var(--plaster),
     linear-gradient(180deg, rgb(8 7 5 / 0.62), transparent 26%),
-    radial-gradient(26% 34% at 74% 63%, rgb(226 160 80 / 0.17), transparent 100%),
-    radial-gradient(70% 72% at 54% 42%, #4a4436 0%, #353126 50%, #1e1c16 100%);
+    radial-gradient(26% 34% at 74% 63%, rgb(232 156 100 / 0.18), transparent 100%),
+    radial-gradient(70% 72% at 54% 42%, #4b3431 0%, #35231f 50%, #1b1110 100%);
 }
 
 /* Viñeta: la luz cae antes de llegar a los bordes. */
@@ -70,7 +70,7 @@
   height: calc(138 * var(--u));
   background:
     linear-gradient(180deg, rgb(6 4 2 / 0.86), transparent 42%),
-    radial-gradient(46% 70% at 54% 0%, rgb(226 160 80 / 0.16), transparent 100%),
+    radial-gradient(46% 70% at 54% 0%, rgb(232 156 100 / 0.16), transparent 100%),
     repeating-linear-gradient(0deg, rgb(0 0 0 / 0.3) 0 1px, transparent 1px calc(34 * var(--u))),
     var(--grain),
     linear-gradient(100deg, #2e1c10, #4c2f1b 50%, #27180d);
@@ -83,7 +83,7 @@
   position: absolute;
   inset: calc(-14 * var(--u)) 0 auto;
   height: calc(14 * var(--u));
-  background: linear-gradient(180deg, #2a261e, #171511);
+  background: linear-gradient(180deg, #2b201d, #170f0e);
   box-shadow: inset 0 1px 0 rgb(255 225 170 / 0.1);
 }
 
@@ -115,13 +115,19 @@
 
 /* Con foto: un cuadro grande, con paspartú, y menos oscurecido para que se vea la cara. */
 .room-frame-photo {
-  left: calc(26 * var(--u));
-  top: calc(84 * var(--u));
-  width: calc(250 * var(--u));
-  height: calc(330 * var(--u));
+  left: calc(22 * var(--u));
+  top: calc(86 * var(--u));
+  width: calc(232 * var(--u));
+  height: auto;
   padding: calc(16 * var(--u));
   border-width: calc(7 * var(--u));
-  filter: brightness(0.92);
+  filter: brightness(0.94) sepia(0.12);
+}
+
+/* La ventana del paspartú tiene la proporción de la foto (vertical, 9:16): se ve entera, sin recortes. */
+.room-frame-window {
+  height: auto;
+  aspect-ratio: 9 / 16;
 }
 
 /* Sin foto todavía: el aviso va sobre el grabado, abajo. */
@@ -260,7 +266,7 @@
     linear-gradient(90deg, transparent calc(50% + 136 * var(--cu)), #060504 calc(50% + 136 * var(--cu)), #060504 calc(50% + 137.5 * var(--cu)), transparent calc(50% + 137.5 * var(--cu))),
     linear-gradient(180deg, rgb(0 0 0 / 0.55), transparent 16%),
     var(--plaster),
-    linear-gradient(180deg, #1d1b17, #171511);
+    linear-gradient(180deg, #211716, #170f0e);
   box-shadow:
     0 calc(14 * var(--cu)) calc(16 * var(--cu)) rgb(0 0 0 / 0.82),
     0 calc(30 * var(--cu)) calc(44 * var(--cu)) rgb(0 0 0 / 0.5);
@@ -482,7 +488,7 @@
   right: 0;
   top: calc(100% + 11 * var(--u));
   height: calc(112 * var(--u));
-  background: linear-gradient(180deg, rgb(248 186 104 / 0.28), rgb(240 172 84 / 0.16) 22%, rgb(240 172 84 / 0.05) 58%, transparent);
+  background: linear-gradient(180deg, rgb(246 178 122 / 0.28), rgb(236 160 108 / 0.16) 22%, rgb(236 160 108 / 0.05) 58%, transparent);
   pointer-events: none;
 }
 
@@ -864,7 +870,7 @@
 
 @media (max-width: 899px) {
   .room-spines { width: auto; right: calc(12 * var(--cu)); }
-  .room-body { background: linear-gradient(180deg, #1d1b17, #171511); }
+  .room-body { background: linear-gradient(180deg, #211716, #170f0e); }
 }
 
 /* Teléfono: el tocadiscos manda; el amplificador y la planta no caben a una escala legible. */
