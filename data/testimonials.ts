@@ -31,8 +31,25 @@ export interface PendingTestimonial {
 
 export type Testimonial = PublishedTestimonial | PendingTestimonial;
 
+// Los profesores autorizaron a sus estudiantes a publicar un testimonio a su nombre.
 export const testimonials: Testimonial[] = [
-  { id: "pendiente-1", status: "pendiente", label: "Testimonio 1, por grabar" },
-  { id: "pendiente-2", status: "pendiente", label: "Testimonio 2, por grabar" },
+  {
+    id: "ivonne-barco",
+    status: "publicado",
+    name: "Ivonne Barco",
+    relationship: "Docente, electiva de NestJS · Universidad Cooperativa de Colombia",
+    quote:
+      "María José lleva lo que vemos en clase a sus propios proyectos: sus backends en Node.js y TypeScript tienen una estructura ordenada y los conecta con aplicaciones reales. Es responsable con sus entregas.",
+    photo: { src: "/images/testimonials/ivonne-barco.webp", alt: "Foto de Ivonne Barco" },
+  },
+  {
+    id: "javier-mendieta",
+    status: "publicado",
+    name: "Javier Alexander Mendieta Ortega",
+    relationship: "Docente de Arquitectura de Software y Computacional · Universidad Cooperativa de Colombia",
+    quote:
+      "María José es una estudiante dedicada y con ganas de aprender. Le interesa entender cómo encajan las partes de un sistema y tiene buena proyección como ingeniera de software.",
+    photo: { src: "/images/testimonials/javier-mendieta.webp", alt: "Foto de Javier Alexander Mendieta Ortega" },
+  },
   { id: "pendiente-3", status: "pendiente", label: "Testimonio 3, por grabar" },
 ];
