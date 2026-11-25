@@ -109,7 +109,7 @@ export const projects: Project[] = [
     },
     image: {
       src: "/images/projects/smartcontrol.jpg",
-      alt: "Captura del prototipo de SmartControl: la pantalla redonda del reloj con los modos Presentación y Música, junto a los controles del prototipo.",
+      alt: "Captura de SmartControl: el reloj en modo Presentación con los botones Siguiente y Anterior, junto a la aplicación de Windows con el reloj conectado y la actividad de las diapositivas.",
     },
     motif: "watch",
     featured: true,
