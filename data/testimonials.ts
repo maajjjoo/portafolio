@@ -51,5 +51,12 @@ export const testimonials: Testimonial[] = [
       "María José es una estudiante dedicada y con ganas de aprender. Le interesa entender cómo encajan las partes de un sistema y tiene buena proyección como ingeniera de software.",
     photo: { src: "/images/testimonials/javier-mendieta.webp", alt: "Foto de Javier Alexander Mendieta Ortega" },
   },
-  { id: "pendiente-3", status: "pendiente", label: "Testimonio 3, por grabar" },
+  {
+    id: "gerardo-figueroa",
+    status: "publicado",
+    name: "Gerardo Figueroa Gómez",
+    relationship: "Docente · Escuela Normal Superior de Pasto",
+    quote:
+      "Conocí a María José como estudiante en el colegio. Siempre fue responsable y constante: cumplía lo que se comprometía a hacer, trabajaba con disciplina y no se rendía cuando algo le costaba. Esa seriedad es la que hoy lleva a su carrera.",
+  },
 ];
